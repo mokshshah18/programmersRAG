@@ -1,0 +1,1 @@
+prag_add_module(engine DEPENDS prag_core prag_exec prag_graph prag_parse prag_embed prag_index prag_kde prag_retrieve prag_context prag_edit prag_llm prag_tune)
