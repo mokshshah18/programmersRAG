@@ -1,0 +1,31 @@
+{
+  "corpus": {
+    "roots": ["Demo repo/mimalloc/src", "Demo repo/mimalloc/include"],
+    "extensions": [".c", ".h", ".cc", ".cpp", ".cxx", ".hpp", ".hh", ".py"],
+    "exclude": ["/.git/", "/build/", "/out/", "/.deps/", "/node_modules/"],
+    "max_file_bytes": 1048576
+  },
+  "paths": {
+    "data": "data",
+    "frontend": "frontend"
+  },
+  "models": {
+    "embedding": "models/Qwen3-Embedding-0.6B-Q8_0.gguf",
+    "chat": "models/qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+    "tuning_base": "models/qwen2.5-coder-0.5b-instruct-fp16.gguf"
+  },
+  "retrieve": {
+    "tau": 0.25
+  },
+  "context": {
+    "theta": 0.25,
+    "token_budget": 2400
+  },
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8000
+  },
+  "tune": {
+    "enabled": false
+  }
+}
