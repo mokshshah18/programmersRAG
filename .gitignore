@@ -3,3 +3,22 @@ Demo repo/
 
 # Machine-local file list (absolute paths); see config.example
 /config
+
+# Build output and fetched dependencies
+/build/
+/.deps/
+
+# Downloaded or fine-tuned model files and runtime data
+/models/
+/data/
+*.gguf
+
+# Paper build products
+/paper/build/
+/.tools/
+
+# Local settings (copy prag.example.json to prag.json)
+/prag.json
+
+# Research working notes (kept locally)
+/paper/notes/
