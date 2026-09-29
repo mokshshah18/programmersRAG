@@ -1,207 +1,166 @@
-class RAGFrontend {
-    constructor() {
-        this.baseUrl = window.location.origin;
-        this.init();
+// programmersRAG web UI: entry point.
+//
+// Plain ES modules, no build step and no network dependency besides the API of
+// the server that delivered this page. Model output and file content are
+// untrusted: nothing in this application assigns markup; see js/ui/dom.js.
+
+import { createApi } from './js/api.js';
+import { createStore } from './js/store.js';
+import { byId } from './js/ui/dom.js';
+import { createToasts } from './js/ui/toast.js';
+import { createTabs } from './js/ui/tabs.js';
+import { createConfirm } from './js/ui/confirm.js';
+import { createHeader } from './js/ui/header.js';
+import { createConversation } from './js/ui/conversation.js';
+import { createRetrievalPanel } from './js/ui/retrieval.js';
+import { createContextPanel } from './js/ui/context-quality.js';
+import { createExecutionPanel } from './js/ui/execution.js';
+import { createGroupsPanel } from './js/ui/groups.js';
+import { createEditsPanel } from './js/ui/edits.js';
+import { createTuningPanel } from './js/ui/tuning.js';
+import { createSettings } from './js/ui/settings.js';
+
+const POLL_IDLE = 5000;     // status poll while nothing happens
+const POLL_ACTIVE = 1000;   // while the index is built or the tuning pipeline runs
+const POLL_OFFLINE = 3000;  // while the server does not answer
+const HIDDEN_FACTOR = 4;    // a page that is not visible polls this much slower
+
+function start() {
+  const api = createApi('');
+  const store = createStore({
+    status: null, tune: null, progress: null, retrieval: null, transaction: null, groups: null, highlight: [],
+    focusUnit: null, busy: false, offline: false, building: false,
+  });
+  const toast = createToasts();
+  const confirm = createConfirm();
+  const workspace = byId('workspace');
+  const viewButtons = Array.from(document.querySelectorAll('.view-button'));
+  const wide = window.matchMedia('(min-width: 960px)');
+
+  // ---- views: on a narrow screen one pane is shown at a time -------------------
+
+  function showView(name) {
+    workspace.dataset.view = name;
+    for (const button of viewButtons) button.setAttribute('aria-pressed', String(button.dataset.view === name));
+    if (name === 'inspector') {
+      byId('inspector-news').hidden = true;
+      tabs.refresh();
+      if (tabs.selected() === 'groups') groups.show();
     }
+  }
+  for (const button of viewButtons) button.addEventListener('click', () => showView(button.dataset.view));
 
-    async init() {
-        this.bindEvents();
-        await this.startupCheck();
-        await this.loadHistory();
+  // ---- inspector ---------------------------------------------------------------
+
+  const tabs = createTabs(byId('inspector-tabs'), (name) => {
+    tabs.mark(name, false);
+    if (name === 'groups') groups.show();
+  });
+
+  function showInspector(tab) {
+    tabs.select(tab);
+    showView('inspector');
+  }
+
+  createRetrievalPanel({ api, store });
+  createContextPanel({ store });
+  createExecutionPanel({ store });
+  const groups = createGroupsPanel({ api, store, toast });
+  createEditsPanel({ api, store, toast });
+  createTuningPanel({ api, store, toast });
+  const settings = createSettings({ api, store, toast });
+  createHeader({ api, store, toast, openSettings: () => settings.open() });
+  const conversation = createConversation({ api, store, toast, confirm, showInspector });
+
+  // New content in the inspector: an edit is shown at once, because the user
+  // asked for it; a retrieval only marks its tab, the answer is what is read first.
+  store.on('inspectorNews', (tab) => {
+    if (tab === 'edits') {
+      tabs.select('edits');
+    } else if (tabs.selected() === 'edits' || tabs.selected() === 'tuning') {
+      tabs.select('retrieval');
     }
+    if (!wide.matches && workspace.dataset.view !== 'inspector') byId('inspector-news').hidden = false;
+  });
 
-    bindEvents() {
-        document.getElementById('askBtn').addEventListener('click', () => this.askQuestion());
-        document.getElementById('question').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                this.askQuestion();
-            }
-        });
+  // ---- status polling ------------------------------------------------------------
 
-        document.getElementById('reindexBtn').addEventListener('click', () => this.reindex());
-        document.getElementById('configBtn').addEventListener('click', () => this.showConfig());
-        document.getElementById('clearHistoryBtn').addEventListener('click', () => this.clearHistory());
-        document.getElementById('saveConfigBtn').addEventListener('click', () => this.saveConfig());
-        document.getElementById('closeConfigBtn').addEventListener('click', () => this.hideConfig());
-    }
+  let timer = 0;
+  let polling = false;
+  let builtAt = null;
 
-    async startupCheck() {
-        try {
-            const response = await fetch('/startup');
-            const data = await response.json();
-            
-            if (data.needs_update) {
-                this.showStatus(
-                    `Changes detected: ${data.added.length} added, ${data.removed.length} removed, ${data.modified.length} modified. Reindex recommended.`,
-                    'warning'
-                );
-            }
-        } catch (error) {
-            console.error('Startup check failed:', error);
+  function interval() {
+    if (store.get('offline')) return POLL_OFFLINE;
+    const status = store.get('status');
+    const tune = store.get('tune');
+    const building = store.get('building') || (status && status.index && status.index.building);
+    const tuning = tune && tune.enabled && tune.stage !== 'disabled' && tune.stage !== 'waiting' && tune.stage !== 'failed';
+    return building || tuning ? POLL_ACTIVE : POLL_IDLE;
+  }
+
+  async function poll() {
+    if (polling) return;
+    polling = true;
+    clearTimeout(timer);
+    try {
+      const status = await api.status();
+      if (store.get('offline')) {
+        store.set('offline', false);
+        toast.good('The server answers again.');
+      }
+      store.set('status', status);
+      if (status && status.tune && typeof status.tune === 'object' && 'stage' in status.tune) store.set('tune', status.tune);
+
+      const index = status && status.index ? status.index : {};
+      if (index.building || store.get('building')) {
+        const progress = await api.indexProgress();
+        store.set('progress', progress);
+        if (progress && progress.running === false) {
+          store.set('building', false);
+          if (progress.stage === 'failed') toast.error(`The index build failed: ${(progress.report && progress.report.error) || progress.message || 'unknown error'}`);
+          else toast.good('The index was rebuilt.');
+          store.set('status', await api.status());
         }
+      }
+      const built = store.get('status').index ? String(store.get('status').index.built_at || '') : '';
+      if (builtAt !== null && built !== builtAt) groups.reload();
+      builtAt = built;
+    } catch (error) {
+      if (!store.get('offline')) {
+        store.set('offline', true);
+        toast.error(`The server is not reachable: ${error.message}`);
+      }
+    } finally {
+      polling = false;
+      timer = setTimeout(poll, interval() * (document.hidden ? HIDDEN_FACTOR : 1));
     }
+  }
 
-    async askQuestion() {
-        const questionInput = document.getElementById('question');
-        const question = questionInput.value.trim();
-        
-        if (!question) return;
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) poll();
+  });
+  store.on('refresh', () => poll());
+  store.on('building', (on) => {
+    if (on) poll();
+  });
+  store.on('answered', () => poll());
 
-        // Add user message to chat
-        this.addMessage(question, 'user');
-        questionInput.value = '';
+  // ---- keyboard ------------------------------------------------------------------
 
-        try {
-            const response = await fetch('/query', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ question })
-            });
-
-            const data = await response.json();
-            
-            // Add assistant message
-            this.addMessage(data.answer, 'assistant');
-            
-            // Show context
-            this.showContext(data.context_used);
-            
-        } catch (error) {
-            console.error('Error asking question:', error);
-            this.addMessage('Error: Could not get response from server', 'assistant');
-        }
+  document.addEventListener('keydown', (event) => {
+    if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey) return;
+    const target = event.target;
+    const typing = target instanceof HTMLElement &&
+      (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName));
+    if (event.key === '/' && !typing && !document.querySelector('dialog[open]')) {
+      event.preventDefault();
+      showView('conversation');
+      conversation.focus();
     }
+  });
 
-    addMessage(content, role) {
-        const chat = document.getElementById('chat');
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${role}`;
-        
-        const timestamp = new Date().toLocaleTimeString();
-        messageDiv.innerHTML = `
-            <div class="timestamp">${timestamp}</div>
-            <div class="content">${role === 'assistant' ? marked.parse(content) : content}</div>
-        `;
-        
-        chat.appendChild(messageDiv);
-        chat.scrollTop = chat.scrollHeight;
-    }
-
-    showContext(contextItems) {
-        const panel = document.getElementById('contextPanel');
-        const list = document.getElementById('contextList');
-        
-        if (!contextItems || contextItems.length === 0) {
-            panel.style.display = 'none';
-            return;
-        }
-
-        list.innerHTML = contextItems.map(item => `
-            <div class="context-item">
-                <h4>${item.file} (lines ${item.start}-${item.end})</h4>
-                <div class="preview">${this.escapeHtml(item.preview)}</div>
-            </div>
-        `).join('');
-
-        panel.style.display = 'block';
-    }
-
-    async reindex() {
-        this.showStatus('Reindexing... This may take a while.', 'info');
-        
-        try {
-            const response = await fetch('/reindex', { method: 'POST' });
-            const data = await response.json();
-            this.showStatus(data.message, 'info');
-        } catch (error) {
-            console.error('Reindex failed:', error);
-            this.showStatus('Reindex failed', 'warning');
-        }
-    }
-
-    async showConfig() {
-        try {
-            const response = await fetch('/config');
-            const data = await response.json();
-            document.getElementById('configFiles').value = data.files.join('\n');
-            document.getElementById('configModal').style.display = 'block';
-        } catch (error) {
-            console.error('Failed to load config:', error);
-        }
-    }
-
-    hideConfig() {
-        document.getElementById('configModal').style.display = 'none';
-    }
-
-    async saveConfig() {
-        const filesText = document.getElementById('configFiles').value;
-        const files = filesText.split('\n').filter(f => f.trim());
-        
-        try {
-            await fetch('/config', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ files })
-            });
-            
-            this.hideConfig();
-            this.showStatus('Configuration updated', 'info');
-            await this.startupCheck();
-        } catch (error) {
-            console.error('Failed to save config:', error);
-        }
-    }
-
-    async clearHistory() {
-        if (!confirm('Clear all chat history?')) return;
-        
-        try {
-            await fetch('/history', { method: 'DELETE' });
-            document.getElementById('chat').innerHTML = '';
-            this.showStatus('History cleared', 'info');
-        } catch (error) {
-            console.error('Failed to clear history:', error);
-        }
-    }
-
-    async loadHistory() {
-        try {
-            const response = await fetch('/history');
-            const history = await response.json();
-            
-            history.reverse().forEach(item => {
-                this.addMessage(item.question, 'user');
-                this.addMessage(item.answer, 'assistant');
-            });
-        } catch (error) {
-            console.error('Failed to load history:', error);
-        }
-    }
-
-    showStatus(message, type) {
-        const status = document.getElementById('status');
-        status.textContent = message;
-        status.className = `status ${type}`;
-        status.style.display = 'block';
-        
-        setTimeout(() => {
-            status.style.display = 'none';
-        }, 5000);
-    }
-
-    escapeHtml(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
+  poll();
+  conversation.load();
 }
 
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    new RAGFrontend();
-});
+start();

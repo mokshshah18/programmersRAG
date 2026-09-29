@@ -1,0 +1,55 @@
+/* Development helper, see viewport.html. */
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+  font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #8884;
+}
+
+.bar input {
+  width: 5.5rem;
+}
+
+.bar output {
+  flex: 1 1 16rem;
+  min-width: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 12px;
+}
+
+.stage {
+  padding: 12px;
+  overflow: auto;
+}
+
+#frame {
+  display: block;
+  width: 360px;
+  height: 740px;
+  border: 1px solid #8888;
+  background: #fff;
+}
+
+/* The colour scheme of the frame element is what the document inside sees as
+   prefers-color-scheme. */
+#frame[data-scheme="light"] {
+  color-scheme: light;
+}
+
+#frame[data-scheme="dark"] {
+  color-scheme: dark;
+}

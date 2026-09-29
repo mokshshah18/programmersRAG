@@ -1,0 +1,11 @@
+{
+  "name": "programmersrag-frontend",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Web UI of programmersRAG. No dependencies and no build step; this file only tells Node that the .js files are ES modules.",
+  "type": "module",
+  "scripts": {
+    "test": "node dev/test.js",
+    "mock": "node dev/mock-server.js"
+  }
+}

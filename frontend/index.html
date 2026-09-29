@@ -1,53 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAG System</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Everything comes from the server that delivered this page. Scripts and
+       styles in the markup are refused, which is a second line of defence
+       behind the rule that the application never assigns markup. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light dark">
+  <title>programmersRAG</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>RAG System</h1>
-            <div class="controls">
-                <button id="reindexBtn">Reindex</button>
-                <button id="configBtn">Edit Config</button>
-                <button id="clearHistoryBtn">Clear History</button>
-            </div>
-        </header>
+  <a class="skip-link" href="#question">Skip to the question field</a>
 
-        <div id="status" class="status"></div>
+  <!-- Icons, referenced with <use>. 20 by 20, drawn with the current colour. -->
+  <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0">
+    <symbol id="i-settings" viewBox="0 0 20 20">
+      <circle cx="10" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M10 2.5v2.2M10 15.3v2.2M2.5 10h2.2M15.3 10h2.2M4.7 4.7l1.55 1.55M13.75 13.75l1.55 1.55M4.7 15.3l1.55-1.55M13.75 6.25l1.55-1.55" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 20 20">
+      <path d="M5 5l10 10M15 5L5 15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 20 20">
+      <circle cx="10" cy="10" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M6.6 10.3l2.3 2.3 4.5-4.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-warning" viewBox="0 0 20 20">
+      <path d="M10 3.2l7.3 12.9H2.7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M10 8v3.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="10" cy="13.9" r="0.95" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-error" viewBox="0 0 20 20">
+      <circle cx="10" cy="10" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M7.3 7.3l5.4 5.4M12.7 7.3l-5.4 5.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-info" viewBox="0 0 20 20">
+      <circle cx="10" cy="10" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M10 9.2v4.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="10" cy="6.5" r="0.95" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-copy" viewBox="0 0 20 20">
+      <rect x="7" y="7" width="9.5" height="9.5" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M13 4.6V4.3a1.8 1.8 0 0 0-1.8-1.8H5.3a1.8 1.8 0 0 0-1.8 1.8v5.9A1.8 1.8 0 0 0 5.3 12h.3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-thumb-up" viewBox="0 0 20 20">
+      <path d="M6.5 9l3.1-5.6a1.7 1.7 0 0 1 2.4 1.5V8h3.1a1.8 1.8 0 0 1 1.8 2.1l-.9 4.9a1.8 1.8 0 0 1-1.8 1.5H6.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M3.2 9h3.3v7.5H3.2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-thumb-down" viewBox="0 0 20 20">
+      <path d="M13.5 11l-3.1 5.6A1.7 1.7 0 0 1 8 15.1V12H4.9a1.8 1.8 0 0 1-1.8-2.1L4 5a1.8 1.8 0 0 1 1.8-1.5h7.7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M16.8 11h-3.3V3.5h3.3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 20 20">
+      <path d="M10 4.5v11M4.5 10h11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-minus" viewBox="0 0 20 20">
+      <path d="M4.5 10h11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-reset" viewBox="0 0 20 20">
+      <path d="M3.5 7.5V3.8M3.5 7.5h3.7M16.5 12.5v3.7M16.5 12.5h-3.7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M4 7.2A6.6 6.6 0 0 1 16.4 8.6M16 12.8A6.6 6.6 0 0 1 3.6 11.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+  </svg>
 
-        <div class="chat-container">
-            <div id="chat" class="chat"></div>
-            
-            <div class="input-area">
-                <textarea id="question" placeholder="Ask a question..." rows="3"></textarea>
-                <button id="askBtn">Ask</button>
-            </div>
+  <div class="app">
+    <header class="app-header">
+      <div class="brand">
+        <h1 class="brand-name">programmersRAG</h1>
+        <span class="brand-version" id="version"></span>
+      </div>
+
+      <div class="header-status" role="group" aria-label="System status">
+        <div class="chip" id="index-chip">
+          <span class="dot" data-state="off" aria-hidden="true"></span>
+          <span class="chip-label">Index</span>
+          <span class="chip-value" id="index-status">loading</span>
+        </div>
+        <div class="chip" id="model-chip">
+          <span class="dot" data-state="off" aria-hidden="true"></span>
+          <span class="chip-label">Model</span>
+          <span class="chip-value" id="model-status">loading</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="switch-field">
+          <span class="switch-label" id="tune-label">Fine-tuning</span>
+          <button type="button" class="switch" id="tune-switch" role="switch" aria-checked="false"
+                  aria-labelledby="tune-label" aria-describedby="tune-stage" disabled>
+            <span class="switch-thumb" aria-hidden="true"></span>
+          </button>
+          <span class="switch-state" id="tune-stage" data-state="off"></span>
+        </div>
+        <button type="button" class="btn btn-quiet" id="settings-button" aria-haspopup="dialog">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg>
+          <span class="btn-text">Settings</span>
+        </button>
+      </div>
+    </header>
+
+    <nav class="view-switch" aria-label="Pane">
+      <button type="button" class="view-button" data-view="conversation" aria-pressed="true">Conversation</button>
+      <button type="button" class="view-button" data-view="inspector" aria-pressed="false">
+        Inspector <span class="news" id="inspector-news" hidden>new</span>
+      </button>
+    </nav>
+
+    <main class="workspace" id="workspace" data-view="conversation">
+      <section class="pane pane-conversation" aria-labelledby="conversation-title">
+        <div class="pane-header">
+          <h2 class="pane-title" id="conversation-title">Conversation</h2>
+          <button type="button" class="btn btn-quiet btn-small" id="clear-history">Clear</button>
         </div>
 
-        <div id="contextPanel" class="context-panel" style="display: none;">
-            <h3>Retrieved Context</h3>
-            <div id="contextList"></div>
+        <div class="messages" id="messages" tabindex="0" role="region" aria-label="Questions and answers"></div>
+
+        <form class="composer" id="composer" novalidate>
+          <div class="composer-box">
+            <label class="visually-hidden" for="question">Question</label>
+            <textarea id="question" name="question" rows="1" maxlength="8000" autocomplete="off"
+                      placeholder="Ask about the code base" aria-describedby="composer-hint"></textarea>
+            <div class="composer-bar">
+              <fieldset class="segmented" id="mode-switch">
+                <legend class="visually-hidden">Mode</legend>
+                <input type="radio" name="mode" id="mode-ask" value="ask" checked>
+                <label for="mode-ask" title="Answer a question about the code">Ask</label>
+                <input type="radio" name="mode" id="mode-edit" value="edit">
+                <label for="mode-edit" title="Propose a change to the code">Edit</label>
+              </fieldset>
+              <span class="composer-hint" id="composer-hint">Enter to send, Shift+Enter for a new line</span>
+              <button type="submit" class="btn btn-primary" id="send" aria-label="Send the question">
+                <span class="btn-text">Send</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="pane pane-inspector" aria-labelledby="inspector-title">
+        <h2 class="visually-hidden" id="inspector-title">Inspector</h2>
+        <div class="tablist" id="inspector-tabs" role="tablist" aria-labelledby="inspector-title">
+          <button type="button" class="tab" role="tab" id="tab-retrieval" aria-controls="panel-retrieval" aria-selected="true" tabindex="0">Retrieval</button>
+          <button type="button" class="tab" role="tab" id="tab-context" aria-controls="panel-context" aria-selected="false" tabindex="-1">Context quality</button>
+          <button type="button" class="tab" role="tab" id="tab-execution" aria-controls="panel-execution" aria-selected="false" tabindex="-1">Execution</button>
+          <button type="button" class="tab" role="tab" id="tab-groups" aria-controls="panel-groups" aria-selected="false" tabindex="-1">Groups</button>
+          <button type="button" class="tab" role="tab" id="tab-edits" aria-controls="panel-edits" aria-selected="false" tabindex="-1">Edits</button>
+          <button type="button" class="tab" role="tab" id="tab-tuning" aria-controls="panel-tuning" aria-selected="false" tabindex="-1">Tuning</button>
         </div>
+        <div class="tabpanel" role="tabpanel" id="panel-retrieval" aria-labelledby="tab-retrieval" tabindex="0"></div>
+        <div class="tabpanel" role="tabpanel" id="panel-context" aria-labelledby="tab-context" tabindex="0" hidden></div>
+        <div class="tabpanel" role="tabpanel" id="panel-execution" aria-labelledby="tab-execution" tabindex="0" hidden></div>
+        <div class="tabpanel" role="tabpanel" id="panel-groups" aria-labelledby="tab-groups" tabindex="0" hidden></div>
+        <div class="tabpanel" role="tabpanel" id="panel-edits" aria-labelledby="tab-edits" tabindex="0" hidden></div>
+        <div class="tabpanel" role="tabpanel" id="panel-tuning" aria-labelledby="tab-tuning" tabindex="0" hidden></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog class="dialog" id="settings-dialog" aria-labelledby="settings-title">
+    <form id="settings-form" class="dialog-form" novalidate>
+      <header class="dialog-header">
+        <h2 id="settings-title">Settings</h2>
+        <button type="button" class="btn-icon" id="settings-close" aria-label="Close the settings">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-close"></use></svg>
+        </button>
+      </header>
+
+      <div class="dialog-body">
+        <section class="form-section" aria-labelledby="section-corpus">
+          <h3 class="form-title" id="section-corpus">Corpus</h3>
+          <p class="form-help">Directories or files to index. A change makes the index stale until it is rebuilt.</p>
+          <ul class="roots" id="roots-list" data-empty="true"></ul>
+          <button type="button" class="btn btn-small" id="add-root">Add a root</button>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-retrieval">
+          <h3 class="form-title" id="section-retrieval">Retrieval and context</h3>
+          <div class="field">
+            <label for="tau">Relevance threshold &tau;</label>
+            <div class="range-row">
+              <span class="range-end" aria-hidden="true">0.05</span>
+              <input type="range" id="tau" min="0.05" max="0.9" step="0.01" value="0.25" aria-describedby="tau-help tau-ratio">
+              <span class="range-end" aria-hidden="true">0.90</span>
+              <output class="range-value" id="tau-value" for="tau">0.25</output>
+            </div>
+            <p class="form-help" id="tau-help">
+              A unit enters the context when its probability of being relevant reaches &tau;.
+              The threshold follows from the cost of the two possible errors:
+              <span class="formula">&tau; = c<sub>fp</sub> / (c<sub>fp</sub> + c<sub>fn</sub>)</span>,
+              where c<sub>fp</sub> is the cost of an irrelevant unit in the prompt and c<sub>fn</sub> the cost of a
+              relevant unit that is missing. A lower &tau; retrieves more.
+            </p>
+            <p class="form-help" id="tau-ratio"></p>
+          </div>
+          <div class="field">
+            <label for="token-budget">Token budget of the context</label>
+            <input type="number" class="input input-short" id="token-budget" min="256" max="131072" step="1" inputmode="numeric"
+                   aria-describedby="token-budget-help">
+            <p class="form-help" id="token-budget-help">Upper limit for the code placed in the prompt. Units that do not fit are reduced to their signature, then dropped.</p>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-models">
+          <h3 class="form-title" id="section-models">Models</h3>
+          <p class="form-help">Paths of GGUF files on this machine. Models are loaded when the server starts.</p>
+          <div class="field">
+            <label for="model-embedding">Embedding model</label>
+            <input type="text" class="input mono" id="model-embedding" autocomplete="off" spellcheck="false" aria-describedby="model-embedding-help">
+            <p class="form-help" id="model-embedding-help">Empty: the built-in hashing embedder. A change makes the index stale.</p>
+          </div>
+          <div class="field">
+            <label for="model-chat">Chat model</label>
+            <input type="text" class="input mono" id="model-chat" autocomplete="off" spellcheck="false" aria-describedby="model-chat-help">
+            <p class="form-help" id="model-chat-help">Empty: extractive answers that list the selected units.</p>
+          </div>
+          <div class="field">
+            <label for="model-tuning">Tuning base model</label>
+            <input type="text" class="input mono" id="model-tuning" autocomplete="off" spellcheck="false" aria-describedby="model-tuning-help">
+            <p class="form-help" id="model-tuning-help">Float model that fine-tuning starts from. Empty: fine-tuning is not available.</p>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-exec">
+          <h3 class="form-title" id="section-exec">Execution</h3>
+          <div class="field-row">
+            <div class="field">
+              <label for="exec-threads">Threads</label>
+              <input type="number" class="input input-short" id="exec-threads" min="0" max="1024" step="1" inputmode="numeric"
+                     aria-describedby="exec-threads-help">
+              <p class="form-help" id="exec-threads-help">0 uses every logical CPU.</p>
+            </div>
+            <div class="field">
+              <label for="exec-block">Block size override, in bytes</label>
+              <input type="number" class="input input-short" id="exec-block" min="0" max="4194304" step="1024" inputmode="numeric"
+                     aria-describedby="exec-block-help">
+              <p class="form-help" id="exec-block-help">0 takes the size from the cache topology.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="section-index">
+          <h3 class="form-title" id="section-index">Index</h3>
+          <p class="form-help" id="index-state"></p>
+          <div class="button-row">
+            <button type="button" class="btn" id="rebuild-index">Rebuild index</button>
+            <button type="button" class="btn btn-quiet" id="calibrate">Calibrate scores again</button>
+          </div>
+          <div class="progress-row">
+            <label class="progress-label" id="index-progress-label" for="index-progress" hidden></label>
+            <progress class="progress" id="index-progress" max="1" value="0" hidden></progress>
+          </div>
+          <div id="index-report" aria-live="polite"></div>
+        </section>
+      </div>
+
+      <footer class="dialog-footer">
+        <div class="dialog-messages">
+          <p class="form-dirty" id="settings-dirty" aria-live="polite"></p>
+          <p class="form-error" id="settings-error" role="alert" hidden></p>
+        </div>
+        <div class="button-row">
+          <button type="button" class="btn" id="settings-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="settings-save">Save</button>
+        </div>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog class="dialog dialog-small" id="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+    <div class="dialog-form">
+      <div class="dialog-body">
+        <h2 id="confirm-title"></h2>
+        <p id="confirm-text"></p>
+      </div>
+      <footer class="dialog-footer">
+        <div class="button-row">
+          <button type="button" class="btn" id="confirm-cancel">Cancel</button>
+          <button type="button" class="btn btn-primary" id="confirm-accept">OK</button>
+        </div>
+      </footer>
     </div>
+  </dialog>
 
-    <!-- Config Modal -->
-    <div id="configModal" class="modal">
-        <div class="modal-content">
-            <h2>Edit Configuration</h2>
-            <p>Add file paths (one per line):</p>
-            <textarea id="configFiles" rows="10"></textarea>
-            <div class="modal-buttons">
-                <button id="saveConfigBtn">Save</button>
-                <button id="closeConfigBtn">Cancel</button>
-            </div>
-        </div>
-    </div>
+  <div class="toasts">
+    <div id="toast-polite" role="status" aria-live="polite"></div>
+    <div id="toast-assertive" role="alert" aria-live="assertive"></div>
+  </div>
 
-    <script src="app.js"></script>
+  <noscript>
+    <p class="noscript">programmersRAG needs JavaScript. The page loads scripts only from the server that delivered it.</p>
+  </noscript>
 </body>
 </html>
