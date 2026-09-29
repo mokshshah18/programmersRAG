@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RAG System</h1>
+            <div class="controls">
+                <button id="reindexBtn">Reindex</button>
+                <button id="configBtn">Edit Config</button>
+                <button id="clearHistoryBtn">Clear History</button>
+            </div>
+        </header>
+
+        <div id="status" class="status"></div>
+
+        <div class="chat-container">
+            <div id="chat" class="chat"></div>
+            
+            <div class="input-area">
+                <textarea id="question" placeholder="Ask a question..." rows="3"></textarea>
+                <button id="askBtn">Ask</button>
+            </div>
+        </div>
+
+        <div id="contextPanel" class="context-panel" style="display: none;">
+            <h3>Retrieved Context</h3>
+            <div id="contextList"></div>
+        </div>
+    </div>
+
+    <!-- Config Modal -->
+    <div id="configModal" class="modal">
+        <div class="modal-content">
+            <h2>Edit Configuration</h2>
+            <p>Add file paths (one per line):</p>
+            <textarea id="configFiles" rows="10"></textarea>
+            <div class="modal-buttons">
+                <button id="saveConfigBtn">Save</button>
+                <button id="closeConfigBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
