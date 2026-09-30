@@ -1,0 +1,5 @@
+file(GLOB prag_cli_sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+add_executable(prag ${prag_cli_sources})
+target_link_libraries(prag PRIVATE prag_server)
+target_compile_features(prag PRIVATE cxx_std_20)
+prag_apply_warnings(prag)
