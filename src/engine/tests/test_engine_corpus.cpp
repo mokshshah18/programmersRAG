@@ -2,6 +2,7 @@
 #define PRAG_TEST_MAIN
 #include "prag_test.hpp"
 
+#include <cstdio>
 #include <cstring>
 #include <filesystem>
 
@@ -22,6 +23,7 @@ struct Outcome {
   std::vector<float> score;
   std::size_t in_context = 0;
   std::string answer;
+  std::string top_name;
 };
 
 static Outcome run(unsigned threads, IndexReport* report, QueryResult* result) {
@@ -39,22 +41,21 @@ static Outcome run(unsigned threads, IndexReport* report, QueryResult* result) {
   Outcome o;
   if (!report->error.empty()) return o;
   *result = e.query(kQuestion, {false, 0.0, true, false});
-  {
-    const CalibrationInfo& ci = e.corpus()->calibration_info;
-    std::printf("calibration (%u threads): fitted %d, %s, %zu + %zu queries, ece %.3f, conformal z %.2f; "
-                "query z_threshold %.2f, top z %.2f, p_score %.3f
-",
-                threads, ci.fitted, ci.source.c_str(), ci.queries, ci.heldout_queries,
-                ci.heldout.expected_calibration_error, ci.conformal_z, result->trace.z_threshold,
-                result->units.empty() ? 0.0 : result->units[0].traced.z,
-                result->units.empty() ? 0.0 : result->units[0].traced.p_score);
-  }
+  const auto c = e.corpus();
+  const CalibrationInfo& ci = c->calibration_info;
+  std::printf("[%2u threads] calibration: fitted %d, %s, %zu + %zu queries, ece %.3f, conformal z %.2f; "
+              "query: z_threshold %.2f, top z %.2f, p_score %.3f\n",
+              threads, ci.fitted ? 1 : 0, ci.source.c_str(), ci.queries, ci.heldout_queries,
+              ci.heldout.expected_calibration_error, ci.conformal_z, result->trace.z_threshold,
+              result->units.empty() ? 0.0 : static_cast<double>(result->units[0].traced.z),
+              result->units.empty() ? 0.0 : static_cast<double>(result->units[0].traced.p_score));
   for (const RetrievedUnit& u : result->units) {
     o.ids.push_back(u.traced.id);
     o.p.push_back(u.traced.p);
     o.score.push_back(u.traced.score);
-    o.in_context += u.in_context;
+    o.in_context += u.in_context ? 1 : 0;
   }
+  if (!o.ids.empty()) o.top_name = c->units[o.ids[0]].name;
   o.answer = result->answer;
   return o;
 }
@@ -80,16 +81,20 @@ PRAG_TEST(mimalloc_build_and_thread_invariance) {
   CHECK(rep24.call_edges >= 1000);
   CHECK(rep24.groups >= 2 && rep24.groups < rep24.units / 3);
   CHECK(rep24.blocks >= 1);
+  CHECK_EQ(rep24.embedded, rep24.units);
   REQUIRE(q24.error.empty());
   REQUIRE(!o24.ids.empty());
   CHECK(o24.in_context >= 1);
-  CHECK(q24.trace.seeds >= 1);
+  CHECK(q24.extractive);
+  CHECK(!o24.answer.empty());
   CHECK_EQ(q24.scan.admission_violations, std::uint64_t{0});
   CHECK_EQ(q24.scan.commit_violations, std::uint64_t{0});
   CHECK_EQ(q24.scan.threads, 24u);
-", q24.trace.z_threshold > 0, 0ul, 0.0, 0.0, q24.trace.z_threshold, q24.units.empty() ? 0.0 : q24.units[0].traced.z, q24.units.empty() ? 0.0 : q24.units[0].traced.p_score);
-  std::printf("query: %zu units (%zu seeds, %zu evaluated), %zu rescored, retrieve %.1f ms\n", o24.ids.size(),
-              q24.trace.seeds, q24.trace.evaluated, q24.scan.rescored, q24.retrieve_ms);
+  std::printf("query: %zu units (%zu seeds, %zu evaluated, low confidence %d), top %s, %zu rescored, "
+              "retrieve %.1f ms, context %u -> %u tokens\n",
+              o24.ids.size(), q24.trace.seeds, q24.trace.evaluated, q24.trace.low_confidence ? 1 : 0,
+              o24.top_name.c_str(), q24.scan.rescored, q24.retrieve_ms, q24.selection.tokens_before,
+              q24.selection.tokens_after);
 
   for (const unsigned threads : {1u, 4u}) {
     IndexReport rep;
@@ -98,6 +103,8 @@ PRAG_TEST(mimalloc_build_and_thread_invariance) {
     REQUIRE(rep.error.empty());
     CHECK_EQ(rep.units, rep24.units);
     CHECK_EQ(rep.groups, rep24.groups);
+    CHECK_EQ(rep.call_edges, rep24.call_edges);
+    CHECK_EQ(q.scan.threads, threads);
     CHECK_EQ(q.scan.admission_violations, std::uint64_t{0});
     CHECK_EQ(q.scan.commit_violations, std::uint64_t{0});
     CHECK(o.ids == o24.ids);

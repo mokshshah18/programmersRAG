@@ -745,6 +745,7 @@ edit::Transaction Engine::preview_edit(const std::vector<edit::EditBlock>& block
 
 edit::Status Engine::apply_edit(const std::string& id, edit::Transaction* result) {
   Impl& d = *impl_;
+  std::lock_guard<std::mutex> edit_lock(d.edit_mu);
   d.tuning->notify_activity();
   edit::Transaction tx;
   {
@@ -775,6 +776,7 @@ edit::Status Engine::apply_edit(const std::string& id, edit::Transaction* result
 
 edit::Status Engine::revert_edit(const std::string& id, edit::Transaction* result) {
   Impl& d = *impl_;
+  std::lock_guard<std::mutex> edit_lock(d.edit_mu);
   d.tuning->notify_activity();
   edit::Transaction tx;
   {

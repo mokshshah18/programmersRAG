@@ -91,6 +91,7 @@ struct Engine::Impl {
   std::string question_cache_id;
   std::unordered_map<std::string, std::vector<float>> question_cache;
 
+  std::mutex edit_mu;   // one commit or revert at a time (taken before build_mu)
   std::mutex build_mu;  // one build or calibration at a time; guards emb_cache
   std::atomic<bool> building{false};
   detail::EmbeddingCache emb_cache;

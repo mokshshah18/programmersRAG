@@ -97,11 +97,16 @@ IndexReport Engine::Impl::build(const IndexProgressCallback& callback) {
   auto finish = [&](const std::string& error) {
     rep.error = error;
     rep.seconds["total"] = to_seconds(total_sw);
-    std::lock_guard<std::mutex> lock(mu);
-    progress = IndexProgress{error.empty() ? "done" : "failed", rep.units, rep.units, error.empty() ? "index built" : error};
-    progress_running = false;
-    last_report = rep;
+    const IndexProgress last{error.empty() ? "done" : "failed", rep.units, rep.units,
+                             error.empty() ? "index built" : error};
+    {
+      std::lock_guard<std::mutex> lock(mu);
+      progress = last;
+      progress_running = false;
+      last_report = rep;
+    }
     if (!error.empty()) PRAG_WARN("index build failed: %s", error.c_str());
+    if (callback) callback(last);
     return rep;
   };
   auto stage_done = [&](const char* name) {
@@ -135,7 +140,7 @@ IndexReport Engine::Impl::build(const IndexProgressCallback& callback) {
 
   // ---- parse
   std::vector<ParsedItem> parsed(files.size());
-  bool cancel = false;
+  std::atomic<bool> cancel{false};
   {
     const auto blocks = exec::partition_fixed(files.size(), 1, 1);
     std::size_t done = 0;
@@ -202,6 +207,7 @@ IndexReport Engine::Impl::build(const IndexProgressCallback& callback) {
   const std::size_t dim = emb->dim();
   c.embedder_id = emb->id();
   const std::string cache_path = index_dir() + "/embeddings.bin";
+  if (!report_progress(callback, "embed", 0, n, "embedding units")) return finish(cancelled);
   if (emb_cache.embedder_id != c.embedder_id) {
     detail::EmbeddingCache loaded;
     if (detail::load_embedding_cache(cache_path, &loaded) && loaded.embedder_id == c.embedder_id &&
@@ -347,9 +353,7 @@ IndexReport Engine::Impl::build(const IndexProgressCallback& callback) {
     stale = false;
   }
   PRAG_INFO("index built: %zu files, %zu units, %zu groups", rep.files, rep.units, rep.groups);
-  IndexReport result = finish("");
-  if (callback) callback(IndexProgress{"done", rep.units, rep.units, "index built"});
-  return result;
+  return finish("");
 }
 
 // ---- calibration -----------------------------------------------------------
@@ -428,7 +432,8 @@ bool Engine::Impl::calibrate_corpus(const Corpus& c, const CalibrationOptions& o
     }
     qunits.push_back(id);
     questions.push_back(std::move(q));
-    if (generate) report_progress(callback, "calibrate", questions.size(), o.max_queries, "generating questions");
+    if (generate && !report_progress(callback, "calibrate", questions.size(), o.max_queries, "generating questions"))
+      return fail("cancelled");
   }
 
   const retrieve::EdgeLift defaults = default_lifts();
