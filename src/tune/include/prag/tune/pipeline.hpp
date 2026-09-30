@@ -25,6 +25,7 @@
 
 #include "prag/core/settings.hpp"
 #include "prag/core/types.hpp"
+#include "prag/llm/tuning.hpp"
 
 namespace prag::tune {
 
@@ -123,6 +124,10 @@ struct GateResult {
 
 GateResult evaluate_gate(const GateInput& input, const GatePolicy& policy);
 
+// Numerics behind the gate, exposed for testing.
+double regularized_incomplete_beta(double a, double b, double x);  // I_x(a, b), x in [0, 1]
+double student_t_cdf(double t, double degrees_of_freedom);          // P(T <= t)
+
 // ---- pipeline --------------------------------------------------------------
 
 enum class Stage {
@@ -161,6 +166,11 @@ struct Status {
 };
 
 nlohmann::json to_json(const Status& status);  // field names as in DESIGN.md section 9
+nlohmann::json to_json(const RunRecord& run);
+nlohmann::json to_json(const GateResult& gate);
+nlohmann::json to_json(const IdleState& idle);
+bool run_from_json(const nlohmann::json& json, RunRecord* run);  // inverse of to_json(RunRecord)
+Stage stage_from_string(std::string_view name, Stage fallback = Stage::Waiting);
 
 struct Hooks {
   // Snapshot of the corpus; returns false when no index is available.
@@ -176,12 +186,57 @@ struct Hooks {
   std::function<bool(const std::string& model_path, std::string* error)> promote;
   // Examples recorded from user feedback since the last run.
   std::function<std::vector<Example>()> feedback_examples;
+
+  // ---- optional additions; when absent the pipeline degrades as described ----
+  // Chat template of the model, used to render training and calibration text.
+  // Absent: a ChatML-style rendering.
+  std::function<std::string(std::span<const ChatMessage>)> chat_template;
+  // Negative log-likelihood per token of the general probe text under the model.
+  // Absent: the general-probe requirement of the gate is neutral (0 vs 0).
+  std::function<bool(const std::string& model_path, double* nll, std::string* error)> general_nll;
+  // Mean KL per token between the unquantised candidate and its quantisation.
+  // Absent: the KL requirement is neutral (0).
+  std::function<bool(const std::string& reference_path, const std::string& quantized_path, double* kl,
+                     std::string* error)> quantization_kl;
+  // Called whenever the enabled flag changes, so the owner can persist tune.enabled.
+  std::function<void(bool enabled)> enabled_changed;
+};
+
+// The heavy operations. The defaults are the functions of prag/llm/tuning.hpp.
+struct Steps {
+  // Writes a float32 copy of `input` to `output`.
+  std::function<bool(const std::string& input, const std::string& output, std::string* error)> convert_f32 =
+      [](const std::string& input, const std::string& output, std::string* error) {
+        llm::QuantizeOptions options;
+        options.input = input;
+        options.output = output;
+        options.type = "F32";
+        return llm::quantize(options, error);
+      };
+  std::function<llm::FineTuneReport(const llm::FineTuneOptions&, std::string_view, const llm::ProgressCallback&)>
+      fine_tune = [](const llm::FineTuneOptions& o, std::string_view text, const llm::ProgressCallback& p) {
+        return llm::fine_tune(o, text, p);
+      };
+  std::function<bool(const llm::ImportanceOptions&, std::string_view, llm::ImportanceMatrix*,
+                     const llm::ProgressCallback&, std::string*)>
+      compute_importance = [](const llm::ImportanceOptions& o, std::string_view text, llm::ImportanceMatrix* out,
+                              const llm::ProgressCallback& p, std::string* e) {
+        return llm::compute_importance(o, text, out, p, e);
+      };
+  std::function<bool(const llm::QuantizeOptions&, std::string*)> quantize = [](const llm::QuantizeOptions& o,
+                                                                               std::string* e) {
+    return llm::quantize(o, e);
+  };
+  // True while the members need llama.cpp; the pipeline is then unavailable
+  // when llm::available() is false. Tests that inject fakes set this to false.
+  bool needs_runtime = true;
 };
 
 class Pipeline {
  public:
   // `settings` supplies the tune.* and models.* keys; `data_dir` is where runs are stored.
   Pipeline(const Settings& settings, std::string data_dir, Hooks hooks);
+  Pipeline(const Settings& settings, std::string data_dir, Hooks hooks, Steps steps);
   ~Pipeline();
   Pipeline(const Pipeline&) = delete;
   Pipeline& operator=(const Pipeline&) = delete;
