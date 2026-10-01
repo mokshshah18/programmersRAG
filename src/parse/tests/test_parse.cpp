@@ -789,12 +789,13 @@ PRAG_TEST(find_unit_returns_the_range_of_a_name) {
   CHECK_EQ(end, std::size_t{7});
   CHECK(find_unit("sample.c", text, "free", nullptr, nullptr));
 
-  // several units of one name: the first function definition wins
-  const std::string twice = "#define get(x) (x)\nstruct get { int a; };\nint get(void) { return 1; }\n"
-                            "#if X\nint get(void) { return 2; }\n#endif\n";
-  ParseOptions options;
-  REQUIRE(find_unit("twice.c", twice, "get", &begin, &end));
-  CHECK_EQ(std::string(twice.substr(begin, end - begin)), std::string("int get(void) { return 1; }\n"));
+  // a function definition is preferred to a macro or type of the same name
+  const std::string once = "#define get(x) (x)\nstruct get { int a; };\nint get(void) { return 1; }\n";
+  REQUIRE(find_unit("once.c", once, "get", &begin, &end));
+  CHECK_EQ(std::string(once.substr(begin, end - begin)), std::string("int get(void) { return 1; }\n"));
+  // two definitions (alternative #if branches): the name is ambiguous and is refused
+  const std::string twice = once + "#if X\nint get(void) { return 2; }\n#endif\n";
+  CHECK(!find_unit("twice.c", twice, "get", &begin, &end));
 
   // a broken file: what can be delimited is found
   const std::string broken = "int first(void) { return 1; }\n\nint second(int x { return x +; }\n\n"

@@ -291,7 +291,8 @@ Resolution resolve_block(const EditBlock& block, const FileProposal& proposal, c
     const bool found = options.unit_locator &&
                        options.unit_locator(proposal.path, original, block.scope, &scope_begin, &scope_end) &&
                        scope_begin <= scope_end && scope_end <= original.size();
-    if (!found) return failed(Status::ScopeNotFound, "the file has no unit called " + in_quotes(block.scope));
+    if (!found) return failed(Status::ScopeNotFound, "the file has no unit called " + in_quotes(block.scope) +
+                                               ", or more than one (for example in alternative #if branches)");
   }
   if (block.kind == EditKind::UnitRewrite) return rewrite_unit(block, proposal, scope_begin, scope_end, style);
 

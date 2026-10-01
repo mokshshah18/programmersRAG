@@ -105,18 +105,26 @@ bool find_unit(std::string_view path, std::string_view text, std::string_view na
   const std::vector<SourceUnit>& units = file.units;
 
   // An exact name before the name of a member, a function before anything else.
+  // The first tier with a match decides; when it holds more than one unit (for
+  // example two definitions in alternative branches of #if), the name does not
+  // say which one is meant, and the lookup fails rather than guess.
   const SourceUnit* found = nullptr;
+  std::size_t matches = 0;
   for (const bool exact : {true, false}) {
     for (const bool functions : {true, false}) {
+      if (matches != 0) break;
       for (const SourceUnit& unit : units) {
-        if (found != nullptr) break;
         if (unit.name.empty() || unit.name.find('#') != std::string::npos) continue;
         if (functions != (unit.kind == UnitKind::Function)) continue;
-        if (exact ? unit.name == name : last_component(unit.name) == name) found = &unit;
+        if (exact ? unit.name == name : last_component(unit.name) == name) {
+          if (found == nullptr) found = &unit;
+          ++matches;
+        }
       }
     }
+    if (matches != 0) break;
   }
-  if (found == nullptr) return false;
+  if (found == nullptr || matches > 1) return false;
 
   // A unit that was split, or a type whose members are units, extends over its parts.
   std::size_t last = found->id;

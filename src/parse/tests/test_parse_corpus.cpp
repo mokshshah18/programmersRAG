@@ -229,6 +229,14 @@ PRAG_TEST(well_known_functions_are_found) {
     // find_unit agrees
     std::size_t begin = 0;
     std::size_t end = 0;
+    // (a name defined twice in the file, in alternative #if branches, is ambiguous and refused)
+    std::size_t definitions = 0;
+    for (const SourceUnit& other : c.files[i].units)
+      if (other.kind == UnitKind::Function && other.name == name) ++definitions;
+    if (definitions > 1) {
+      PARSE_EXPECT(!find_unit(c.paths[i], c.texts[i], name, &begin, &end), path, std::string(name) + ": ambiguous");
+      continue;
+    }
     PARSE_EXPECT(find_unit(c.paths[i], c.texts[i], name, &begin, &end), path, std::string(name) + ": find_unit");
     PARSE_EXPECT(begin <= unit->start_byte && unit->end_byte <= end, path, std::string(name) + ": find_unit range");
   }

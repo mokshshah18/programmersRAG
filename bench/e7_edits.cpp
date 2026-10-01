@@ -740,6 +740,12 @@ int run_e7(Context& ctx) {
   const std::string started = iso_now();
   json body = json::object();
   body["a_matching"] = guarded("E7a matching engine", [&] { return matching_protocol(ctx); });
+  // PRAG_E7_ONLY_A=1 re-runs the matching protocol alone (no model, minutes
+  // instead of an hour) and writes e7a_matching.json next to e7_edits.json.
+  if (const char* only = std::getenv("PRAG_E7_ONLY_A"); only != nullptr && std::string(only) == "1") {
+    write_result(ctx, "e7a_matching", started, json{{"a_functions", ctx.quick() ? 12 : 250}}, body);
+    return 0;
+  }
   std::vector<TaskResult> results;
   Copy copy;
   bool have_copy = false;

@@ -83,8 +83,10 @@ ParsedFile parse_source(std::string_view path, std::string_view text, const Pars
 std::size_t count_syntax_errors(std::string_view language, std::string_view text);
 
 // Byte range [begin, end) of the unit called `name` in `text`, leading comment
-// included; returns false when no unit has that name. When several units share
-// the name the first function definition wins. A name without qualification
+// included; returns false when no unit has that name. Function definitions are
+// preferred to other units; when two or more units of the deciding kind share
+// the name (two definitions in alternative #if branches, say), the name is
+// ambiguous and the function returns false rather than guess. A name without qualification
 // also finds a member ("method" finds "Class::method") when no unit carries the
 // name itself. The range of a unit that was split covers all its parts, the
 // range of a class all its members.
