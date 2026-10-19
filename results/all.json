@@ -1,0 +1,135 @@
+{
+ "meta": {
+  "corpus": {
+   "commit": "31d034d94cdb8e22f7d7ed55967f581a2d6e831d",
+   "files": 45,
+   "functions": 1514,
+   "path": "<repo>/Demo repo/mimalloc",
+   "roots": [
+    "<repo>/Demo repo/mimalloc/include",
+    "<repo>/Demo repo/mimalloc/src"
+   ],
+   "units": 2326
+  },
+  "experiment": "all",
+  "finished": "2026-10-01T02:03:56Z",
+  "git_commit": "946b67ea86525ae39decf998a7e2ac9a5da5c51c",
+  "machine": {
+   "block_bytes": 16384,
+   "cache_detected": true,
+   "cpu": "12th Gen Intel(R) Core(TM) i9-12950HX",
+   "l1d_bytes": [
+    49152,
+    32768
+   ],
+   "logical_cpus": 24,
+   "os": "Windows 10.0.22631",
+   "ram_gb": 31.692127227783203,
+   "simd_kernel_note": "see e5_execution for the kernel in use"
+  },
+  "models": {
+   "chat": "qwen2.5-coder-0.5b-instruct-q4_k_m",
+   "embedding": "Qwen3-Embedding-0.6B-Q8_0|pool=last|dim=1024|ctx=2048|eos=1|prefix=aab9def051f51fa5"
+  },
+  "seed": 20260930,
+  "settings": {
+   "block_bytes": 16384,
+   "engine_settings": {
+    "context": {
+     "theta": 0.25,
+     "token_budget": 2400
+    },
+    "corpus": {
+     "exclude": [
+      "/.git/",
+      "/build/",
+      "/out/",
+      "/.deps/",
+      "/node_modules/"
+     ],
+     "extensions": [
+      ".c",
+      ".h",
+      ".cc",
+      ".cpp",
+      ".cxx",
+      ".hpp",
+      ".hh",
+      ".py"
+     ],
+     "max_file_bytes": 1048576,
+     "roots": [
+      "<repo>/Demo repo/mimalloc/src",
+      "<repo>/Demo repo/mimalloc/include"
+     ]
+    },
+    "models": {
+     "chat": "<repo>/models/qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+     "embedding": "<repo>/models/Qwen3-Embedding-0.6B-Q8_0.gguf",
+     "tuning_base": "<repo>/models/qwen2.5-coder-0.5b-instruct-fp16.gguf"
+    },
+    "paths": {
+     "data": "<repo>/build/bench_data/Qwen3-Embedding-0.6B-Q8_0",
+     "frontend": "frontend"
+    },
+    "retrieve": {
+     "tau": 0.25
+    },
+    "server": {
+     "host": "127.0.0.1",
+     "port": 8000
+    },
+    "tune": {
+     "enabled": false
+    }
+   },
+   "experiments": "queries, e1 .. e7 in order",
+   "quick": false,
+   "threads": 24
+  },
+  "started": "2026-09-30T21:43:25Z"
+ },
+ "failures": 0,
+ "runs": [
+  {
+   "experiment": "queries",
+   "seconds": 794.3544342,
+   "status": "ok"
+  },
+  {
+   "experiment": "e1_retrieval",
+   "seconds": 1364.6222581,
+   "status": "ok"
+  },
+  {
+   "experiment": "e2_calibration",
+   "seconds": 73.7856963,
+   "status": "ok"
+  },
+  {
+   "experiment": "e3_groups",
+   "seconds": 25.1440999,
+   "status": "ok"
+  },
+  {
+   "experiment": "e4_context_rot",
+   "seconds": 1279.8714514,
+   "status": "ok"
+  },
+  {
+   "experiment": "e5_execution",
+   "seconds": 978.1379495,
+   "status": "ok"
+  },
+  {
+   "experiment": "e6_tuning",
+   "seconds": 7138.0004894,
+   "status": "ok"
+  },
+  {
+   "experiment": "e7_edits",
+   "seconds": 3977.50932,
+   "status": "ok"
+  }
+ ]
+}

@@ -1,0 +1,1990 @@
+{
+ "meta": {
+  "corpus": {
+   "commit": "31d034d94cdb8e22f7d7ed55967f581a2d6e831d",
+   "files": 45,
+   "functions": 1514,
+   "path": "<repo>/Demo repo/mimalloc",
+   "roots": [
+    "<repo>/Demo repo/mimalloc/include",
+    "<repo>/Demo repo/mimalloc/src"
+   ],
+   "units": 2326
+  },
+  "experiment": "e1_retrieval",
+  "finished": "2026-09-30T22:19:23Z",
+  "git_commit": "946b67ea86525ae39decf998a7e2ac9a5da5c51c",
+  "machine": {
+   "block_bytes": 16384,
+   "cache_detected": true,
+   "cpu": "12th Gen Intel(R) Core(TM) i9-12950HX",
+   "l1d_bytes": [
+    49152,
+    32768
+   ],
+   "logical_cpus": 24,
+   "os": "Windows 10.0.22631",
+   "ram_gb": 31.692127227783203,
+   "simd_kernel_note": "see e5_execution for the kernel in use"
+  },
+  "models": {
+   "chat": "qwen2.5-coder-0.5b-instruct-q4_k_m",
+   "embedding": "Qwen3-Embedding-0.6B-Q8_0|pool=last|dim=1024|ctx=2048|eos=1|prefix=aab9def051f51fa5"
+  },
+  "seed": 20260930,
+  "settings": {
+   "block_bytes": 16384,
+   "bootstrap_resamples": 1000,
+   "bootstrap_seed": 20261030,
+   "calibration_negatives_per_query": 400,
+   "engine_settings": {
+    "context": {
+     "theta": 0.25,
+     "token_budget": 2400
+    },
+    "corpus": {
+     "exclude": [
+      "/.git/",
+      "/build/",
+      "/out/",
+      "/.deps/",
+      "/node_modules/"
+     ],
+     "extensions": [
+      ".c",
+      ".h",
+      ".cc",
+      ".cpp",
+      ".cxx",
+      ".hpp",
+      ".hh",
+      ".py"
+     ],
+     "max_file_bytes": 1048576,
+     "roots": [
+      "<repo>/Demo repo/mimalloc/src",
+      "<repo>/Demo repo/mimalloc/include"
+     ]
+    },
+    "models": {
+     "chat": "<repo>/models/qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+     "embedding": "<repo>/models/Qwen3-Embedding-0.6B-Q8_0.gguf",
+     "tuning_base": "<repo>/models/qwen2.5-coder-0.5b-instruct-fp16.gguf"
+    },
+    "paths": {
+     "data": "<repo>/build/bench_data/Qwen3-Embedding-0.6B-Q8_0",
+     "frontend": "frontend"
+    },
+    "retrieve": {
+     "tau": 0.25
+    },
+    "server": {
+     "host": "127.0.0.1",
+     "port": 8000
+    },
+    "tune": {
+     "enabled": false
+    }
+   },
+   "precision": "relevant unit in the set divided by the set size",
+   "quick": false,
+   "ranking_for_mrr": "method order, then the remaining units by score",
+   "scores": "exact float32 cosine; Q-doc against documentation-free embeddings",
+   "threads": 24
+  },
+  "started": "2026-09-30T21:56:39Z"
+ },
+ "q_doc": {
+  "calibration": {
+   "conformal": {
+    "0.1": {
+     "heldout_queries": 72,
+     "z_threshold": 2.0815367768987114
+    },
+    "0.2": {
+     "heldout_queries": 72,
+     "z_threshold": 2.5959513217960972
+    }
+   },
+   "fit_queries": 142,
+   "fitted": true,
+   "nonrelevant_samples": 56800,
+   "prior": 0.0004299226139294927,
+   "relevant_samples": 142,
+   "z_at_tau": {
+    "0.10": 4.48485904168828,
+    "0.25": 6.058649595421003,
+    "0.50": 6.854428930499162
+   }
+  },
+  "codes": {
+   "int8": {
+    "build_seconds": 0.0067937,
+    "bytes_per_code": 1032,
+    "oracle_recall_codes": {
+     "hi": 0.3684210526315789,
+     "lo": 0.14035087719298245,
+     "mean": 0.24561403508771928,
+     "n": 57
+    },
+    "oracle_recall_exact": {
+     "hi": 0.3684210526315789,
+     "lo": 0.14035087719298245,
+     "mean": 0.24561403508771928,
+     "n": 57
+    },
+    "queries": 57,
+    "rescored_share_of_corpus": 0.007504789488769214,
+    "rescored_units": {
+     "hi": 19.982456140350877,
+     "lo": 15.489912280701754,
+     "mean": 17.45614035087719,
+     "n": 57
+    },
+    "set_jaccard": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 57
+    },
+    "set_recall_retention": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 57
+    },
+    "set_size_codes": {
+     "hi": 1.0526315789473684,
+     "lo": 1.0,
+     "mean": 1.0175438596491229,
+     "n": 57
+    },
+    "set_size_exact": {
+     "hi": 1.0526315789473684,
+     "lo": 1.0,
+     "mean": 1.0175438596491229,
+     "n": 57
+    },
+    "top10_overlap_without_rescoring": {
+     "hi": 1.0,
+     "lo": 0.9912280701754385,
+     "mean": 0.9964912280701754,
+     "n": 57
+    }
+   },
+   "rabitq": {
+    "build_seconds": 0.0744321,
+    "bytes_per_code": 136,
+    "oracle_recall_codes": {
+     "hi": 0.3684210526315789,
+     "lo": 0.14035087719298245,
+     "mean": 0.24561403508771928,
+     "n": 57
+    },
+    "oracle_recall_exact": {
+     "hi": 0.3684210526315789,
+     "lo": 0.14035087719298245,
+     "mean": 0.24561403508771928,
+     "n": 57
+    },
+    "queries": 57,
+    "rescored_share_of_corpus": 0.008078019640675206,
+    "rescored_units": {
+     "hi": 21.82456140350877,
+     "lo": 16.333333333333332,
+     "mean": 18.789473684210527,
+     "n": 57
+    },
+    "set_jaccard": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 57
+    },
+    "set_recall_retention": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 57
+    },
+    "set_size_codes": {
+     "hi": 1.0526315789473684,
+     "lo": 1.0,
+     "mean": 1.0175438596491229,
+     "n": 57
+    },
+    "set_size_exact": {
+     "hi": 1.0526315789473684,
+     "lo": 1.0,
+     "mean": 1.0175438596491229,
+     "n": 57
+    },
+    "top10_overlap_without_rescoring": {
+     "hi": 0.8877192982456135,
+     "lo": 0.8438596491228065,
+     "mean": 0.8666666666666663,
+     "n": 57
+    }
+   }
+  },
+  "edge_lifts": {
+   "callee": 2.00625,
+   "caller": 3.4516129032258065,
+   "sibling": 1.202247191011236
+  },
+  "methods": {
+   "conformal_alpha0.1": {
+    "mrr": {
+     "hi": 0.47896752272697507,
+     "lo": 0.28950173018174424,
+     "mean": 0.38756556147539,
+     "n": 57
+    },
+    "parameters": {
+     "alpha": 0.1
+    },
+    "precision": {
+     "hi": 0.01492879986874316,
+     "lo": 0.011317871440158517,
+     "mean": 0.013069975525231125,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.9649122807017544,
+     "lo": 0.8070175438596491,
+     "mean": 0.8947368421052632,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 80.63201754385965,
+     "lo": 66.35087719298245,
+     "mean": 73.6842105263158,
+     "n": 57
+    },
+    "set_size_median": 70.0,
+    "tokens_mean": {
+     "hi": 18204.952631578948,
+     "lo": 14014.883333333333,
+     "mean": 16202.82456140351,
+     "n": 57
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "conformal_alpha0.2": {
+    "mrr": {
+     "hi": 0.47896752272697507,
+     "lo": 0.28950173018174424,
+     "mean": 0.38756556147539,
+     "n": 57
+    },
+    "parameters": {
+     "alpha": 0.2
+    },
+    "precision": {
+     "hi": 0.03353789798839732,
+     "lo": 0.021797371919311477,
+     "mean": 0.027331487679079315,
+     "n": 56
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.9298245614035088,
+     "lo": 0.7368421052631579,
+     "mean": 0.8421052631578947,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 45.089473684210525,
+     "lo": 31.715350877192982,
+     "mean": 38.54385964912281,
+     "n": 57
+    },
+    "set_size_median": 32.0,
+    "tokens_mean": {
+     "hi": 10592.872807017544,
+     "lo": 6645.968421052631,
+     "mean": 8667.807017543859,
+     "n": 57
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "largest_gap": {
+    "mrr": {
+     "hi": 0.47896752272697507,
+     "lo": 0.28950173018174424,
+     "mean": 0.38756556147539,
+     "n": 57
+    },
+    "parameters": {
+     "buffer": 0,
+     "k_max": 20
+    },
+    "precision": {
+     "hi": 0.3514358813700918,
+     "lo": 0.16806982734614312,
+     "mean": 0.25832637148426624,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.6140350877192983,
+     "lo": 0.3508771929824561,
+     "mean": 0.49122807017543857,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 4.350877192982456,
+     "lo": 2.4381578947368423,
+     "mean": 3.3157894736842106,
+     "n": 57
+    },
+    "set_size_median": 2.0,
+    "tokens_mean": {
+     "hi": 929.3100877192982,
+     "lo": 432.51271929824566,
+     "mean": 664.2456140350877,
+     "n": 57
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "ppr_top10": {
+    "mrr": {
+     "hi": 0.4626801402311548,
+     "lo": 0.27841440226690084,
+     "mean": 0.37025086384046874,
+     "n": 57
+    },
+    "parameters": {
+     "continuation": 0.5,
+     "k": 10,
+     "seeds": "score posterior"
+    },
+    "precision": {
+     "hi": 0.08245614035087719,
+     "lo": 0.05789473684210529,
+     "mean": 0.07017543859649127,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.8245614035087719,
+     "lo": 0.5789473684210527,
+     "mean": 0.7017543859649122,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 10.0,
+     "lo": 10.0,
+     "mean": 10.0,
+     "n": 57
+    },
+    "set_size_median": 10.0,
+    "tokens_mean": {
+     "hi": 2328.977192982456,
+     "lo": 1741.743859649123,
+     "mean": 2047.0526315789473,
+     "n": 57
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "ppr_top5": {
+    "mrr": {
+     "hi": 0.4620405706545107,
+     "lo": 0.27685478704685723,
+     "mean": 0.3690674409088675,
+     "n": 57
+    },
+    "parameters": {
+     "continuation": 0.5,
+     "k": 5,
+     "seeds": "score posterior"
+    },
+    "precision": {
+     "hi": 0.14043859649122806,
+     "lo": 0.08771929824561407,
+     "mean": 0.11578947368421058,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.7021929824561399,
+     "lo": 0.43859649122807015,
+     "mean": 0.5789473684210527,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 5.0,
+     "lo": 5.0,
+     "mean": 5.0,
+     "n": 57
+    },
+    "set_size_median": 5.0,
+    "tokens_mean": {
+     "hi": 1241.1877192982456,
+     "lo": 846.6723684210526,
+     "mean": 1048.859649122807,
+     "n": 57
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "topk_1": {
+    "mrr": {
+     "hi": 0.47896752272697507,
+     "lo": 0.28950173018174424,
+     "mean": 0.38756556147539,
+     "n": 57
+    },
+    "parameters": {
+     "k": 1
+    },
+    "precision": {
+     "hi": 0.3508771929824561,
+     "lo": 0.12280701754385964,
+     "mean": 0.22807017543859648,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.3508771929824561,
+     "lo": 0.12280701754385964,
+     "mean": 0.22807017543859648,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 57
+    },
+    "set_size_median": 1.0,
+    "tokens_mean": {
+     "hi": 299.5385964912281,
+     "lo": 159.5986842105263,
+     "mean": 223.42105263157896,
+     "n": 57
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "topk_10": {
+    "mrr": {
+     "hi": 0.47896752272697507,
+     "lo": 0.28950173018174424,
+     "mean": 0.38756556147539,
+     "n": 57
+    },
+    "parameters": {
+     "k": 10
+    },
+    "precision": {
+     "hi": 0.08245614035087719,
+     "lo": 0.05964912280701758,
+     "mean": 0.07192982456140354,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.8245614035087719,
+     "lo": 0.5964912280701754,
+     "mean": 0.7192982456140351,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 10.0,
+     "lo": 10.0,
+     "mean": 10.0,
+     "n": 57
+    },
+    "set_size_median": 10.0,
+    "tokens_mean": {
+     "hi": 2385.0973684210526,
+     "lo": 1722.0486842105263,
+     "mean": 2056.0877192982457,
+     "n": 57
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "topk_20": {
+    "mrr": {
+     "hi": 0.47896752272697507,
+     "lo": 0.28950173018174424,
+     "mean": 0.38756556147539,
+     "n": 57
+    },
+    "parameters": {
+     "k": 20
+    },
+    "precision": {
+     "hi": 0.04473684210526314,
+     "lo": 0.033333333333333354,
+     "mean": 0.039473684210526314,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.8947368421052632,
+     "lo": 0.6666666666666666,
+     "mean": 0.7894736842105263,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 20.0,
+     "lo": 20.0,
+     "mean": 20.0,
+     "n": 57
+    },
+    "set_size_median": 20.0,
+    "tokens_mean": {
+     "hi": 4980.401315789473,
+     "lo": 3748.659649122807,
+     "mean": 4363.210526315789,
+     "n": 57
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "topk_3": {
+    "mrr": {
+     "hi": 0.47896752272697507,
+     "lo": 0.28950173018174424,
+     "mean": 0.38756556147539,
+     "n": 57
+    },
+    "parameters": {
+     "k": 3
+    },
+    "precision": {
+     "hi": 0.20467836257309946,
+     "lo": 0.11695906432748533,
+     "mean": 0.16374269005847952,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.6140350877192983,
+     "lo": 0.3508771929824561,
+     "mean": 0.49122807017543857,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 3.0,
+     "lo": 3.0,
+     "mean": 3.0,
+     "n": 57
+    },
+    "set_size_median": 3.0,
+    "tokens_mean": {
+     "hi": 747.9557017543859,
+     "lo": 486.8434210526316,
+     "mean": 618.4561403508771,
+     "n": 57
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "topk_5": {
+    "mrr": {
+     "hi": 0.47896752272697507,
+     "lo": 0.28950173018174424,
+     "mean": 0.38756556147539,
+     "n": 57
+    },
+    "parameters": {
+     "k": 5
+    },
+    "precision": {
+     "hi": 0.14385964912280708,
+     "lo": 0.09122807017543863,
+     "mean": 0.11929824561403515,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.7192982456140351,
+     "lo": 0.45614035087719296,
+     "mean": 0.5964912280701754,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 5.0,
+     "lo": 5.0,
+     "mean": 5.0,
+     "n": 57
+    },
+    "set_size_median": 5.0,
+    "tokens_mean": {
+     "hi": 1233.2131578947367,
+     "lo": 839.9078947368421,
+     "mean": 1038.122807017544,
+     "n": 57
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "trace_nodamp_tau0.25": {
+    "skipped": "prag::retrieve::TraceOptions has no switch for hub damping; see the report of the bench module (requests)"
+   },
+   "trace_nograph_tau0.10": {
+    "mrr": {
+     "hi": 0.4745021451648543,
+     "lo": 0.2851264804614278,
+     "mean": 0.3811328129373784,
+     "n": 57
+    },
+    "parameters": {
+     "graph_edges": false,
+     "tau": 0.1
+    },
+    "precision": {
+     "hi": 0.3127730123763404,
+     "lo": 0.12523928374257323,
+     "mean": 0.2140943923064666,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.543859649122807,
+     "lo": 0.2807017543859649,
+     "mean": 0.42105263157894735,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 4.456140350877193,
+     "lo": 2.2798245614035086,
+     "mean": 3.3333333333333335,
+     "n": 57
+    },
+    "set_size_median": 1.0,
+    "tokens_mean": {
+     "hi": 1139.4429824561403,
+     "lo": 441.353947368421,
+     "mean": 763.140350877193,
+     "n": 57
+    },
+    "trace": {
+     "evaluated_mean": 0.0,
+     "expansions_mean": 2.9649122807017543,
+     "low_confidence_share": 0.3684210526315789,
+     "truncated_share": 0.0
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "trace_nograph_tau0.25": {
+    "mrr": {
+     "hi": 0.47896752272697507,
+     "lo": 0.28950173018174424,
+     "mean": 0.38756556147539,
+     "n": 57
+    },
+    "parameters": {
+     "graph_edges": false,
+     "tau": 0.25
+    },
+    "precision": {
+     "hi": 0.3508771929824561,
+     "lo": 0.13157894736842105,
+     "mean": 0.23684210526315788,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.3508771929824561,
+     "lo": 0.14035087719298245,
+     "mean": 0.24561403508771928,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 1.0701754385964912,
+     "lo": 1.0,
+     "mean": 1.0175438596491229,
+     "n": 57
+    },
+    "set_size_median": 1.0,
+    "tokens_mean": {
+     "hi": 300.06578947368416,
+     "lo": 160.26184210526316,
+     "mean": 224.6315789473684,
+     "n": 57
+    },
+    "trace": {
+     "evaluated_mean": 0.0,
+     "expansions_mean": 0.05263157894736842,
+     "low_confidence_share": 0.9649122807017544,
+     "truncated_share": 0.0
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "trace_nograph_tau0.50": {
+    "mrr": {
+     "hi": 0.47896752272697507,
+     "lo": 0.28950173018174424,
+     "mean": 0.38756556147539,
+     "n": 57
+    },
+    "parameters": {
+     "graph_edges": false,
+     "tau": 0.5
+    },
+    "precision": {
+     "hi": 0.3508771929824561,
+     "lo": 0.12280701754385964,
+     "mean": 0.22807017543859648,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.3508771929824561,
+     "lo": 0.12280701754385964,
+     "mean": 0.22807017543859648,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 57
+    },
+    "set_size_median": 1.0,
+    "tokens_mean": {
+     "hi": 299.5385964912281,
+     "lo": 159.5986842105263,
+     "mean": 223.42105263157896,
+     "n": 57
+    },
+    "trace": {
+     "evaluated_mean": 0.0,
+     "expansions_mean": 0.017543859649122806,
+     "low_confidence_share": 0.9824561403508771,
+     "truncated_share": 0.0
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "trace_tau0.10": {
+    "mrr": {
+     "hi": 0.4745021451648543,
+     "lo": 0.2851264804614278,
+     "mean": 0.3811328129373784,
+     "n": 57
+    },
+    "parameters": {
+     "graph_edges": true,
+     "tau": 0.1
+    },
+    "precision": {
+     "hi": 0.3123938050253839,
+     "lo": 0.12505323580787975,
+     "mean": 0.21384995580042018,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.543859649122807,
+     "lo": 0.2807017543859649,
+     "mean": 0.42105263157894735,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 4.578947368421052,
+     "lo": 2.35,
+     "mean": 3.43859649122807,
+     "n": 57
+    },
+    "set_size_median": 1.0,
+    "tokens_mean": {
+     "hi": 1191.700438596491,
+     "lo": 446.7372807017544,
+     "mean": 787.4561403508771,
+     "n": 57
+    },
+    "trace": {
+     "evaluated_mean": 17.42105263157895,
+     "expansions_mean": 3.0701754385964914,
+     "low_confidence_share": 0.3684210526315789,
+     "truncated_share": 0.0
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "trace_tau0.25": {
+    "mrr": {
+     "hi": 0.47896752272697507,
+     "lo": 0.28950173018174424,
+     "mean": 0.38756556147539,
+     "n": 57
+    },
+    "parameters": {
+     "graph_edges": true,
+     "tau": 0.25
+    },
+    "precision": {
+     "hi": 0.3508771929824561,
+     "lo": 0.13157894736842105,
+     "mean": 0.23684210526315788,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.3508771929824561,
+     "lo": 0.14035087719298245,
+     "mean": 0.24561403508771928,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 1.0701754385964912,
+     "lo": 1.0,
+     "mean": 1.0175438596491229,
+     "n": 57
+    },
+    "set_size_median": 1.0,
+    "tokens_mean": {
+     "hi": 300.06578947368416,
+     "lo": 160.26184210526316,
+     "mean": 224.6315789473684,
+     "n": 57
+    },
+    "trace": {
+     "evaluated_mean": 0.40350877192982454,
+     "expansions_mean": 0.05263157894736842,
+     "low_confidence_share": 0.9649122807017544,
+     "truncated_share": 0.0
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   },
+   "trace_tau0.50": {
+    "mrr": {
+     "hi": 0.47896752272697507,
+     "lo": 0.28950173018174424,
+     "mean": 0.38756556147539,
+     "n": 57
+    },
+    "parameters": {
+     "graph_edges": true,
+     "tau": 0.5
+    },
+    "precision": {
+     "hi": 0.3508771929824561,
+     "lo": 0.12280701754385964,
+     "mean": 0.22807017543859648,
+     "n": 57
+    },
+    "queries": 57,
+    "recall": {
+     "hi": 0.3508771929824561,
+     "lo": 0.12280701754385964,
+     "mean": 0.22807017543859648,
+     "n": 57
+    },
+    "set_size_mean": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 57
+    },
+    "set_size_median": 1.0,
+    "tokens_mean": {
+     "hi": 299.5385964912281,
+     "lo": 159.5986842105263,
+     "mean": 223.42105263157896,
+     "n": 57
+    },
+    "trace": {
+     "evaluated_mean": 0.21052631578947367,
+     "expansions_mean": 0.017543859649122806,
+     "low_confidence_share": 0.9824561403508771,
+     "truncated_share": 0.0
+    },
+    "utility": {
+     "skipped": "utility labels exist for Q-gen only"
+    }
+   }
+  },
+  "reference_with_documentation_in_index": {
+   "mrr": {
+    "hi": 0.7995748146403888,
+    "lo": 0.609171471512454,
+    "mean": 0.709019450755994,
+    "n": 57
+   },
+   "note": "leakage reference, not a result: the relevant unit still contains the question text",
+   "recall_at_1": {
+    "hi": 0.7017543859649122,
+    "lo": 0.45570175438596494,
+    "mean": 0.5789473684210527,
+    "n": 57
+   },
+   "recall_at_10": {
+    "hi": 1.0,
+    "lo": 0.8771929824561403,
+    "mean": 0.9473684210526315,
+    "n": 57
+   }
+  },
+  "test_queries": 57
+ },
+ "q_gen": {
+  "calibration": {
+   "conformal": {
+    "0.1": {
+     "heldout_queries": 9,
+     "z_threshold": 1.380731114761641
+    },
+    "0.2": {
+     "heldout_queries": 9,
+     "z_threshold": 2.272057346028106
+    }
+   },
+   "fit_queries": 36,
+   "fitted": true,
+   "nonrelevant_samples": 14400,
+   "prior": 0.0004299226139294927,
+   "relevant_samples": 36,
+   "z_at_tau": {
+    "0.10": 4.459346615899969,
+    "0.25": 5.169593299341085,
+    "0.50": 5.594973507904999
+   }
+  },
+  "codes": {
+   "int8": {
+    "build_seconds": 0.0085288,
+    "bytes_per_code": 1032,
+    "oracle_recall_codes": {
+     "hi": 1.0,
+     "lo": 0.3333333333333333,
+     "mean": 0.6666666666666666,
+     "n": 6
+    },
+    "oracle_recall_exact": {
+     "hi": 1.0,
+     "lo": 0.3333333333333333,
+     "mean": 0.6666666666666666,
+     "n": 6
+    },
+    "queries": 6,
+    "rescored_share_of_corpus": 0.008598452278589854,
+    "rescored_units": {
+     "hi": 27.0,
+     "lo": 13.4875,
+     "mean": 20.0,
+     "n": 6
+    },
+    "set_jaccard": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 6
+    },
+    "set_recall_retention": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 6
+    },
+    "set_size_codes": {
+     "hi": 2.3333333333333335,
+     "lo": 1.0,
+     "mean": 1.6666666666666667,
+     "n": 6
+    },
+    "set_size_exact": {
+     "hi": 2.3333333333333335,
+     "lo": 1.0,
+     "mean": 1.6666666666666667,
+     "n": 6
+    },
+    "top10_overlap_without_rescoring": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 6
+    }
+   },
+   "rabitq": {
+    "build_seconds": 0.0833977,
+    "bytes_per_code": 136,
+    "oracle_recall_codes": {
+     "hi": 1.0,
+     "lo": 0.3333333333333333,
+     "mean": 0.6666666666666666,
+     "n": 6
+    },
+    "oracle_recall_exact": {
+     "hi": 1.0,
+     "lo": 0.3333333333333333,
+     "mean": 0.6666666666666666,
+     "n": 6
+    },
+    "queries": 6,
+    "rescored_share_of_corpus": 0.008598452278589854,
+    "rescored_units": {
+     "hi": 27.0,
+     "lo": 13.4875,
+     "mean": 20.0,
+     "n": 6
+    },
+    "set_jaccard": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 6
+    },
+    "set_recall_retention": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 6
+    },
+    "set_size_codes": {
+     "hi": 2.3333333333333335,
+     "lo": 1.0,
+     "mean": 1.6666666666666667,
+     "n": 6
+    },
+    "set_size_exact": {
+     "hi": 2.3333333333333335,
+     "lo": 1.0,
+     "mean": 1.6666666666666667,
+     "n": 6
+    },
+    "top10_overlap_without_rescoring": {
+     "hi": 0.9666666666666668,
+     "lo": 0.8666666666666667,
+     "mean": 0.9166666666666666,
+     "n": 6
+    }
+   }
+  },
+  "edge_lifts": {
+   "callee": 2.00625,
+   "caller": 3.4516129032258065,
+   "sibling": 1.202247191011236
+  },
+  "methods": {
+   "conformal_alpha0.1": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "alpha": 0.1
+    },
+    "precision": {
+     "hi": 0.005981603746966875,
+     "lo": 0.004852373805901622,
+     "mean": 0.005447728700710554,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 211.0,
+     "lo": 167.5,
+     "mean": 187.16666666666666,
+     "n": 6
+    },
+    "set_size_median": 177.5,
+    "tokens_mean": {
+     "hi": 50700.166666666664,
+     "lo": 33005.666666666664,
+     "mean": 41090.833333333336,
+     "n": 6
+    },
+    "utility": {
+     "precision": {
+      "hi": 0.03428571428571429,
+      "lo": 0.0056179775280898875,
+      "mean": 0.02168697483940223,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.4444444444444444,
+      "mean": 0.6632996632996633,
+      "n": 3
+     }
+    }
+   },
+   "conformal_alpha0.2": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "alpha": 0.2
+    },
+    "precision": {
+     "hi": 0.020712152484598303,
+     "lo": 0.014332706766917292,
+     "mean": 0.017833665231111052,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 75.00833333333333,
+     "lo": 48.666666666666664,
+     "mean": 59.833333333333336,
+     "n": 6
+    },
+    "set_size_median": 54.0,
+    "tokens_mean": {
+     "hi": 18486.858333333334,
+     "lo": 10812.166666666666,
+     "mean": 14622.833333333334,
+     "n": 6
+    },
+    "utility": {
+     "precision": {
+      "hi": 0.13953488372093023,
+      "lo": 0.010526315789473684,
+      "mean": 0.07152577618088733,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.4444444444444444,
+      "mean": 0.6632996632996633,
+      "n": 3
+     }
+    }
+   },
+   "largest_gap": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "buffer": 0,
+     "k_max": 20
+    },
+    "precision": {
+     "hi": 0.8055555555555555,
+     "lo": 0.22749999999999998,
+     "mean": 0.5055555555555556,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 0.5,
+     "mean": 0.8333333333333334,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 3.3333333333333335,
+     "lo": 1.1666666666666667,
+     "mean": 2.1666666666666665,
+     "n": 6
+    },
+    "set_size_median": 1.5,
+    "tokens_mean": {
+     "hi": 1193.0,
+     "lo": 203.22083333333336,
+     "mean": 613.6666666666666,
+     "n": 6
+    },
+    "utility": {
+     "precision": {
+      "hi": 1.0,
+      "lo": 0.5,
+      "mean": 0.8333333333333334,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.1111111111111111,
+      "mean": 0.49158249158249157,
+      "n": 3
+     }
+    }
+   },
+   "ppr_top10": {
+    "mrr": {
+     "hi": 1.0,
+     "lo": 0.47222222222222227,
+     "mean": 0.7685185185185185,
+     "n": 6
+    },
+    "parameters": {
+     "continuation": 0.5,
+     "k": 10,
+     "seeds": "score posterior"
+    },
+    "precision": {
+     "hi": 0.09999999999999999,
+     "lo": 0.09999999999999999,
+     "mean": 0.09999999999999999,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 10.0,
+     "lo": 10.0,
+     "mean": 10.0,
+     "n": 6
+    },
+    "set_size_median": 10.0,
+    "tokens_mean": {
+     "hi": 3232.0,
+     "lo": 1377.0,
+     "mean": 2162.8333333333335,
+     "n": 6
+    },
+    "utility": {
+     "precision": {
+      "hi": 0.5555555555555556,
+      "lo": 0.1111111111111111,
+      "mean": 0.3703703703703704,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.4444444444444444,
+      "mean": 0.632996632996633,
+      "n": 3
+     }
+    }
+   },
+   "ppr_top5": {
+    "mrr": {
+     "hi": 1.0,
+     "lo": 0.46666666666666673,
+     "mean": 0.7666666666666666,
+     "n": 6
+    },
+    "parameters": {
+     "continuation": 0.5,
+     "k": 5,
+     "seeds": "score posterior"
+    },
+    "precision": {
+     "hi": 0.19999999999999998,
+     "lo": 0.10000000000000002,
+     "mean": 0.16666666666666666,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 0.5,
+     "mean": 0.8333333333333334,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 5.0,
+     "lo": 5.0,
+     "mean": 5.0,
+     "n": 6
+    },
+    "set_size_median": 5.0,
+    "tokens_mean": {
+     "hi": 1757.1958333333332,
+     "lo": 364.5,
+     "mean": 997.0,
+     "n": 6
+    },
+    "utility": {
+     "precision": {
+      "hi": 1.0,
+      "lo": 0.25,
+      "mean": 0.6166666666666667,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.3333333333333333,
+      "mean": 0.5656565656565656,
+      "n": 3
+     }
+    }
+   },
+   "topk_1": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "k": 1
+    },
+    "precision": {
+     "hi": 0.8333333333333334,
+     "lo": 0.16666666666666666,
+     "mean": 0.5,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 0.8333333333333334,
+     "lo": 0.16666666666666666,
+     "mean": 0.5,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 6
+    },
+    "set_size_median": 1.0,
+    "tokens_mean": {
+     "hi": 582.0416666666666,
+     "lo": 141.0,
+     "mean": 352.1666666666667,
+     "n": 6
+    },
+    "utility": {
+     "precision": {
+      "hi": 1.0,
+      "lo": 1.0,
+      "mean": 1.0,
+      "n": 2
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 0.1111111111111111,
+      "lo": 0.0,
+      "mean": 0.06734006734006734,
+      "n": 3
+     }
+    }
+   },
+   "topk_10": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "k": 10
+    },
+    "precision": {
+     "hi": 0.09999999999999999,
+     "lo": 0.09999999999999999,
+     "mean": 0.09999999999999999,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 10.0,
+     "lo": 10.0,
+     "mean": 10.0,
+     "n": 6
+    },
+    "set_size_median": 10.0,
+    "tokens_mean": {
+     "hi": 3540.1666666666665,
+     "lo": 1895.6208333333334,
+     "mean": 2623.3333333333335,
+     "n": 6
+    },
+    "utility": {
+     "precision": {
+      "hi": 0.5555555555555556,
+      "lo": 0.1111111111111111,
+      "mean": 0.3703703703703704,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.4444444444444444,
+      "mean": 0.632996632996633,
+      "n": 3
+     }
+    }
+   },
+   "topk_20": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "k": 20
+    },
+    "precision": {
+     "hi": 0.049999999999999996,
+     "lo": 0.049999999999999996,
+     "mean": 0.049999999999999996,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 1.0,
+     "mean": 1.0,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 20.0,
+     "lo": 20.0,
+     "mean": 20.0,
+     "n": 6
+    },
+    "set_size_median": 20.0,
+    "tokens_mean": {
+     "hi": 5657.858333333333,
+     "lo": 4022.5916666666667,
+     "mean": 4812.166666666667,
+     "n": 6
+    },
+    "utility": {
+     "precision": {
+      "hi": 0.3157894736842105,
+      "lo": 0.05263157894736842,
+      "mean": 0.1929824561403509,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.4444444444444444,
+      "mean": 0.6632996632996633,
+      "n": 3
+     }
+    }
+   },
+   "topk_3": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "k": 3
+    },
+    "precision": {
+     "hi": 0.3333333333333333,
+     "lo": 0.16666666666666666,
+     "mean": 0.27777777777777773,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 0.5,
+     "mean": 0.8333333333333334,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 3.0,
+     "lo": 3.0,
+     "mean": 3.0,
+     "n": 6
+    },
+    "set_size_median": 3.0,
+    "tokens_mean": {
+     "hi": 1322.8333333333333,
+     "lo": 256.1666666666667,
+     "mean": 733.1666666666666,
+     "n": 6
+    },
+    "utility": {
+     "precision": {
+      "hi": 1.0,
+      "lo": 0.5,
+      "mean": 0.8333333333333334,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.1818181818181818,
+      "mean": 0.5050505050505051,
+      "n": 3
+     }
+    }
+   },
+   "topk_5": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "k": 5
+    },
+    "precision": {
+     "hi": 0.19999999999999998,
+     "lo": 0.10000000000000002,
+     "mean": 0.16666666666666666,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 0.5,
+     "mean": 0.8333333333333334,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 5.0,
+     "lo": 5.0,
+     "mean": 5.0,
+     "n": 6
+    },
+    "set_size_median": 5.0,
+    "tokens_mean": {
+     "hi": 1864.3958333333333,
+     "lo": 630.3333333333334,
+     "mean": 1263.5,
+     "n": 6
+    },
+    "utility": {
+     "precision": {
+      "hi": 1.0,
+      "lo": 0.25,
+      "mean": 0.6833333333333332,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.3636363636363636,
+      "mean": 0.6026936026936026,
+      "n": 3
+     }
+    }
+   },
+   "trace_nodamp_tau0.25": {
+    "skipped": "prag::retrieve::TraceOptions has no switch for hub damping; see the report of the bench module (requests)"
+   },
+   "trace_nograph_tau0.10": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "graph_edges": false,
+     "tau": 0.1
+    },
+    "precision": {
+     "hi": 0.7777777777777777,
+     "lo": 0.19444444444444442,
+     "mean": 0.4861111111111111,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 0.5,
+     "mean": 0.8333333333333334,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 3.1666666666666665,
+     "lo": 1.3333333333333333,
+     "mean": 2.1666666666666665,
+     "n": 6
+    },
+    "set_size_median": 2.0,
+    "tokens_mean": {
+     "hi": 1279.8333333333333,
+     "lo": 267.3958333333333,
+     "mean": 727.3333333333334,
+     "n": 6
+    },
+    "trace": {
+     "evaluated_mean": 0.0,
+     "expansions_mean": 2.0,
+     "low_confidence_share": 0.16666666666666666,
+     "truncated_share": 0.0
+    },
+    "utility": {
+     "precision": {
+      "hi": 1.0,
+      "lo": 0.5,
+      "mean": 0.8333333333333334,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.1111111111111111,
+      "mean": 0.43097643097643096,
+      "n": 3
+     }
+    }
+   },
+   "trace_nograph_tau0.25": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "graph_edges": false,
+     "tau": 0.25
+    },
+    "precision": {
+     "hi": 0.7777777777777777,
+     "lo": 0.1111111111111111,
+     "mean": 0.4444444444444444,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 0.3333333333333333,
+     "mean": 0.6666666666666666,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 2.3333333333333335,
+     "lo": 1.0,
+     "mean": 1.6666666666666667,
+     "n": 6
+    },
+    "set_size_median": 1.0,
+    "tokens_mean": {
+     "hi": 1167.0083333333332,
+     "lo": 146.83333333333334,
+     "mean": 599.8333333333334,
+     "n": 6
+    },
+    "trace": {
+     "evaluated_mean": 0.0,
+     "expansions_mean": 1.0,
+     "low_confidence_share": 0.6666666666666666,
+     "truncated_share": 0.0
+    },
+    "utility": {
+     "precision": {
+      "hi": 1.0,
+      "lo": 0.5,
+      "mean": 0.8333333333333334,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.0909090909090909,
+      "mean": 0.4006734006734007,
+      "n": 3
+     }
+    }
+   },
+   "trace_nograph_tau0.50": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "graph_edges": false,
+     "tau": 0.5
+    },
+    "precision": {
+     "hi": 0.8055555555555555,
+     "lo": 0.16666666666666666,
+     "mean": 0.47222222222222227,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 0.3333333333333333,
+     "mean": 0.6666666666666666,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 2.1666666666666665,
+     "lo": 1.0,
+     "mean": 1.5,
+     "n": 6
+    },
+    "set_size_median": 1.0,
+    "tokens_mean": {
+     "hi": 1167.0,
+     "lo": 146.83333333333334,
+     "mean": 587.6666666666666,
+     "n": 6
+    },
+    "trace": {
+     "evaluated_mean": 0.0,
+     "expansions_mean": 0.8333333333333334,
+     "low_confidence_share": 0.6666666666666666,
+     "truncated_share": 0.0
+    },
+    "utility": {
+     "precision": {
+      "hi": 1.0,
+      "lo": 0.5,
+      "mean": 0.8333333333333334,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.0909090909090909,
+      "mean": 0.4006734006734007,
+      "n": 3
+     }
+    }
+   },
+   "trace_tau0.10": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "graph_edges": true,
+     "tau": 0.1
+    },
+    "precision": {
+     "hi": 0.7777777777777777,
+     "lo": 0.17777777777777778,
+     "mean": 0.4777777777777778,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 0.5,
+     "mean": 0.8333333333333334,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 3.6666666666666665,
+     "lo": 1.3333333333333333,
+     "mean": 2.3333333333333335,
+     "n": 6
+    },
+    "set_size_median": 2.0,
+    "tokens_mean": {
+     "hi": 1472.8583333333331,
+     "lo": 267.5,
+     "mean": 870.1666666666666,
+     "n": 6
+    },
+    "trace": {
+     "evaluated_mean": 16.666666666666668,
+     "expansions_mean": 2.1666666666666665,
+     "low_confidence_share": 0.16666666666666666,
+     "truncated_share": 0.0
+    },
+    "utility": {
+     "precision": {
+      "hi": 1.0,
+      "lo": 0.5,
+      "mean": 0.8333333333333334,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.1111111111111111,
+      "mean": 0.43097643097643096,
+      "n": 3
+     }
+    }
+   },
+   "trace_tau0.25": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "graph_edges": true,
+     "tau": 0.25
+    },
+    "precision": {
+     "hi": 0.7777777777777777,
+     "lo": 0.1111111111111111,
+     "mean": 0.4444444444444444,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 0.3333333333333333,
+     "mean": 0.6666666666666666,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 2.3333333333333335,
+     "lo": 1.0,
+     "mean": 1.6666666666666667,
+     "n": 6
+    },
+    "set_size_median": 1.0,
+    "tokens_mean": {
+     "hi": 1167.0083333333332,
+     "lo": 146.83333333333334,
+     "mean": 599.8333333333334,
+     "n": 6
+    },
+    "trace": {
+     "evaluated_mean": 5.833333333333333,
+     "expansions_mean": 1.0,
+     "low_confidence_share": 0.6666666666666666,
+     "truncated_share": 0.0
+    },
+    "utility": {
+     "precision": {
+      "hi": 1.0,
+      "lo": 0.5,
+      "mean": 0.8333333333333334,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.0909090909090909,
+      "mean": 0.4006734006734007,
+      "n": 3
+     }
+    }
+   },
+   "trace_tau0.50": {
+    "mrr": {
+     "hi": 0.9166666666666666,
+     "lo": 0.3888888888888889,
+     "mean": 0.6851851851851851,
+     "n": 6
+    },
+    "parameters": {
+     "graph_edges": true,
+     "tau": 0.5
+    },
+    "precision": {
+     "hi": 0.7777777777777777,
+     "lo": 0.1111111111111111,
+     "mean": 0.4444444444444444,
+     "n": 6
+    },
+    "queries": 6,
+    "recall": {
+     "hi": 1.0,
+     "lo": 0.3333333333333333,
+     "mean": 0.6666666666666666,
+     "n": 6
+    },
+    "set_size_mean": {
+     "hi": 2.3333333333333335,
+     "lo": 1.0,
+     "mean": 1.6666666666666667,
+     "n": 6
+    },
+    "set_size_median": 1.0,
+    "tokens_mean": {
+     "hi": 1167.0083333333332,
+     "lo": 146.83333333333334,
+     "mean": 599.8333333333334,
+     "n": 6
+    },
+    "trace": {
+     "evaluated_mean": 6.0,
+     "expansions_mean": 1.0,
+     "low_confidence_share": 0.6666666666666666,
+     "truncated_share": 0.0
+    },
+    "utility": {
+     "precision": {
+      "hi": 1.0,
+      "lo": 0.5,
+      "mean": 0.8333333333333334,
+      "n": 3
+     },
+     "precision_definition": "useful units in the set over units of the set other than the relevant unit",
+     "queries_with_useful_units": 3,
+     "recall": {
+      "hi": 1.0,
+      "lo": 0.0909090909090909,
+      "mean": 0.4006734006734007,
+      "n": 3
+     }
+    }
+   }
+  },
+  "test_queries": 6
+ }
+}

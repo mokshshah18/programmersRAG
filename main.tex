@@ -1,0 +1,564 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,multirow}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\pending}[1]{\textcolor{red!70!black}{[\textbf{pending:} #1]}}
+\newcommand{\logit}{\operatorname{logit}}
+\newcommand{\sigm}{\sigma}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\title{Density, Probability and Order in Local Code Retrieval:\\
+Calibrated Tracing, Recursive Context Quality and Cache-Blocked Execution\\[4pt]
+\large First draft --- not for circulation}
+\author{Moksh Shah}
+\date{September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study retrieval-augmented question answering and editing over a single source repository with a small language model that runs entirely on a laptop.
+Four questions organise the work.
+How should functions that are semantically alike be grouped when their embeddings are unit vectors in a space of hundreds of dimensions?
+When should retrieval stop, so that everything the model needs is present and little else is?
+How can the quality of an assembled context be measured, so that ``context rot'' becomes a quantity rather than an impression?
+And what can user-space software actually guarantee about the order and the cache residency of parallel work?
+We answer with (i) directional kernel density estimation with the von Mises--Fisher kernel and mode seeking by directional mean shift, with a concentration limited by a neighbourhood criterion after we observe that likelihood cross-validation fails for mode seeking above a few dimensions;
+(ii) a calibrated Bayes posterior of relevance, propagated along call-graph and density edges by a noisy-OR rule and cut at a threshold $\tau$ whose value is a statement about costs, $\tau=c_{\mathrm{fp}}/(c_{\mathrm{fp}}+c_{\mathrm{fn}})$;
+(iii) a recursive context-quality measure with a pruning rule that guarantees a lower bound on quality and whose iteration converges to a unique fixed point;
+and (iv) a block-size rule derived from the cache hierarchy together with an ordered executor that provably admits and commits work in sequence order, making every numerical result independent of the number of threads.
+All measurements are taken on a single corpus, the \emph{Demo repository}, which is a fork of the mimalloc memory allocator~\cite{mimalloc}.
+On this corpus the groups recover the call graph (35.8\% of call edges fall inside a group against 4.9\% at random); the thresholded posterior returns sets whose precision matches $\tau$ but, with an embedder that ranks the relevant function first for 23\% of questions, little recall; the context-quality index correlates with the loss a context causes (Spearman $\rho=0.36$); execution is bit-identical across 6\,168 runs at every thread count and block size; and the promotion test rejects a fine-tuned model that improved on the corpus while forgetting general text.
+\end{abstract}
+
+% ---------------------------------------------------------------------------
+\section{Introduction}
+
+Long prompts hurt language models even when the relevant text is present.
+Accuracy falls as input length grows~\cite{hong2025contextrot}, it falls with length alone even when retrieval is perfect~\cite{du2025length}, and it depends on where in the prompt the evidence sits~\cite{liu2024lost}.
+Operational measures of the effect exist, such as the effective length of NoLiMa, the largest length at which a model keeps 85\% of its short-context score~\cite{modarressi2025nolima}, but no scalar measure of the \emph{quality} of a given context has become standard.
+For code the problem has a structure that text lacks: a function is a natural unit, functions call each other, and removing single tokens of code corrupts it~\cite{shi2025longcodezip,zhang2025cast}.
+
+This paper treats retrieval over one repository as a sequence of statistical decisions made under explicit assumptions.
+Section~\ref{sec:setting} fixes notation and the corpus.
+Section~\ref{sec:exec} derives the size of the unit of parallel work from the cache hierarchy and proves the ordering guarantees of the executor that runs it.
+Section~\ref{sec:kde} groups functions by the modes of a directional kernel density.
+Section~\ref{sec:prob} turns similarity scores into calibrated probabilities and extends retrieval along the call graph until the probability of relevance falls below $\tau$.
+Section~\ref{sec:rcq} defines recursive context quality and the pruning rule.
+Section~\ref{sec:compress} bounds the error introduced by compressed vector codes.
+Section~\ref{sec:tune} describes opportunistic fine-tuning and quantisation of the local model and the test that decides whether a tuned model replaces the served one.
+Section~\ref{sec:edit} gives the acceptance criterion for applying model-proposed edits.
+Section~\ref{sec:results} reports the experiments.
+
+\paragraph{Contributions.}
+(1) A block-size rule and an ordered executor with admission and commit order guarantees and bit-identical reductions (Theorem~\ref{thm:order}).
+(2) Evidence that likelihood cross-validated concentration is unsuitable for directional mean shift above a few dimensions, and a neighbourhood limit that restores planted groupings (Section~\ref{sec:kde}).
+(3) A calibrated probabilistic trace with a closed-form reach condition (Proposition~\ref{prop:reach}).
+(4) Recursive context quality with an order-independent threshold guarantee and a unique, greedy fixed point (Theorems~\ref{thm:rcq-bound} and~\ref{thm:fixed}).
+(5) A promotion test for locally fine-tuned models.
+(6) An evaluation on one repository that includes the negative results: low recall of the thresholded trace with a weak embedder, no measurable benefit of graph edges, catastrophic forgetting caught by the promotion test, and a defect in edit scoping found and fixed by the evaluation.
+Items (3)--(5) combine known ingredients; what is new is their combination into one decision procedure and the proofs that tie them together.
+Several ingredients have close prior art, which we cite where they appear.
+
+% ---------------------------------------------------------------------------
+\section{Setting}\label{sec:setting}
+
+\paragraph{Corpus.}
+All experiments use the Demo repository, a fork of mimalloc~\cite{mimalloc} at commit \texttt{31d034d9} (version 3.5.3).
+Its C sources and headers under \texttt{src/} and \texttt{include/} comprise 45 files and 1\,090\,189 bytes.
+The results therefore describe one C code base with heavy use of macros and conditional compilation, and may not transfer to other languages or repositories.
+
+\paragraph{Units.}
+A file is partitioned into contiguous byte ranges called \emph{units}: function definitions with their leading comment, type definitions, macros, and residual regions.
+Parsing combines a concrete syntax tree~\cite{treesitter_intro} with brace matching over a token stream, because the declaration macros of the corpus defeat the grammar in 37 of the 45 files.
+The corpus yields $n=2326$ units: 1514 functions, 70 types, 341 macros and 401 regions.
+Every definition found by an independent brace-matching count (1427 bodies) is recovered.
+The \emph{call graph} $G=(V,E)$ has an edge $u\to v$ when the body of $u$ calls a name defined by $v$; it has 5800 edges.
+
+\paragraph{Embeddings.}
+Each unit $v$ has an embedding $e_v\in S^{D-1}$, the unit sphere in $\mathbb R^D$; the question has an embedding $q\in S^{D-1}$, and the score of $v$ is $s_v=\langle q,e_v\rangle$.
+We use Qwen3-Embedding-0.6B~\cite{zhang2025qwen3embedding} with $D=1024$, last-token pooling and an instruction prefix on questions, run locally.
+A model-free signed feature-hashing embedder serves as a baseline and for tests.
+
+\paragraph{Machine.}
+The reference machine has an Intel Core i9-12950HX: 8 performance cores with a 48~KiB L1 data cache shared by two hyper-threads, 8 efficiency cores with a 32~KiB L1 data cache each, 24 logical CPUs, 32~GB of memory, and no GPU in use.
+
+% ---------------------------------------------------------------------------
+\section{Cache-blocked ordered execution}\label{sec:exec}
+
+\subsection{Block size}
+Software cannot choose the cache level that holds its data.
+It can choose the size of its working set, and a working set that fits the first-level data cache stays there after its first use, apart from interference by other code~\cite{lam1991blocked,frigo1999cacheoblivious}.
+Processing data in cache-sized vectors is a long-standing technique in query execution~\cite{boncz2005x100,leis2014morsel}.
+Let the machine have core classes $c$, each with an L1 data cache of $C(c)$ bytes shared by $h(c)$ logical CPUs.
+We choose the block size
+\begin{equation}\label{eq:block}
+B=\Bigl\lfloor \min\Bigl( f\cdot \min_c C(c),\ \min_c \tfrac{C(c)}{h(c)} \Bigr)\Bigr\rfloor_{\mathrm{KiB}},\qquad f=\tfrac12 .
+\end{equation}
+The first term leaves half of the smallest L1 data cache for the query, the outputs and the stack, following the recommendation to size blocking to a fraction of the first-level cache~\cite{intel2024optmanual}.
+The second term keeps the block within the share of one logical CPU when its hyper-thread sibling is busy.
+On the reference machine $\min(32/2,\ \min(48/2, 32/1))=16$~KiB.
+
+A block pays off only if it is touched more than once.
+A single streaming pass over the data gains nothing from being L1-sized, so every pairwise computation in this work is \emph{tiled}: a data block is kept hot while all queries or seeds of a batch pass over it.
+
+\subsection{Ordered execution}
+Blocks carry sequence numbers $0,1,\dots,N-1$.
+Workers obtain blocks from a shared counter (dynamic assignment, which adapts to the unequal speeds of the two core classes~\cite{intel2021hybridwp}).
+A block goes through three events: \emph{admission} (the first read of its payload, performed inside a gate), \emph{work} (concurrent), and \emph{commit} (sequential).
+Two counters $a$ (admitted) and $k$ (committed) and a reorder window $W$ define the protocol:
+worker holding ticket $i$ may admit when $a=i$ and $i<k+W$, then sets $a\leftarrow i+1$;
+after the work it marks $i$ done and, under a mutex, commits the longest run of done blocks starting at $k$, advancing $k$ each time.
+The gate is a FIFO ticket gate~\cite{mellorcrummey1991scalable}.
+
+\begin{theorem}[Order]\label{thm:order}
+For every execution:
+(G1) the admission of block $i$ precedes the admission of block $i+1$;
+(G2) commit $i$ completes before commit $i+1$ starts, and no two commits overlap;
+(G3) if no work item fails, each block is admitted, worked and committed exactly once;
+(G4) block $i$ is not admitted before block $i-W$ has been committed.
+\end{theorem}
+\begin{proof}
+(G1) $a$ takes the values $0,1,2,\dots$ in order, since only the holder of ticket $a$ may pass the gate and it increments $a$ after its admission. Block $i+1$ passes only when $a=i+1$, which happens after block $i$ was admitted.
+(G2) Commits happen under one mutex, and the drain commits block $k$ and then increments $k$; block $i+1$ can be committed only when $k=i+1$.
+(G3) Tickets are distinct values of an atomic counter, so each block has exactly one owner; the drain visits each $k$ once.
+(G4) The gate condition $i<k+W$ implies $k>i-W$ at admission.
+\end{proof}
+
+\begin{corollary}[Determinism]
+If every reduction is performed in the commit step, its result is a function of the inputs alone: floating-point sums and top-$k$ merges are bit-identical for every thread count and every schedule.
+\end{corollary}
+
+The corollary holds by construction and is tested: a sum of 200\,000 single-precision values with a heavy-tailed distribution is bit-identical for 1, 2, 5, 16 and 24 threads over repeated runs, and a logical clock records zero violations of G1 and G2 in all tests.
+What the theorem does not state is when a block's work runs relative to another's; the operating system may pre-empt a worker between its admission and its work, and determinism does not require otherwise.
+Deterministic multithreading systems obtain stronger guarantees for arbitrary programs~\cite{olszewski2009kendo,bergan2010coredet,liu2011dthreads}; ordered reduction needs only the commit order.
+
+\paragraph{Speed-up bound.}
+Let one block take $d$ time units at the gate, $w$ in work and $c$ in commit, on $P$ equally fast workers.
+Gate and commit are serial, so in steady state
+\begin{equation}
+S(P)\le \min\Bigl(P,\ \frac{d+w+c}{\max(d,c)}\Bigr),
+\end{equation}
+a pipeline form of Amdahl's bound~\cite{amdahl1967validity,hill2008amdahl}.
+With a gate that only reads a few cache lines and a commit that only writes a block's scores, $d,c\ll w$.
+
+% ---------------------------------------------------------------------------
+\section{Grouping by directional density}\label{sec:kde}
+
+\subsection{Model}
+Embeddings are directions, so we estimate their density on the sphere $S^{m-1}$ after reduction to $m$ dimensions.
+The von Mises--Fisher density with mean $\mu$ and concentration $\kappa$ is~\cite{banerjee2005}
+\begin{gather}
+f(x;\mu,\kappa)=C_m(\kappa)\,e^{\kappa\langle\mu,x\rangle},\\
+C_m(\kappa)=\frac{\kappa^{m/2-1}}{(2\pi)^{m/2}\,I_{m/2-1}(\kappa)},
+\end{gather}
+with $I_\nu$ the modified Bessel function of the first kind.
+The kernel density estimator with the von Mises kernel~\cite{hall1987,bai1988} is a mixture of $n$ such densities with common concentration:
+\begin{equation}\label{eq:kde}
+\hat f_\kappa(x)=\frac{C_m(\kappa)}{n}\sum_{i=1}^n e^{\kappa\langle x_i,x\rangle}.
+\end{equation}
+All evaluations are done in the logarithmic domain; $\log I_\nu$ is computed from its power series, its uniform (Debye) asymptotic expansion, or its large-argument expansion depending on the regime, to a relative error below $10^{-9}$ in the logarithm for $\nu\le 512$ and arguments up to $10^6$.
+
+\paragraph{Preprocessing.}
+Embeddings of language models are anisotropic: they occupy a narrow cone~\cite{ethayarajh2019contextual}, and nearest neighbours in high dimension concentrate on a few hubs~\cite{radovanovic2010hubs}.
+Both effects bias a kernel density toward the common direction.
+We centre the embeddings on their mean, project on the leading principal directions ($m=32$ by default), and re-normalise to the sphere.
+Non-parametric estimation converges at the rate $n^{-2/(m+4)}$~\cite{stone1980}, so reduction is necessary at $n\approx 2300$; a random projection preserving pairwise distances to 20\% would need more than 1700 dimensions at this $n$~\cite{dasgupta2003jl}, which is why a data-dependent projection is used and validated empirically rather than justified by that bound.
+
+\subsection{Mode seeking}
+Directional mean shift~\cite{zhang2021directional} iterates, from every data point,
+\begin{equation}\label{eq:ms}
+x\leftarrow\frac{\sum_i w_i x_i}{\bigl\|\sum_i w_i x_i\bigr\|},\qquad w_i=e^{\kappa(\langle x_i,x\rangle-1)} .
+\end{equation}
+It is gradient ascent on $\hat f_\kappa$ with an adaptive step, the density is non-decreasing along each trajectory, and under regularity conditions the iteration converges to a mode~\cite{zhang2021directional}; it is the directional counterpart of Euclidean mean shift~\cite{fukunaga1975,cheng1995,comaniciu2002}.
+Points whose iterations end within cosine $0.999$ of each other form one group; groups smaller than three points join the nearest mode.
+Storing units group by group, in decreasing density, puts similar functions in adjacent memory, which the index of Section~\ref{sec:compress} exploits.
+
+\subsection{Choice of concentration}
+The directional rule of thumb~\cite{garciaportugues2013} is the AMISE-optimal bandwidth when the data are themselves vMF.
+With $q=m-1$ and $\hat k$ the maximum-likelihood concentration of the whole sample,
+\begin{equation}
+h^{4+q}=\frac{4\sqrt\pi\, I_{\frac{q-1}{2}}(\hat k)^2\,/\,n}{\hat k^{\frac{q+1}{2}}\bigl[2q\,I_{\frac{q+1}{2}}(2\hat k)+(2+q)\,\hat k\, I_{\frac{q+3}{2}}(2\hat k)\bigr]}
+\end{equation}
+and $\kappa=h^{-2}$.
+We verified this expression against numerical quadrature of its definition to $5\times10^{-13}$ in the logarithm for $q\in\{1,2,3,7,15,31\}$.
+Likelihood cross-validation then maximises $\sum_i\log\hat f^{-i}_\kappa(x_i)$ over a grid centred on the rule of thumb.
+
+\paragraph{Observation: cross-validation fails for mode seeking.}
+On planted mixtures of vMF components, the cross-validated $\kappa$ gives held-out likelihood within 0.04\% of the best, as intended, but it is far too large for mode seeking once $m$ exceeds a few dimensions (Table~\ref{tab:kappa}).
+Kernels then no longer reach the neighbours of a point, every point is a local maximum of $\hat f_\kappa$, and mean shift returns it as its own mode.
+
+\begin{table}[t]\centering\small
+\caption{Directional mean shift at the cross-validated concentration on planted vMF mixtures (three seeds each). ``Singletons'' is the share of points forming a mode of their own; ARI is the adjusted Rand index against the planted labels.}\label{tab:kappa}
+\begin{tabular}{rrcc}\toprule
+$m$ & $n$ & singletons & ARI \\\midrule
+3 & 500 & 0--0.2\% & 0.997--1.000 \\
+8 & 600 & 22--31\% & 0.44--0.84 \\
+16 & 400 & 99--100\% & 0.000 \\
+32 & 2000 & 74--77\% & 0.32--0.35 \\\bottomrule
+\end{tabular}
+\end{table}
+
+We therefore limit the concentration.
+With $N_i(\kappa)=\sum_{j\neq i}e^{\kappa(\langle x_i,x_j\rangle-1)}$, the weight of the other points at $x_i$ in units of the weight of $x_i$ itself, $N_i$ decreases in $\kappa$, and a point with $N_i\ll 1$ is a local maximum on its own.
+We define the \emph{neighbourhood concentration} $\kappa_N$ as the largest $\kappa$ for which at most 5\% of the points have $N_i<1$, and use $\min(\kappa_{\mathrm{CV}},\kappa_N)$ for mode seeking while keeping $\kappa_{\mathrm{CV}}$ for density values.
+On a mixture of 12 components in $m=32$ with $n=2000$, $\kappa_{\mathrm{CV}}=102.8$ and $\kappa_N=10.7$; at $\kappa_N$ mean shift finds exactly the 12 modes, ARI $0.996$, in 6 steps per point on average, none unconverged.
+The constants of the criterion (5\%, $N_i<1$) are heuristic, and the criterion has so far been validated on synthetic mixtures only.
+
+% ---------------------------------------------------------------------------
+\section{Calibrated relevance and probabilistic tracing}\label{sec:prob}
+
+\subsection{From scores to probabilities}
+Scores are standardised against the background of the question itself, $z_v=(s_v-\bar s)/\hat\sigma_s$, which removes the question-dependent offset and scale.
+Let $f_1$ and $f_0$ be the densities of $z$ for relevant and non-relevant units and $\pi$ the prior probability of relevance.
+Bayes' rule gives
+\begin{equation}\label{eq:post}
+P(\mathrm{rel}\mid z)=\sigm\bigl(\logit\pi+\ln f_1(z)-\ln f_0(z)\bigr).
+\end{equation}
+We estimate $f_1,f_0$ by Gaussian kernel density estimation with Silverman's bandwidth~\cite{parzen1962,rosenblatt1956} on labelled calibration pairs, tabulate~\eqref{eq:post} on a grid, and project the table onto non-decreasing functions by isotonic regression weighted by the mixture density $\pi f_1+(1-\pi)f_0$.
+The projection matters: without monotonicity, the rule ``accept while the probability is at least $\tau$'' can have several stopping points.
+Calibration of this kind is necessary because raw scores of neural models are not probabilities~\cite{guo2017calibration}.
+
+Calibration pairs come from the corpus: a function's documentation is a question to which the function is the answer.
+To prevent the question from matching its own text, the relevant unit is embedded without its leading comment.
+Reliability on held-out pairs is reported as expected calibration error and Brier score.
+
+\subsection{The threshold as a cost ratio}
+Admitting a unit with relevance probability $p$ costs $c_{\mathrm{fp}}(1-p)$ in expectation (context rot); omitting it costs $c_{\mathrm{fn}}p$ (a missed dependency).
+Admission is optimal iff $p\ge c_{\mathrm{fp}}/(c_{\mathrm{fp}}+c_{\mathrm{fn}})$~\cite{elkan2001cost}.
+The threshold $\tau=0.25$ used throughout therefore states that missing a relevant function is three times as costly as admitting an irrelevant one.
+It is meaningful only for calibrated $p$, and the ratio is expected to change when fine-tuning makes the model more tolerant of distractors.
+A complementary, distribution-free choice is the split-conformal threshold, the $\lceil(n+1)(1-\alpha)\rceil$-th largest calibration score of relevant units, which retains a relevant unit with probability at least $1-\alpha$ under exchangeability~\cite{angelopoulos2021gentle,chakraborty2026conformal}.
+
+\subsection{Tracing}
+Relevance is correlated along the call graph: if a function is relevant, its callees often are.
+Let $p_s(v)=P(\mathrm{rel}\mid z_v)$ and let an edge of kind $e\in\{\text{callee},\text{caller},\text{sibling}\}$ carry a likelihood ratio $\lambda_e\ge1$, where siblings are nearest neighbours inside the same density mode.
+Given that an accepted neighbour $u$ is relevant,
+\begin{equation}
+p(v\mid u)=\sigm\bigl(\logit p_s(v)+\gamma_{uv}\ln\lambda_e\bigr),
+\end{equation}
+where $\gamma_{uv}=1/(1+\log_2\max(1,\deg))$ damps edges into hubs (utility functions called from everywhere carry little information).
+Since $u$ is relevant only with probability $P(u)$, the evidence $u$ provides is the mixture
+\begin{equation}
+q_u(v)=P(u)\,p(v\mid u)+(1-P(u))\,p_s(v)\ \ge\ p_s(v),
+\end{equation}
+and evidence from several accepted neighbours is combined by a noisy-OR of the normalised gains $d_u(v)=(q_u(v)-p_s(v))/(1-p_s(v))\in[0,1]$:
+\begin{equation}\label{eq:noisyor}
+P(v)=1-(1-p_s(v))\prod_{u}\bigl(1-d_u(v)\bigr).
+\end{equation}
+Units with $p_s\ge\tau$ are seeds.
+Candidates are then expanded best-first; a unit is accepted when $P(v)\ge\tau$, and its probability is frozen at acceptance, which excludes feedback between mutually adjacent units.
+Tracing stops when no candidate reaches $\tau$.
+Personalised PageRank propagates relevance on a graph in a related way~\cite{erkan2004lexrank,gutierrez2024hipporag}; its stationary vector sums to one over all units, so a probability threshold cannot be applied to it directly, whereas~\eqref{eq:noisyor} is a probability per unit.
+
+\begin{proposition}[Reach]\label{prop:reach}
+A unit reached through a single edge of kind $e$ from a neighbour accepted with $P(u)\to1$ is accepted iff
+\begin{equation}
+p_s(v)\ \ge\ \frac{\tau}{\tau+\lambda_e^{\gamma}(1-\tau)} .
+\end{equation}
+\end{proposition}
+\begin{proof}
+With $P(u)=1$, $P(v)=p(v\mid u)=\sigm(\logit p_s(v)+\gamma\ln\lambda_e)\ge\tau$ iff $\logit p_s(v)\ge\logit\tau-\gamma\ln\lambda_e$, i.e.\ $\frac{p_s}{1-p_s}\ge\frac{\tau}{(1-\tau)\lambda_e^\gamma}$, which rearranges to the claim.
+\end{proof}
+For $\tau=0.25$ and an undamped callee edge with $\lambda=4$ the bound is $1/13\approx0.077$.
+The proposition also bounds the work of the engine: only units whose score could reach this posterior need exact rescoring when compressed codes are used (Section~\ref{sec:compress}).
+
+\begin{proposition}[Well-posedness]
+$P(v)\ge p_s(v)$ for every unit; each unit is accepted at most once, so tracing terminates after at most $n$ acceptances; and the set of seeds is monotone in $\tau$.
+\end{proposition}
+\begin{proof}
+$\lambda_e\ge1$ gives $p(v\mid u)\ge p_s(v)$, hence $q_u\ge p_s$, $d_u\in[0,1]$ and $P(v)\ge p_s(v)$ by~\eqref{eq:noisyor}. Acceptance is irreversible, and $\{v:p_s(v)\ge\tau\}$ shrinks as $\tau$ grows.
+\end{proof}
+Randomised tests on 200 graphs additionally find the accepted sets nested across $\tau\in\{0.1,0.25,0.5\}$; nesting of the traced (not only the seed) sets is not proved here.
+Noisy-OR treats the evidence of different neighbours as independent; on graphs whose paths share edges it overstates the combined evidence, and the lifts $\lambda_e$ are therefore estimated from data (Section~\ref{sec:results}).
+
+% ---------------------------------------------------------------------------
+\section{Recursive context quality}\label{sec:rcq}
+
+\subsection{Definition}
+A context is a tree: context $\to$ files $\to$ units.
+For a unit $u$ with calibrated relevance $p_u$ and length $L(u)$ tokens let $M(u)=p_uL(u)$.
+For an inner node $v$ with children $u_1,\dots,u_k$ in prompt order and overhead $h(v)$ tokens,
+\begin{align}
+L(v)&=h(v)+\textstyle\sum_j L(u_j),\\
+M(v)&=\textstyle\sum_j\bigl(1-\rho(u_j)\bigr)M(u_j),\\
+\rho(u_j)&=\max_{i<j}\max\bigl(0,\cos(e_{u_i},e_{u_j})\bigr),
+\end{align}
+and the quality is $Q(v)=M(v)/L(v)\in[0,1]$.
+The \emph{context rot index} of a context $C$ is $\mathrm{CRI}(C)=1-Q(C)$: the expected share of prompt tokens that are irrelevant, redundant or overhead.
+Only units carry embeddings, so in practice redundancy is taken against every unit placed earlier in the whole prompt and $Q(C)=\sum_u(1-\rho_u)p_uL_u/L(C)$.
+The measure generalises the flat context-relevance ratio of RAGAs~\cite{es2023ragas} by weighting by probability, discounting redundancy inside the recursion and charging structural overhead.
+The redundancy term is that of MMR~\cite{carbonell1998mmr}, which, unlike monotone submodular objectives, carries no approximation guarantee~\cite{lin2011submodular}; we use it only inside a threshold rule, for which Theorem~\ref{thm:rcq-bound} gives a guarantee directly.
+
+\begin{lemma}
+Removing child $u$ from $v$, other redundancies fixed, raises $Q(v)$ iff $(1-\rho(u))\,Q(u)<Q(v)$.
+\end{lemma}
+\begin{proof}
+$Q(v\setminus u)=\frac{M(v)-(1-\rho_u)M(u)}{L(v)-L(u)}>\frac{M(v)}{L(v)}$ iff $(1-\rho_u)M(u)L(v)<M(v)L(u)$, i.e.\ $(1-\rho_u)Q(u)<Q(v)$.
+\end{proof}
+Unconstrained maximisation of $Q$ would therefore keep only the single best unit; a threshold with a recall safeguard is needed, which is what the pruning rule provides.
+
+\subsection{Pruning}
+Sort candidates by $p$ (descending, ties by identifier) and keep $u$ iff $(1-\rho(u))p_u\ge\theta$, with $\rho$ taken against the \emph{kept} candidates ranked before $u$.
+Because dropping a unit can make a later one non-redundant, the rule is iterated: each pass recomputes $\rho$ against the units kept by the previous pass.
+
+\begin{theorem}[Fixed point]\label{thm:fixed}
+The iteration reaches a unique fixed point within $n$ passes, and the fixed point equals the greedy selection that scans candidates once in rank order.
+\end{theorem}
+\begin{proof}
+The status of the $j$-th candidate depends only on the statuses of candidates $1,\dots,j-1$. The first candidate's status is final after one pass; if the first $j$ statuses are final after $j$ passes, the $(j+1)$-th is final after pass $j+1$. The greedy scan computes exactly these statuses in order.
+\end{proof}
+The kept set is not monotone across passes (a unit can return), so a termination argument by shrinking sets does not apply; the argument above does.
+
+\begin{theorem}[Quality bound]\label{thm:rcq-bound}
+At the fixed point every kept pair $i,j$ satisfies $(1-c_{ij})\min(p_i,p_j)\ge\theta$ with $c_{ij}=\max(0,\cos(e_i,e_j))$.
+Hence every kept unit has discounted quality at least $\theta$ against \emph{any} subset of the other kept units, whatever the prompt order, and
+\begin{equation}
+Q(C)\ \ge\ \theta\,\frac{L_{\mathrm{kept}}}{L_{\mathrm{kept}}+L_{\mathrm{support}}+L_{\mathrm{overhead}}}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+If $j$ is kept and $i$ was kept before it, $(1-c_{ij})p_j\ge\theta$ and $p_i\ge p_j$. Redundancy against a subset is a maximum over fewer terms, hence no larger. Summing $(1-\rho_u)p_uL_u\ge\theta L_u$ over kept units and dividing by $L(C)$ gives the bound.
+\end{proof}
+Support units are skeletons (signature and documentation) of callees that a kept unit needs, added after pruning; enforcing such dependency closure matters for code~\cite{wang2026lamr}.
+The utility of~\cite{wang2026lamr}, $U(S)=\sum_{i\in S}(r_i-\lambda c_i)-M\,\bigl|\{(i,j)\in E: i\in S,\ j\notin S\}\bigr|$, is claimed to have only dependency-closed optima when $M>\max_j(r_j-\lambda c_j)_+$.
+This is false as stated: for the chain $a\to b\to c$ with net values $100,100,-1000$ and $M=101$, the open set $\{a,b\}$ scores $99$ while every closed set scores at most $0$ (checked by enumeration).
+The argument fails because adding the missing node can itself be costly; the claim does hold when every net value is non-negative.
+We therefore enforce closure as a hard constraint rather than through a penalty.
+When the result exceeds the token budget, units outside a protected share of the budget are first reduced to skeletons and then dropped in increasing order of discounted mass; removal only lowers redundancy, so the bound survives.
+Finally, files are ordered strongest first, second strongest last, following the positional effect of~\cite{liu2024lost}; for question answering over retrieved documents, noise has been found to cost several times more accuracy than position, so pruning precedes ordering.
+
+% ---------------------------------------------------------------------------
+\section{Compressed scoring with error bounds}\label{sec:compress}
+
+The scan of Section~\ref{sec:exec} scores compressed codes.
+With RaBitQ~\cite{gao2024rabitq}, vectors are centred on the corpus centroid, normalised to $o$, rotated by a random orthogonal $P$, and reduced to signs, giving $\bar o=P\operatorname{sign}(P^\top o)/\sqrt D$.
+For a centred, normalised query $q'$, the estimator $\langle\bar o,q'\rangle/\langle\bar o,o\rangle$ is unbiased for $\langle o,q'\rangle$, and with high probability its error is below
+\begin{equation}
+\sqrt{\frac{1-\langle\bar o,o\rangle^2}{\langle\bar o,o\rangle^2}}\cdot\frac{\epsilon_0}{\sqrt{D-1}} .
+\end{equation}
+With $D=1024$, the typical $\langle\bar o,o\rangle\approx0.8$ and $\epsilon_0=1.9$ the half-width is $0.75\times1.9/\sqrt{1023}\approx0.045$.
+Each estimate is therefore an interval, and a unit is rescored exactly when its interval contains the score at which its posterior can still reach the bound of Proposition~\ref{prop:reach}; decisions then rest on exact scores only.
+A code occupies $D/8=128$ bytes plus two floats, so a 16~KiB block holds about 120 vectors.
+For the alternative symmetric int8 code with scale $s$, each coordinate carries a rounding error of at most $\delta=s/254$; for unit vectors and no clipping the inner-product error is at most $2\delta\sqrt D+\delta^2D$.
+
+% ---------------------------------------------------------------------------
+\section{Opportunistic fine-tuning and quantisation}\label{sec:tune}
+
+The served model is Qwen2.5-Coder-0.5B-Instruct~\cite{hui2024qwen25coder} quantised to 4.5 bits per weight (Q4\_K\_M~\cite{kawrakow2023kquants}).
+When the user enables tuning and the machine is idle, the system builds training examples from the repository in the style of RAFT~\cite{zhang2024raft}: a question, the unit that answers it, and distractors drawn from the same density mode and from units whose posterior is closest to $\tau$, with the answering unit absent from a fixed share of examples so the model learns to say so.
+Units are split into training and held-out sets before examples are built.
+
+\paragraph{Training.}
+Low-rank adaptation~\cite{hu2022lora,dettmers2023qlora} is the usual choice, but the local training API (llama.cpp) trains float32 weights directly and has no low-rank trainer upstream~\cite{llamacpp2026training}.
+We therefore update only the last $b$ transformer blocks: $\theta=(\theta_{\mathrm{frozen}},\theta_{\mathrm{top}})$ with $\nabla_{\theta_{\mathrm{frozen}}}=0$, which bounds memory and the drift from the base model, a known risk of fine-tuning~\cite{kirkpatrick2017ewc,biderman2024lora}.
+Training runs only while the machine is idle and is cancelled by any user activity, in the spirit of eligibility rules for on-device learning~\cite{bonawitz2019scale}.
+
+\paragraph{Quantisation.}
+The tuned model is quantised with an importance matrix $I_j=\mathbb E[x_j^2]$, the mean squared activation of input column $j$ of each weight matrix over repository text in the serving prompt format~\cite{kawrakow2024imatrix}.
+The motivation is the diagonal approximation
+\begin{equation}
+\mathbb E\bigl\|(W-\hat W)x\bigr\|^2\approx\sum_{r,j}I_j\,(W_{rj}-\hat W_{rj})^2,
+\end{equation}
+related to the second-order objectives of GPTQ~\cite{frantar2023gptq} and activation-aware scaling~\cite{lin2024awq}; the implemented k-quant objective weights errors by a function of $I_j$ and the weight magnitude rather than by $I_j$ alone.
+
+\paragraph{Promotion test.}
+A candidate replaces the served model only if (i) its held-out domain loss is lower in a one-sided paired $t$-test at level $\alpha$ over held-out examples, with $d_i=\ell^{\mathrm{base}}_i-\ell^{\mathrm{cand}}_i$ and $t=\bar d/(s_d/\sqrt n)$;
+(ii) its loss on general text is not worse by more than a margin $\delta$ (non-inferiority);
+and (iii) the mean per-token Kullback--Leibler divergence between the quantised and unquantised candidate stays below a bound.
+The previous model is kept for rollback.
+
+% ---------------------------------------------------------------------------
+\section{Applying proposed edits}\label{sec:edit}
+
+The model proposes edits as \emph{search/replace} blocks or as the complete new text of one named unit; line numbers are never used~\cite{aider_editformats,yang2024sweagent}.
+A search text $s$ is located by a ladder of comparisons of decreasing strictness: exact bytes; ignoring trailing blanks; ignoring leading and trailing blanks (the replacement is then re-indented); and, only when enabled, a fuzzy rung.
+\begin{definition}[Acceptance]
+A location is accepted iff it is the \emph{only} match on the first rung that matches anything, inside the named unit when one is given.
+On the fuzzy rung a window of lines with edit distance $d$ to $s$ is accepted iff $d\le\lfloor0.1|s|\rfloor$ and no other non-overlapping window is within that bound.
+\end{definition}
+Ambiguity is refused rather than resolved, so the only way to apply an edit at the wrong place is for the intended text to be absent and an unintended text to match uniquely.
+All blocks for one file are resolved against one snapshot, must not overlap, and are applied as one transaction: a journal and backups are written first, the files are replaced by write-then-rename, and removing the journal is the commit point~\cite{pillai2014crash}.
+Edits that increase the number of syntax errors reported by the parser are refused.
+
+% ---------------------------------------------------------------------------
+% ---------------------------------------------------------------------------
+\section{Experiments}\label{sec:results}
+
+All experiments ran on the reference machine against the Demo repository, with Qwen3-Embedding-0.6B (8-bit) for embeddings and Qwen2.5-Coder-0.5B-Instruct (Q4\_K\_M) as the served model, in one run of five hours.
+Every number below is read from the result files of that run; 95\% confidence intervals are bootstrap intervals over queries unless stated otherwise.
+
+\paragraph{Query sets.}
+Two question sets were built from the corpus.
+\emph{Q-doc} uses the documentation of a function (at least six words) as the question and the function as the single relevant unit; the unit is embedded without its documentation so that the question cannot match its own text.
+Only 271 functions qualify; they were split by function into 142 calibration, 72 held-out and 57 test questions.
+\emph{Q-gen} asks the served model to write a question about a function without naming it.
+The 0.5B model named the function in most of its attempts, and only 51 questions survived the filter (36 calibration, 9 held-out, 6 test).
+Q-gen results are therefore reported only where noted, and with that caveat.
+
+\subsection{Grouping (E3)}
+The raw embeddings are strongly anisotropic: the mean pairwise cosine is $0.445$.
+Centring removes this ($-2\times10^{-5}$), and the skewness of the 10-occurrence distribution falls from $1.10$ to $0.86$; reduction to $m=32$ dimensions keeps 62\% of the variance.
+
+On the corpus the failure of cross-validated concentration seen on synthetic data recurs.
+In $m=32$ the cross-validated value is $\kappa_{\mathrm{CV}}=188.5$ and the neighbourhood limit $\kappa_N=10.8$.
+Table~\ref{tab:modes} shows the number of modes as $\kappa$ grows: one mode up to $\kappa_N/8$, 50 modes with two singletons at $\kappa_N$, and from $2\kappa_N$ on mostly singletons (608 modes, 380 of them single points); at $\kappa_{\mathrm{CV}}\approx17\kappa_N$ nearly every unit would be its own group.
+With $\kappa_N$ and groups of at least three units, mean shift finds 44 groups in 24 steps per point on average, every point converges, and the density never decreases along a trajectory.
+
+The groups carry structure that was not given to the method.
+Of the 5800 call edges, 35.8\% join two units of the same group, against $4.9\%$ (95\% range 4.2--5.8\%) when the same group sizes are assigned at random ($p<0.002$, 500 permutations): functions that call each other are embedded close to each other.
+Agreement with the source files is moderate (adjusted Rand index 0.36, normalised mutual information 0.63), agreement with spherical $k$-means with the same number of clusters is higher (ARI 0.50), and the grouping is stable under bootstrap resampling of the units (ARI $0.817$, range 0.80--0.83, over 20 resamples).
+
+\begin{table}[t]\centering\small
+\caption{Modes of the corpus density ($m=32$) as the concentration grows; $\kappa_N=10.8$.}\label{tab:modes}
+\begin{tabular}{rrrr}\toprule
+$\kappa/\kappa_N$ & modes & singletons & largest \\\midrule
+1/8 & 1 & 0 & 2326 \\
+1/4 & 5 & 0 & 1072 \\
+1/2 & 8 & 0 & 764 \\
+1 & 50 & 2 & 294 \\
+2 & 608 & 380 & 121 \\
+4 & 1434 & 1155 & 58 \\
+8 & 1904 & 1694 & 13 \\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Calibration (E2)}
+On the 57 Q-doc test questions (132\,582 scored pairs, 57 relevant), the kernel posterior has expected calibration error $1\times10^{-4}$, Brier score $4\times10^{-4}$ and log loss $2.2\times10^{-3}$, against $0.010$, $0.0024$ and $0.013$ for the logistic fallback.
+Platt scaling fitted on the same calibration set is as good as the kernel posterior, and the isotonic projection changed nothing measurable here, because the estimated posterior was already monotone.
+These summary figures are dominated by the many non-relevant pairs and say little about the region that matters; the decisive quantity is the score at which the posterior reaches $\tau$.
+With prior $\pi=1/2326$ it is $z=6.06$ standard deviations above the question's mean score for $\tau=0.25$ ($4.48$ for $\tau=0.1$, $6.85$ for $\tau=0.5$).
+
+\subsection{Retrieval (E1)}
+Table~\ref{tab:retrieval} compares retrieval rules on the 57 Q-doc test questions.
+The embedder ranks the relevant function first for 23\% of the questions and within the top ten for 72\% (mean reciprocal rank 0.39).
+The calibrated trace at $\tau=0.25$ accepts one unit for almost every question; its precision, $0.24$, matches what a calibrated threshold of $0.25$ promises, but its recall is only $0.25$.
+This is the correct behaviour of the rule given the evidence: the posterior of the second-ranked unit is rarely above one in four, so the rule declines to add it.
+Fixed top-$k$ reaches a recall of 0.72 at $k=10$ by accepting nine irrelevant units for each relevant one.
+The split-conformal threshold delivers its guarantee (recall 0.90 at $\alpha=0.1$) at a cost of 74 units and 16\,200 tokens per question, far beyond the context of a small model.
+Graph evidence did not change the outcome measurably: with edges removed, the trace returns the same sets at $\tau=0.25$ and nearly the same at $\tau=0.1$.
+The lifts estimated from the served model were $\lambda_{\text{callee}}=2.0$, $\lambda_{\text{caller}}=3.5$ and $\lambda_{\text{sibling}}=1.2$; by Proposition~\ref{prop:reach} a single callee edge can then lift only units whose own posterior is at least $0.14$, a caller edge only those at $0.09$ or more, and few units other than the seeds reach either.
+
+\begin{table}[t]\centering\small
+\caption{Retrieval on 57 Q-doc test questions: recall of the relevant function, precision, mean set size and mean tokens. 95\% intervals for recall in brackets.}\label{tab:retrieval}
+\begin{tabular}{lcrrr}\toprule
+rule & recall & prec. & size & tokens \\\midrule
+top-1 & 0.23 {\scriptsize[0.12,0.35]} & 0.23 & 1.0 & 223 \\
+top-3 & 0.49 {\scriptsize[0.35,0.61]} & 0.16 & 3.0 & 618 \\
+top-5 & 0.60 {\scriptsize[0.46,0.72]} & 0.12 & 5.0 & 1038 \\
+top-10 & 0.72 {\scriptsize[0.60,0.83]} & 0.07 & 10.0 & 2056 \\
+top-20 & 0.79 {\scriptsize[0.67,0.90]} & 0.04 & 20.0 & 4363 \\
+largest gap & 0.49 {\scriptsize[0.35,0.61]} & 0.26 & 3.3 & 664 \\
+PageRank top-10 & 0.70 {\scriptsize[0.58,0.83]} & 0.07 & 10.0 & 2047 \\
+conformal $\alpha{=}0.2$ & 0.84 {\scriptsize[0.74,0.93]} & 0.03 & 38.5 & 8668 \\
+conformal $\alpha{=}0.1$ & 0.90 {\scriptsize[0.81,0.97]} & 0.01 & 73.7 & 16203 \\
+trace $\tau{=}0.5$ & 0.23 {\scriptsize[0.12,0.35]} & 0.23 & 1.0 & 223 \\
+trace $\tau{=}0.25$ & 0.25 {\scriptsize[0.14,0.35]} & 0.24 & 1.0 & 225 \\
+trace $\tau{=}0.1$ & 0.42 {\scriptsize[0.28,0.54]} & 0.21 & 3.4 & 787 \\
+\quad without graph & 0.42 {\scriptsize[0.28,0.54]} & 0.21 & 3.3 & 763 \\\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Compressed codes.}
+RaBitQ codes take 136 bytes per unit against 1032 for int8.
+Without rescoring, the top ten by RaBitQ agree with the exact top ten in 87\% of positions (int8: 99.6\%).
+With the rescoring rule of Section~\ref{sec:compress}, which rescored 19 units per question (0.8\% of the corpus), the trace returned exactly the sets it returns on exact scores for every question (Jaccard index 1.0) for both codes.
+
+\subsection{Context rot (E4)}
+E4 measures the loss of a reference answer (the documentation of the function) under the served model, in nats per token, for different contexts.
+It ran on the six Q-gen test questions, so its intervals are wide and its results are indicative only.
+Without context the loss is $5.66$; with the relevant function alone it is $0.60$.
+Distractors raise it steadily, and similar (hard) distractors more than random ones: with 2, 4, 8 and 16 hard distractors the loss is 0.82, 0.92, 1.14 and 1.21, with random ones 0.62, 0.79, 0.92 and 0.98.
+Top-$k$ contexts are worse still (top-10: 1.12; top-20: 2.05), because they combine many hard distractors with the length cost reported in the literature~\cite{du2025length,hong2025contextrot}.
+The trace context had a loss of $2.16$, worse than the oracle because the trace missed the relevant function for two of the six questions.
+Quality pruning reduced that context from 647 to 393 tokens and raised its quality $Q$ from 0.17 to 0.39 without a measurable change in loss (2.27; the intervals overlap widely).
+Across the 78 contexts that contain the relevant function, the rot index $1-Q$ correlates positively with the increase in loss over the oracle context (Spearman $\rho=0.36$).
+The direction supports the index as a measure of harmful context; the strength is modest and the sample small.
+Prompt evaluation time is proportional to length (Spearman $\rho=0.99$ over 84 prompts), so every pruned token is also saved latency.
+
+\subsection{Execution (E5)}
+Over 6\,168 checked runs the executor recorded no violation of admission or commit order, and every result (scan scores, mean and standard deviation, batch scores, mode assignments and centres, iteration counts) hashed to one value across all block sizes from 1~KiB to 1~MiB and all thread counts from 1 to 24.
+The corpus index (2326 vectors, 316~KB of codes) is too small for parallelism to matter: a scan takes 120--220~$\mu$s at any setting.
+On a synthetic index of $10^6$ vectors of dimension 64 (16~MB of codes), Table~\ref{tab:scan} shows the dependence on block size.
+With one thread the block size is irrelevant (14--17~ms).
+With 24 threads, blocks of 1--2~KiB are slow because workers queue at the admission gate (65\% of worker time at 1~KiB), and blocks of 256~KiB and more are slow because 16~MB divides into too few blocks to balance the work over 24 threads; 16 to 64~KiB is the fast range, and 16~KiB lies within it.
+For mean shift on the corpus, 8--32~KiB blocks are fastest at 24 threads (0.71--0.78~s) and 1~MiB blocks are five times slower (4.0~s).
+The ordered executor costs between $-26\%$ and $+34\%$ against an unordered loop doing the same work, within the run-to-run variation at block sizes of 2~KiB and more.
+These results support a block size well below L2 and above the gate overhead; they do not isolate an L1 effect, and no cache counters were read.
+
+\begin{table}[t]\centering\small
+\caption{Median scan time (ms) of $10^6$ RaBitQ codes by block size and threads.}\label{tab:scan}
+\begin{tabular}{rrrr}\toprule
+block & 1 thread & 8 threads & 24 threads \\\midrule
+1 KiB & 16.4 & 20.3 & 160.9 \\
+4 KiB & 15.7 & 9.0 & 40.6 \\
+16 KiB & 15.2 & 7.8 & 7.8 \\
+64 KiB & 14.4 & 8.0 & 6.1 \\
+256 KiB & 15.3 & 7.3 & 17.5 \\
+1 MiB & 15.5 & 11.8 & 17.3 \\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Fine-tuning and quantisation (E6)}
+Training examples were built from 218 calibration and held-out functions (never from test functions), with 47 held out for the promotion test.
+Training the last two blocks (29.4 million of 630 million parameters) for two epochs over 1244 windows of 256 tokens took 70 minutes on the CPU with a peak working set of 6.4~GB; training loss fell from 2.10 to 1.51 and validation loss from 1.80 to 1.49.
+On held-out domain examples the loss fell from 0.95 to 0.58 nats per token.
+On general text it rose from 2.62 to 5.66: the model forgot much of what it knew outside the corpus.
+The promotion test rejected the candidate on that ground (general loss worse by 3.05 against an allowed 0.02), although the domain improvement alone was highly significant.
+The test did what it is for; the result also shows that this form of training, on this little data, needs replay of general text or a penalty on the divergence from the base model before it can be promoted~\cite{kirkpatrick2017ewc,biderman2024lora}.
+
+Quantisation of the fine-tuned model was nearly lossless: from Q8\_0 to Q4\_K\_M the mean KL divergence from the float model was $0.0003$ to $0.0021$ nats per token and the most probable token agreed in 99.6\% of positions, at 676 to 491~MB.
+The repository importance matrix had no consistent effect at these bit widths (Q4\_K\_M: KL 0.0017 with, 0.0021 without; Q5\_K\_M: 0.0019 with, 0.0011 without).
+
+\subsection{Edits (E7)}
+\paragraph{Matching.}
+The known-target protocol was run on 250 functions with nine perturbations of search/replace blocks and four of unit rewrites, each with the fuzzy rung off and on (6\,500 cases).
+The first run exposed a defect: mimalloc defines some functions twice, in alternative branches of a conditional, and the lookup of a named unit silently took the first definition; 133 edits were applied at the wrong place.
+After the lookup was changed to refuse an ambiguous name, 20 of 6\,500 cases (0.3\%) were applied with a result that differs from the intended one, against 133 (2.0\%) before.
+None of the 20 places an edit in the wrong function: eight differ only in the blanks of an empty line, and twelve are unit rewrites in which the line endings of a converted file, or lines inserted directly above the unit, are not reproduced.
+Search/replace blocks whose target occurs twice are now refused in all 250 cases.
+Without the fuzzy rung, a block with a one-letter typing error is refused in 242 of 250 cases; with it, 220 are applied correctly, 30 refused and none applied wrongly. The price of refusing ambiguous names is that 25 of 250 unperturbed unit rewrites, and 26 of 250 unperturbed search/replace blocks scoped to such a unit, are now refused.
+
+\paragraph{With the served model.}
+The 0.5B model could not use the edit format.
+Without the grammar none of its 91 answers parsed as an edit; with the grammar 44 parsed, but the model invented file paths or unit names, ran to the 768-token limit, and only two edits applied, neither equal to the target.
+The edited copy of the corpus still builds, because no wrong edit was written.
+Editing needs a larger model than the one that fits this machine's serving budget, or fine-tuning on the format.
+
+% ---------------------------------------------------------------------------
+\section{Limitations}
+All results concern one C repository, a fork of mimalloc, on one machine, with one embedding model and one small generative model.
+The labelled questions are few (57 Q-doc test questions; six Q-gen questions for E4), each has a single relevant function, and the labels are derived from the corpus itself; recall against a single label underestimates the usefulness of neighbouring functions.
+The neighbourhood limit on the concentration and the edge lifts are heuristics whose constants were fixed by us.
+The block-size results are timings; cache behaviour was not observed directly.
+The fine-tuning experiment used one configuration and no protection against forgetting.
+The remaining edit deviations of Section~\ref{sec:results} are known and not yet fixed.
+
+\section{Conclusion}
+Treating retrieval as a sequence of explicit decisions makes its behaviour predictable and its failures visible.
+The calibrated threshold returned sets whose precision matched the threshold, and it declined to add context it had no evidence for; with an embedder that ranks the right function first a quarter of the time, that means small contexts and low recall, and the remedy lies in the evidence, not in the rule.
+The density of the embeddings groups functions in a way that recovers the call graph, once its concentration is chosen for mode seeking rather than for likelihood.
+Context quality as defined here correlates with the harm a context does to a small model, though the evidence is preliminary.
+Ordered cache-sized execution gave bit-identical results at every setting, with block sizes from 16 to 64~KiB among the fastest.
+The promotion test stopped a fine-tuned model that had improved on the corpus and forgotten the rest.
+The natural next steps are a stronger local embedder, more and richer relevance labels, and fine-tuning with replay.
+
+\paragraph{Use of AI tools.}
+The implementation and the drafting of this paper were assisted by an AI coding assistant; the research direction, the system design and the claims are the author's.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+\end{document}

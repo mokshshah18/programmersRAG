@@ -1,0 +1,389 @@
+{
+ "meta": {
+  "corpus": {
+   "commit": "31d034d94cdb8e22f7d7ed55967f581a2d6e831d",
+   "files": 45,
+   "functions": 1514,
+   "path": "<repo>/Demo repo/mimalloc",
+   "roots": [
+    "<repo>/Demo repo/mimalloc/include",
+    "<repo>/Demo repo/mimalloc/src"
+   ],
+   "units": 2326
+  },
+  "experiment": "e3_groups",
+  "finished": "2026-09-30T22:21:02Z",
+  "git_commit": "946b67ea86525ae39decf998a7e2ac9a5da5c51c",
+  "machine": {
+   "block_bytes": 16384,
+   "cache_detected": true,
+   "cpu": "12th Gen Intel(R) Core(TM) i9-12950HX",
+   "l1d_bytes": [
+    49152,
+    32768
+   ],
+   "logical_cpus": 24,
+   "os": "Windows 10.0.22631",
+   "ram_gb": 31.692127227783203,
+   "simd_kernel_note": "see e5_execution for the kernel in use"
+  },
+  "models": {
+   "chat": "qwen2.5-coder-0.5b-instruct-q4_k_m",
+   "embedding": "Qwen3-Embedding-0.6B-Q8_0|pool=last|dim=1024|ctx=2048|eos=1|prefix=aab9def051f51fa5"
+  },
+  "seed": 20260930,
+  "settings": {
+   "block_bytes": 16384,
+   "bootstrap_stability_resamples": 20,
+   "dims": [
+    8,
+    16,
+    32,
+    64
+   ],
+   "engine_dim": 32,
+   "engine_kappa": 10.79355916548508,
+   "engine_min_group": 3,
+   "engine_settings": {
+    "context": {
+     "theta": 0.25,
+     "token_budget": 2400
+    },
+    "corpus": {
+     "exclude": [
+      "/.git/",
+      "/build/",
+      "/out/",
+      "/.deps/",
+      "/node_modules/"
+     ],
+     "extensions": [
+      ".c",
+      ".h",
+      ".cc",
+      ".cpp",
+      ".cxx",
+      ".hpp",
+      ".hh",
+      ".py"
+     ],
+     "max_file_bytes": 1048576,
+     "roots": [
+      "<repo>/Demo repo/mimalloc/src",
+      "<repo>/Demo repo/mimalloc/include"
+     ]
+    },
+    "models": {
+     "chat": "<repo>/models/qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+     "embedding": "<repo>/models/Qwen3-Embedding-0.6B-Q8_0.gguf",
+     "tuning_base": "<repo>/models/qwen2.5-coder-0.5b-instruct-fp16.gguf"
+    },
+    "paths": {
+     "data": "<repo>/build/bench_data/Qwen3-Embedding-0.6B-Q8_0",
+     "frontend": "frontend"
+    },
+    "retrieve": {
+     "tau": 0.25
+    },
+    "server": {
+     "host": "127.0.0.1",
+     "port": 8000
+    },
+    "tune": {
+     "enabled": false
+    }
+   },
+   "kmeans_seed": 20260951,
+   "quick": false,
+   "random_assignment_permutations": 500,
+   "threads": 24
+  },
+  "started": "2026-09-30T22:20:38Z"
+ },
+ "agreement": {
+  "call_graph": {
+   "edges": 5800,
+   "observed_share_same_group": 0.35793103448275865,
+   "p_value_add_one": 0.001996007984031936,
+   "permutations": 500,
+   "permutations_at_least_observed": 0,
+   "random_share_mean": 0.04935620689655166,
+   "random_share_q025": 0.04249568965517241,
+   "random_share_q975": 0.05802155172413793
+  },
+  "files": 45,
+  "groups": 44,
+  "kmeans_same_k": 44,
+  "kmeans_vs_files": {
+   "ari": 0.365658034335128,
+   "nmi": 0.6417132352349119
+  },
+  "kmeans_vs_top_level_directories": {
+   "ari": 0.019683420815683715,
+   "nmi": 0.13423451171141718
+  },
+  "stability": {
+   "ari": {
+    "hi": 0.8301389484892325,
+    "lo": 0.8035665949581606,
+    "mean": 0.8172965449717153,
+    "n": 20
+   },
+   "ari_values": [
+    0.7929743946724068,
+    0.8173319651370599,
+    0.8054781717122207,
+    0.7802326063577039,
+    0.8314582332951341,
+    0.8378869878299224,
+    0.8570554420399354,
+    0.8111625913535696,
+    0.8434781961721455,
+    0.8114104223366372,
+    0.7559106683551696,
+    0.830298231863891,
+    0.8092716297177467,
+    0.8489311549361667,
+    0.8330449299981744,
+    0.8105730424793591,
+    0.8076710544553994,
+    0.7463930647877027,
+    0.8427758935773503,
+    0.8725922183566085
+   ],
+   "kappa": 10.79355916548508,
+   "modes_mean": 40.65,
+   "nmi": {
+    "hi": 0.9033922311158754,
+    "lo": 0.8951667440375503,
+    "mean": 0.8992294661911965,
+    "n": 20
+   },
+   "nmi_values": [
+    0.9033072182511455,
+    0.8932633431192036,
+    0.8892328837172468,
+    0.8780871794911786,
+    0.91433857636227,
+    0.9023805109099602,
+    0.9101207846465887,
+    0.9093479786020152,
+    0.9043291892704969,
+    0.8986702063891339,
+    0.8843315050499747,
+    0.902020968316157,
+    0.8980866914905302,
+    0.9007729665040488,
+    0.8930789056844677,
+    0.9047051996945747,
+    0.9029457024961866,
+    0.8812603052572388,
+    0.903204105987336,
+    0.9111051025841758
+   ],
+   "resamples": 20,
+   "sample": "points drawn with replacement, duplicates removed (about 63 %)"
+  },
+  "top_level_directories": 2,
+  "vs_files": {
+   "ari": 0.3564907998500229,
+   "nmi": 0.6298592014967298
+  },
+  "vs_spherical_kmeans": {
+   "ari": 0.4979959337212548,
+   "nmi": 0.7833883293650544
+  },
+  "vs_top_level_directories": {
+   "ari": 0.02882763758315994,
+   "nmi": 0.13207801825385115
+  }
+ },
+ "geometry": {
+  "centred": {
+   "anisotropy": -2.2375592707410826e-05,
+   "dim": 1024,
+   "hubness_skewness": 0.8602807046064773
+  },
+  "engine_index": {
+   "anisotropy_after_reported": 0.0003031084215096723,
+   "anisotropy_before_reported": 0.4449010852346429,
+   "reduced_dim": 32
+  },
+  "raw": {
+   "anisotropy": 0.4449010852346429,
+   "dim": 1024,
+   "hubness_skewness": 1.0956997069204282
+  },
+  "reduced": {
+   "16": {
+    "anisotropy": 0.0008745979501294315,
+    "dim": 16,
+    "explained_variance": 0.4754385561090297,
+    "hubness_skewness": 0.5116405474874997
+   },
+   "32": {
+    "anisotropy": 0.0003031084215096723,
+    "dim": 32,
+    "explained_variance": 0.6238147373373454,
+    "hubness_skewness": 0.6548154448876373
+   },
+   "64": {
+    "anisotropy": 0.0001470248170677443,
+    "dim": 64,
+    "explained_variance": 0.7663052474481947,
+    "hubness_skewness": 0.6453587336109843
+   },
+   "8": {
+    "anisotropy": 0.002212795128255364,
+    "dim": 8,
+    "explained_variance": 0.3397308382827572,
+    "hubness_skewness": 0.4017366563739846
+   }
+  }
+ },
+ "modes_vs_kappa": {
+  "dim": 32,
+  "min_group": 1,
+  "neighbourhood_limit": 10.79355916548508,
+  "rows": [
+   {
+    "kappa": 1.349194895685635,
+    "kappa_over_neighbourhood_limit": 0.125,
+    "largest_mode": 2326,
+    "mean_iterations": 32.4402407566638,
+    "modes": 1,
+    "singleton_modes": 0
+   },
+   {
+    "kappa": 2.69838979137127,
+    "kappa_over_neighbourhood_limit": 0.25,
+    "largest_mode": 1072,
+    "mean_iterations": 30.402407566638004,
+    "modes": 5,
+    "singleton_modes": 0
+   },
+   {
+    "kappa": 5.39677958274254,
+    "kappa_over_neighbourhood_limit": 0.5,
+    "largest_mode": 764,
+    "mean_iterations": 34.18400687876182,
+    "modes": 8,
+    "singleton_modes": 0
+   },
+   {
+    "kappa": 10.79355916548508,
+    "kappa_over_neighbourhood_limit": 1.0,
+    "largest_mode": 294,
+    "mean_iterations": 23.960447119518488,
+    "modes": 50,
+    "singleton_modes": 2
+   },
+   {
+    "kappa": 10.79355916548508,
+    "kappa_over_neighbourhood_limit": 1.0,
+    "largest_mode": 294,
+    "mean_iterations": 23.960447119518488,
+    "modes": 50,
+    "singleton_modes": 2
+   },
+   {
+    "kappa": 21.58711833097016,
+    "kappa_over_neighbourhood_limit": 2.0,
+    "largest_mode": 121,
+    "mean_iterations": 21.03267411865864,
+    "modes": 608,
+    "singleton_modes": 380
+   },
+   {
+    "kappa": 43.17423666194032,
+    "kappa_over_neighbourhood_limit": 4.0,
+    "largest_mode": 58,
+    "mean_iterations": 13.510318142734308,
+    "modes": 1434,
+    "singleton_modes": 1155
+   },
+   {
+    "kappa": 86.34847332388064,
+    "kappa_over_neighbourhood_limit": 8.0,
+    "largest_mode": 13,
+    "mean_iterations": 7.224419604471195,
+    "modes": 1904,
+    "singleton_modes": 1694
+   }
+  ]
+ },
+ "per_dimension": {
+  "16": {
+   "cv_log_likelihood": 8.59919229172169,
+   "dim": 16,
+   "kappa_cross_validated": 130.44747375576617,
+   "kappa_neighbourhood_limit": 13.483156910643276,
+   "kappa_rule_of_thumb": 12.890279937195888,
+   "kappa_used": 13.483156910643276,
+   "mean_shift_iterations": {
+    "density_decreases": 0,
+    "max": 145.0,
+    "mean": 26.402407566638004,
+    "median": 21.0,
+    "not_converged": 0
+   },
+   "mean_shift_seconds": 1.1538299,
+   "modes": 28,
+   "singleton_modes": 0
+  },
+  "32": {
+   "cv_log_likelihood": 30.978463001715795,
+   "dim": 32,
+   "kappa_cross_validated": 188.49893914564683,
+   "kappa_neighbourhood_limit": 10.79355916548508,
+   "kappa_rule_of_thumb": 23.977745694631675,
+   "kappa_used": 10.79355916548508,
+   "mean_shift_iterations": {
+    "density_decreases": 0,
+    "max": 186.0,
+    "mean": 23.960447119518488,
+    "median": 19.0,
+    "not_converged": 0
+   },
+   "mean_shift_seconds": 1.4188853,
+   "modes": 44,
+   "singleton_modes": 0
+  },
+  "64": {
+   "cv_log_likelihood": 85.04984560784466,
+   "dim": 64,
+   "kappa_cross_validated": 291.28075296249216,
+   "kappa_neighbourhood_limit": 9.615968024702566,
+   "kappa_rule_of_thumb": 47.257599411275066,
+   "kappa_used": 9.615968024702566,
+   "mean_shift_iterations": {
+    "density_decreases": 0,
+    "max": 353.0,
+    "mean": 29.078245915735167,
+    "median": 25.0,
+    "not_converged": 0
+   },
+   "mean_shift_seconds": 2.0566558,
+   "modes": 50,
+   "singleton_modes": 0
+  },
+  "8": {
+   "cv_log_likelihood": -0.042749303821621676,
+   "dim": 8,
+   "kappa_cross_validated": 94.90036250079889,
+   "kappa_neighbourhood_limit": 19.986966973798697,
+   "kappa_rule_of_thumb": 7.74336270338556,
+   "kappa_used": 19.986966973798697,
+   "mean_shift_iterations": {
+    "density_decreases": 0,
+    "max": 152.0,
+    "mean": 26.815563198624247,
+    "median": 20.0,
+    "not_converged": 0
+   },
+   "mean_shift_seconds": 1.0378252,
+   "modes": 24,
+   "singleton_modes": 0
+  }
+ }
+}

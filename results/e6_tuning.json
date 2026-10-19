@@ -1,0 +1,332 @@
+{
+ "meta": {
+  "corpus": {
+   "commit": "31d034d94cdb8e22f7d7ed55967f581a2d6e831d",
+   "files": 45,
+   "functions": 1514,
+   "path": "<repo>/Demo repo/mimalloc",
+   "roots": [
+    "<repo>/Demo repo/mimalloc/include",
+    "<repo>/Demo repo/mimalloc/src"
+   ],
+   "units": 2326
+  },
+  "experiment": "e6_tuning",
+  "finished": "2026-10-01T00:57:38Z",
+  "git_commit": "946b67ea86525ae39decf998a7e2ac9a5da5c51c",
+  "machine": {
+   "block_bytes": 16384,
+   "cache_detected": true,
+   "cpu": "12th Gen Intel(R) Core(TM) i9-12950HX",
+   "l1d_bytes": [
+    49152,
+    32768
+   ],
+   "logical_cpus": 24,
+   "os": "Windows 10.0.22631",
+   "ram_gb": 31.692127227783203,
+   "simd_kernel_note": "see e5_execution for the kernel in use"
+  },
+  "models": {
+   "chat": "qwen2.5-coder-0.5b-instruct-q4_k_m",
+   "embedding": "Qwen3-Embedding-0.6B-Q8_0|pool=last|dim=1024|ctx=2048|eos=1|prefix=aab9def051f51fa5"
+  },
+  "seed": 20260930,
+  "settings": {
+   "base_model": "<repo>/models/qwen2.5-coder-0.5b-instruct-fp16.gguf",
+   "block_bytes": 16384,
+   "chat_template_for_training": "ChatML rendering by the driver",
+   "engine_settings": {
+    "context": {
+     "theta": 0.25,
+     "token_budget": 2400
+    },
+    "corpus": {
+     "exclude": [
+      "/.git/",
+      "/build/",
+      "/out/",
+      "/.deps/",
+      "/node_modules/"
+     ],
+     "extensions": [
+      ".c",
+      ".h",
+      ".cc",
+      ".cpp",
+      ".cxx",
+      ".hpp",
+      ".hh",
+      ".py"
+     ],
+     "max_file_bytes": 1048576,
+     "roots": [
+      "<repo>/Demo repo/mimalloc/src",
+      "<repo>/Demo repo/mimalloc/include"
+     ]
+    },
+    "models": {
+     "chat": "<repo>/models/qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+     "embedding": "<repo>/models/Qwen3-Embedding-0.6B-Q8_0.gguf",
+     "tuning_base": "<repo>/models/qwen2.5-coder-0.5b-instruct-fp16.gguf"
+    },
+    "paths": {
+     "data": "<repo>/build/bench_data/Qwen3-Embedding-0.6B-Q8_0",
+     "frontend": "frontend"
+    },
+    "retrieve": {
+     "tau": 0.25
+    },
+    "server": {
+     "host": "127.0.0.1",
+     "port": 8000
+    },
+    "tune": {
+     "enabled": false
+    }
+   },
+   "epochs": 2,
+   "holdout_cap": 100,
+   "max_examples": 400,
+   "quick": false,
+   "serving_model": "<repo>/models/qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+   "settings": {
+    "general_probe": "fixed passage of prose and short programs, 256-token windows",
+    "kl": "mean KL(reference || quantised) per token over the rendered held-out examples, 256-token windows",
+    "peak_memory": "process-wide peak working set, monotone over the run",
+    "training": "examples of the calibration and held-out functions; test functions never appear"
+   },
+   "threads": 24,
+   "trainable_blocks": 2
+  },
+  "started": "2026-09-30T22:58:41Z"
+ },
+ "base": {
+  "domain_loss": 0.9495716756507644,
+  "general_loss": 2.621869070298342,
+  "model": "<repo>/build/bench_tune/base_f32.gguf",
+  "speed": {
+   "generation_tokens_per_second": 29.034562171262166,
+   "prompt_tokens_per_second": 581.7394820156912,
+   "prompts": 3
+  }
+ },
+ "examples": {
+  "holdout": 47,
+  "train": 218,
+  "train_removed_test_oracle": 48
+ },
+ "fine_tune": {
+  "epochs": 2,
+  "error": "",
+  "learning_rate": 1e-05,
+  "ok": true,
+  "peak_working_set_bytes_after_training": 6442717184,
+  "seconds_reported": 4182.1071279,
+  "total_parameters": 630167424,
+  "train_loss_per_epoch": [
+   2.104048294988476,
+   1.5052970875521756
+  ],
+  "train_windows": 1244,
+  "trainable_blocks": 2,
+  "trainable_parameters": 29365504,
+  "validation_loss_per_epoch": [
+   1.7974446712844614,
+   1.488754784607369
+  ],
+  "validation_windows": 138,
+  "wall_seconds": 4182.1071337,
+  "window": 256
+ },
+ "fine_tuned_f32": {
+  "domain_loss": 0.5764530484142804,
+  "general_loss": 5.663670097066772,
+  "speed": {
+   "generation_tokens_per_second": 27.639591019274988,
+   "prompt_tokens_per_second": 506.74240722825283,
+   "prompts": 3
+  }
+ },
+ "gate": {
+  "base_model": "<repo>/models/qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+  "candidate": "<repo>/build/bench_tune/ft_Q4_K_M_imp.gguf",
+  "candidate_importance_matrix": true,
+  "candidate_type": "Q4_K_M",
+  "examples": 47,
+  "policy": {
+   "alpha": 0.05,
+   "margin": 0.02,
+   "max_kl": 0.05,
+   "min_examples": 20
+  },
+  "result": {
+   "domain_nll_base": 0.9515969026581075,
+   "domain_nll_candidate": 0.5714423698768804,
+   "general_nll_base": 2.652986408600924,
+   "general_nll_candidate": 5.7044757318849975,
+   "p_value": 1.2501999435698963e-11,
+   "pass": false,
+   "quantization_kl": 0.0016671025110201693,
+   "reason": "general-probe loss worsened by 3.0515 nats per token (allowed 0.0200)"
+  }
+ },
+ "importance": {
+  "error": "",
+  "matrices": 168,
+  "ok": true,
+  "seconds": 85.0277424,
+  "tokens": 32768
+ },
+ "peak_working_set_bytes_after_conversion": 3862921216,
+ "peak_working_set_bytes_final": 6442717184,
+ "quantised": [
+  {
+   "domain_loss": 0.5747073311671282,
+   "file_bytes": 675710848,
+   "general_loss": 5.691049159398049,
+   "importance_matrix": false,
+   "kl_error": "",
+   "kl_tokens": 4080,
+   "mean_kl_per_token": 0.00026039692249274005,
+   "quantize_seconds": 3.1187303,
+   "speed": {
+    "generation_tokens_per_second": 74.69782008417926,
+    "prompt_tokens_per_second": 349.5465826161302,
+    "prompts": 3
+   },
+   "top1_agreement": 0.996078431372549,
+   "type": "Q8_0"
+  },
+  {
+   "domain_loss": 0.5747073311671282,
+   "file_bytes": 675710848,
+   "general_loss": 5.691049159398049,
+   "importance_matrix": true,
+   "kl_error": "",
+   "kl_tokens": 4080,
+   "mean_kl_per_token": 0.00026039692249274005,
+   "quantize_seconds": 3.443902,
+   "speed": {
+    "generation_tokens_per_second": 69.05644155609485,
+    "prompt_tokens_per_second": 340.7944309611043,
+    "prompts": 3
+   },
+   "top1_agreement": 0.996078431372549,
+   "type": "Q8_0"
+  },
+  {
+   "domain_loss": 0.5723988119574156,
+   "file_bytes": 650379136,
+   "general_loss": 5.6545712066572325,
+   "importance_matrix": false,
+   "kl_error": "",
+   "kl_tokens": 4080,
+   "mean_kl_per_token": 0.0006031025657308721,
+   "quantize_seconds": 4.6394036,
+   "speed": {
+    "generation_tokens_per_second": 74.04572035276203,
+    "prompt_tokens_per_second": 357.8589720789261,
+    "prompts": 3
+   },
+   "top1_agreement": 0.996078431372549,
+   "type": "Q6_K"
+  },
+  {
+   "domain_loss": 0.5729760929841954,
+   "file_bytes": 650379136,
+   "general_loss": 5.6753963106861285,
+   "importance_matrix": true,
+   "kl_error": "",
+   "kl_tokens": 4080,
+   "mean_kl_per_token": 0.0004751959652722462,
+   "quantize_seconds": 4.6184203,
+   "speed": {
+    "generation_tokens_per_second": 74.45488553569592,
+    "prompt_tokens_per_second": 380.36588835483593,
+    "prompts": 3
+   },
+   "top1_agreement": 0.996078431372549,
+   "type": "Q6_K"
+  },
+  {
+   "domain_loss": 0.5742709311264812,
+   "file_bytes": 522186624,
+   "general_loss": 5.709259443982535,
+   "importance_matrix": false,
+   "kl_error": "",
+   "kl_tokens": 4080,
+   "mean_kl_per_token": 0.0011269737207044263,
+   "quantize_seconds": 4.6797521,
+   "speed": {
+    "generation_tokens_per_second": 74.05627999568622,
+    "prompt_tokens_per_second": 281.9012003425063,
+    "prompts": 3
+   },
+   "top1_agreement": 0.996078431372549,
+   "type": "Q5_K_M"
+  },
+  {
+   "domain_loss": 0.5777321482449124,
+   "file_bytes": 522186624,
+   "general_loss": 5.662503282936309,
+   "importance_matrix": true,
+   "kl_error": "",
+   "kl_tokens": 4080,
+   "mean_kl_per_token": 0.001866051103519411,
+   "quantize_seconds": 11.4806736,
+   "speed": {
+    "generation_tokens_per_second": 70.19849257512007,
+    "prompt_tokens_per_second": 282.41586926118697,
+    "prompts": 3
+   },
+   "top1_agreement": 0.996078431372549,
+   "type": "Q5_K_M"
+  },
+  {
+   "domain_loss": 0.5789903823032266,
+   "file_bytes": 491400064,
+   "general_loss": 5.652720345156634,
+   "importance_matrix": false,
+   "kl_error": "",
+   "kl_tokens": 4080,
+   "mean_kl_per_token": 0.0020807874318312827,
+   "quantize_seconds": 4.9163154,
+   "speed": {
+    "generation_tokens_per_second": 77.60679193085538,
+    "prompt_tokens_per_second": 297.8173316994136,
+    "prompts": 3
+   },
+   "top1_agreement": 0.996078431372549,
+   "type": "Q4_K_M"
+  },
+  {
+   "domain_loss": 0.5714423698768804,
+   "file_bytes": 491400064,
+   "general_loss": 5.7044757318849975,
+   "importance_matrix": true,
+   "kl_error": "",
+   "kl_tokens": 4080,
+   "mean_kl_per_token": 0.0016671025110201693,
+   "quantize_seconds": 7.6682238,
+   "speed": {
+    "generation_tokens_per_second": 78.70859743301747,
+    "prompt_tokens_per_second": 344.63026301156003,
+    "prompts": 3
+   },
+   "top1_agreement": 0.9955882352941177,
+   "type": "Q4_K_M"
+  }
+ ],
+ "serving": {
+  "domain_loss": 0.9515969026581075,
+  "error": "",
+  "general_loss": 2.652986408600924,
+  "model": "<repo>/models/qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+  "speed": {
+   "generation_tokens_per_second": 76.87477293189608,
+   "prompt_tokens_per_second": 324.62039072851644,
+   "prompts": 3
+  }
+ }
+}

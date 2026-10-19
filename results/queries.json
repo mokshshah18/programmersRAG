@@ -1,0 +1,2915 @@
+{
+ "meta": {
+  "corpus": {
+   "commit": "31d034d94cdb8e22f7d7ed55967f581a2d6e831d",
+   "files": 45,
+   "functions": 1514,
+   "path": "<repo>/Demo repo/mimalloc",
+   "roots": [
+    "<repo>/Demo repo/mimalloc/include",
+    "<repo>/Demo repo/mimalloc/src"
+   ],
+   "units": 2326
+  },
+  "experiment": "queries",
+  "finished": "2026-09-30T21:56:38Z",
+  "git_commit": "946b67ea86525ae39decf998a7e2ac9a5da5c51c",
+  "machine": {
+   "block_bytes": 16384,
+   "cache_detected": true,
+   "cpu": "12th Gen Intel(R) Core(TM) i9-12950HX",
+   "l1d_bytes": [
+    49152,
+    32768
+   ],
+   "logical_cpus": 24,
+   "os": "Windows 10.0.22631",
+   "ram_gb": 31.692127227783203,
+   "simd_kernel_note": "see e5_execution for the kernel in use"
+  },
+  "models": {
+   "chat": "qwen2.5-coder-0.5b-instruct-q4_k_m",
+   "embedding": "Qwen3-Embedding-0.6B-Q8_0|pool=last|dim=1024|ctx=2048|eos=1|prefix=aab9def051f51fa5"
+  },
+  "seed": 20260930,
+  "settings": {
+   "block_bytes": 16384,
+   "doc_min_words": 6,
+   "engine_settings": {
+    "context": {
+     "theta": 0.25,
+     "token_budget": 2400
+    },
+    "corpus": {
+     "exclude": [
+      "/.git/",
+      "/build/",
+      "/out/",
+      "/.deps/",
+      "/node_modules/"
+     ],
+     "extensions": [
+      ".c",
+      ".h",
+      ".cc",
+      ".cpp",
+      ".cxx",
+      ".hpp",
+      ".hh",
+      ".py"
+     ],
+     "max_file_bytes": 1048576,
+     "roots": [
+      "<repo>/Demo repo/mimalloc/src",
+      "<repo>/Demo repo/mimalloc/include"
+     ]
+    },
+    "models": {
+     "chat": "<repo>/models/qwen2.5-coder-0.5b-instruct-q4_k_m.gguf",
+     "embedding": "<repo>/models/Qwen3-Embedding-0.6B-Q8_0.gguf",
+     "tuning_base": "<repo>/models/qwen2.5-coder-0.5b-instruct-fp16.gguf"
+    },
+    "paths": {
+     "data": "<repo>/build/bench_data/Qwen3-Embedding-0.6B-Q8_0",
+     "frontend": "frontend"
+    },
+    "retrieve": {
+     "tau": 0.25
+    },
+    "server": {
+     "host": "127.0.0.1",
+     "port": 8000
+    },
+    "tune": {
+     "enabled": false
+    }
+   },
+   "min_gain_nats_per_token": 0.02,
+   "note": "Q-gen questions and utility labels need the chat model",
+   "quick": false,
+   "threads": 24
+  },
+  "started": "2026-09-30T21:43:25Z"
+ },
+ "fingerprint": "69bc01b68f90300a",
+ "info": {
+  "doc_eligible": 271,
+  "doc_min_words": 6,
+  "gen_attempted": 271,
+  "gen_discarded_empty_or_name": 220,
+  "gen_requested": 240,
+  "split_fractions": {
+   "calibration": 0.5,
+   "heldout": 0.25,
+   "test": 0.25
+  },
+  "split_seed": 20260930
+ },
+ "q_doc": {
+  "by_split": {
+   "calibration": 142,
+   "heldout": 72,
+   "test": 57
+  },
+  "count": 271,
+  "queries": [
+   {
+    "id": "doc-255",
+    "question": "These are used by the statistics",
+    "reference": "",
+    "split": "calibration",
+    "unit": 255
+   },
+   {
+    "id": "doc-282",
+    "question": "These are used by the statistics",
+    "reference": "",
+    "split": "calibration",
+    "unit": 282
+   },
+   {
+    "id": "doc-302",
+    "question": "Atomically add a signed value; returns the previous value.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 302
+   },
+   {
+    "id": "doc-303",
+    "question": "Atomically subtract a signed value; returns the previous value.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 303
+   },
+   {
+    "id": "doc-373",
+    "question": "Bit scan forward: find the least significant bit that is set (i.e. count trailing zero's)\nreturn false if `x==0` (with `*idx` undefined) and true otherwise,\nwith the `idx` is set to the bit index (`0 <= *idx < MI_BFIELD_BITS`).",
+    "reference": "",
+    "split": "heldout",
+    "unit": 373
+   },
+   {
+    "id": "doc-374",
+    "question": "Bit scan reverse: find the most significant bit that is set\nreturn false if `x==0` (with `*idx` undefined) and true otherwise,\nwith the `idx` is set to the bit index (`0 <= *idx < MI_BFIELD_BITS`).",
+    "reference": "",
+    "split": "calibration",
+    "unit": 374
+   },
+   {
+    "id": "doc-457",
+    "question": "Is `x` a power of two? (0 is considered a power of two)",
+    "reference": "",
+    "split": "heldout",
+    "unit": 457
+   },
+   {
+    "id": "doc-458",
+    "question": "valid alignment values are as posix memalign: <https://en.cppreference.com/c/memory/aligned_alloc#Notes>",
+    "reference": "",
+    "split": "calibration",
+    "unit": 458
+   },
+   {
+    "id": "doc-464",
+    "question": "Divide upwards: `s <= _mi_divide_up(s,d)*d < s+d`.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 464
+   },
+   {
+    "id": "doc-470",
+    "question": "Safe multiply `count*size` into `total`; return `true` on overflow.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 470
+   },
+   {
+    "id": "doc-493",
+    "question": "if the page meta data is aligned in front of pages we can find it efficiently\nwithout needing to go through the page map (for valid pointers).",
+    "reference": "",
+    "split": "heldout",
+    "unit": 493
+   },
+   {
+    "id": "doc-496",
+    "question": "Get the block size of a page",
+    "reference": "",
+    "split": "calibration",
+    "unit": 496
+   },
+   {
+    "id": "doc-504",
+    "question": "Get the usable block size of a page without fixed padding.\nThis may still include internal padding due to alignment and rounding up size classes.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 504
+   },
+   {
+    "id": "doc-507",
+    "question": "This gives the offset relative to the start slice of a page.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 507
+   },
+   {
+    "id": "doc-508",
+    "question": "How much of the page is committed relative to the slice start? (or 0 if fully committed already)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 508
+   },
+   {
+    "id": "doc-509",
+    "question": "Currently committed part of a page",
+    "reference": "",
+    "split": "calibration",
+    "unit": 509
+   },
+   {
+    "id": "doc-515",
+    "question": "are all blocks in a page freed?\nnote: needs up-to-date used count, (as the `xthread_free` list may not be empty). see `_mi_page_collect_free`.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 515
+   },
+   {
+    "id": "doc-516",
+    "question": "are there immediately available blocks, i.e. blocks available on the free list.",
+    "reference": "",
+    "split": "test",
+    "unit": 516
+   },
+   {
+    "id": "doc-517",
+    "question": "is the page not yet used up to its reserved space?",
+    "reference": "",
+    "split": "test",
+    "unit": 517
+   },
+   {
+    "id": "doc-519",
+    "question": "is more than 7/8th of a page in use?",
+    "reference": "",
+    "split": "test",
+    "unit": 519
+   },
+   {
+    "id": "doc-520",
+    "question": "is more than (n-1)/n'th of a page in use?",
+    "reference": "",
+    "split": "test",
+    "unit": 520
+   },
+   {
+    "id": "doc-525",
+    "question": "Thread id of thread that owns this page (with flags in the bottom 2 bits)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 525
+   },
+   {
+    "id": "doc-526",
+    "question": "Plain thread id of the thread that owns this page",
+    "reference": "",
+    "split": "calibration",
+    "unit": 526
+   },
+   {
+    "id": "doc-554",
+    "question": "get ownership; returns true if the page was not owned before.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 554
+   },
+   {
+    "id": "doc-575",
+    "question": "Blocks needed for a given byte size",
+    "reference": "",
+    "split": "heldout",
+    "unit": 575
+   },
+   {
+    "id": "doc-576",
+    "question": "Byte size of a number of blocks",
+    "reference": "",
+    "split": "test",
+    "unit": 576
+   },
+   {
+    "id": "doc-595",
+    "question": "Zero a block: blocks are always aligned with a positive bsize in machine-word bytes.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 595
+   },
+   {
+    "id": "doc-632",
+    "question": "Check if a thread is initialized (without using a thread-local if using fixed slots)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 632
+   },
+   {
+    "id": "doc-633",
+    "question": "Get (and possible create) the theap belonging to a heap\nWe cache the last accessed theap in `_mi_theap_cached` for better performance.",
+    "reference": "",
+    "split": "test",
+    "unit": 633
+   },
+   {
+    "id": "doc-635",
+    "question": "Get the theap belonging to a heap without creating it if it is not yet initialized.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 635
+   },
+   {
+    "id": "doc-636",
+    "question": "Find the associated theap or NULL if it does not exist (during shutdown)\nShould be fast as it is called in `free.c:mi_free_try_collect`.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 636
+   },
+   {
+    "id": "doc-720",
+    "question": "Fallback aligned allocation that over-allocates -- split out for better codegen",
+    "reference": "",
+    "split": "heldout",
+    "unit": 720
+   },
+   {
+    "id": "doc-721",
+    "question": "Generic primitive aligned allocation -- split out for better codegen",
+    "reference": "",
+    "split": "heldout",
+    "unit": 721
+   },
+   {
+    "id": "doc-808",
+    "question": "On all other systems forward allocation primitives to our API",
+    "reference": "",
+    "split": "calibration",
+    "unit": 808
+   },
+   {
+    "id": "doc-863",
+    "question": "defined here instead alloc-posix so we can alias it",
+    "reference": "",
+    "split": "calibration",
+    "unit": 863
+   },
+   {
+    "id": "doc-869",
+    "question": "No forwarding here due to aliasing/name mangling issues",
+    "reference": "",
+    "split": "test",
+    "unit": 869
+   },
+   {
+    "id": "doc-874",
+    "question": "no forwarding here due to aliasing/name mangling issues",
+    "reference": "",
+    "split": "calibration",
+    "unit": 874
+   },
+   {
+    "id": "doc-879",
+    "question": "some systems define reallocarr so mark it as a weak symbol (#751)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 879
+   },
+   {
+    "id": "doc-880",
+    "question": "forward __libc interface (see PR #667)",
+    "reference": "",
+    "split": "heldout",
+    "unit": 880
+   },
+   {
+    "id": "doc-885",
+    "question": "forward __libc interface (needed for glibc-based and musl-based Linux distributions)",
+    "reference": "",
+    "split": "test",
+    "unit": 885
+   },
+   {
+    "id": "doc-913",
+    "question": "Fast allocation in a page: just pop from the free list.\nFall back to generic allocation only if the list is empty.\nNote: even though there is a lot of checks etc in the source,\nin release mode the (inlined) routine is about 7 to 10 instructions with a single test.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 913
+   },
+   {
+    "id": "doc-914",
+    "question": "extra entries for improved efficiency in `alloc-aligned.c` (and in `page.c:mi_malloc_generic`.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 914
+   },
+   {
+    "id": "doc-915",
+    "question": "Internal small size allocation; assumes the `theap` is non-NULL.\nThis looks up the page directly from a the direct page entries in the theap.\nThe size can be in words (as a wsize); we assume this will be inlined for best code for `mi_wmalloc_small` and similar functions.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 915
+   },
+   {
+    "id": "doc-916",
+    "question": "Internal generic allocation.\nGoes to `page.c:_mi_malloc_generic` which handles large and aligned allocations.\nEvery small allocation eventually goes through this generic allocation path if it cannot be satisfied from the small page cache.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 916
+   },
+   {
+    "id": "doc-918",
+    "question": "internal small allocation where the theap can be NULL on some platforms (Windows and macOS)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 918
+   },
+   {
+    "id": "doc-919",
+    "question": "Allocate a small block from a theap; these routines assume a non-NULL theap.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 919
+   },
+   {
+    "id": "doc-923",
+    "question": "Regular small allocation functions that use the default theap.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 923
+   },
+   {
+    "id": "doc-960",
+    "question": "Expand (or shrink) in place (or fail)",
+    "reference": "",
+    "split": "heldout",
+    "unit": 960
+   },
+   {
+    "id": "doc-963",
+    "question": "for theap_realloc/rezalloc we allow theap==NULL to reduce variants",
+    "reference": "",
+    "split": "calibration",
+    "unit": 963
+   },
+   {
+    "id": "doc-969",
+    "question": "Reallocate but free `p` on errors",
+    "reference": "",
+    "split": "heldout",
+    "unit": 969
+   },
+   {
+    "id": "doc-975",
+    "question": "Reallocate but free `p` on errors",
+    "reference": "",
+    "split": "heldout",
+    "unit": 975
+   },
+   {
+    "id": "doc-997",
+    "question": "note: on windows we could dynamically link to `?get_new_handler@std@@YAP6AXXZXZ`.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 997
+   },
+   {
+    "id": "doc-1028",
+    "question": "slices reserved for page meta info at the start of aligned chunks",
+    "reference": "",
+    "split": "test",
+    "unit": 1028
+   },
+   {
+    "id": "doc-1029",
+    "question": "fixed limit for the maximum object size in an arena",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1029
+   },
+   {
+    "id": "doc-1030",
+    "question": "Maximum object size allowed to be allocated in an arena",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1030
+   },
+   {
+    "id": "doc-1034",
+    "question": "Start of the arena memory area",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1034
+   },
+   {
+    "id": "doc-1039",
+    "question": "get the arena and slice span",
+    "reference": "",
+    "split": "test",
+    "unit": 1039
+   },
+   {
+    "id": "doc-1044",
+    "question": "try to reserve a fresh arena space",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1044
+   },
+   {
+    "id": "doc-1047",
+    "question": "determine the start of search; important to keep heaps and threads\ninto their own memory regions to reduce contention.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1047
+   },
+   {
+    "id": "doc-1054",
+    "question": "Allocate slices from the arena's -- potentially allocating a fresh arena",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1054
+   },
+   {
+    "id": "doc-1055",
+    "question": "Allocate from the OS (if allowed)",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1055
+   },
+   {
+    "id": "doc-1059",
+    "question": "release ownership of a page. This may free the page if all blocks were concurrently\nfreed in the meantime. Returns true if the page was freed.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1059
+   },
+   {
+    "id": "doc-1072",
+    "question": "Allocate a page containing one block (very large, or with large alignment)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1072
+   },
+   {
+    "id": "doc-1078",
+    "question": "this is called from `free.c:mi_free_try_collect_mt` only.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1078
+   },
+   {
+    "id": "doc-1079",
+    "question": "called from `mi_free` if trying to unabandon an abandoned page",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1079
+   },
+   {
+    "id": "doc-1082",
+    "question": "Purge the arenas; if `force_purge` is true, amenable parts are purged even if not yet expired",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1082
+   },
+   {
+    "id": "doc-1083",
+    "question": "Is a pointer contained in the given arena area?",
+    "reference": "",
+    "split": "test",
+    "unit": 1083
+   },
+   {
+    "id": "doc-1084",
+    "question": "Is a pointer inside any of our arenas?",
+    "reference": "",
+    "split": "test",
+    "unit": 1084
+   },
+   {
+    "id": "doc-1086",
+    "question": "Is a pointer contained in the given arena area?",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1086
+   },
+   {
+    "id": "doc-1088",
+    "question": "destroy owned arenas; this is unsafe and should only be done using `mi_option_destroy_on_exit`\nfor dynamic libraries that are unloaded and need to release all their allocated memory.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1088
+   },
+   {
+    "id": "doc-1089",
+    "question": "destroy owned arenas; this is unsafe and should only be done using `mi_option_destroy_on_exit`\nfor dynamic libraries that are unloaded and need to release all their allocated memory.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1089
+   },
+   {
+    "id": "doc-1102",
+    "question": "Reserve a range of regular OS memory",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1102
+   },
+   {
+    "id": "doc-1103",
+    "question": "Reserve a range of regular OS memory",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1103
+   },
+   {
+    "id": "doc-1104",
+    "question": "Manage a range of regular OS memory",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1104
+   },
+   {
+    "id": "doc-1105",
+    "question": "Reserve a range of regular OS memory",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1105
+   },
+   {
+    "id": "doc-1107",
+    "question": "Return idx of the slice past the last used slice",
+    "reference": "",
+    "split": "test",
+    "unit": 1107
+   },
+   {
+    "id": "doc-1118",
+    "question": "Reserve a huge page arena.\n\nreserve at a specific numa node",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1118
+   },
+   {
+    "id": "doc-1120",
+    "question": "reserve huge pages evenly among the given number of numa nodes (or use the available ones as detected)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1120
+   },
+   {
+    "id": "doc-1124",
+    "question": "reset or decommit in an arena and update the commit bitmap\nassumes we own the area (i.e. slices_free is claimed by us)\nreturns if the memory is no longer committed (versus reset which keeps the commit)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1124
+   },
+   {
+    "id": "doc-1125",
+    "question": "Schedule a purge. This is usually delayed to avoid repeated decommit/commit calls.\nNote: assumes we (still) own the area as we may purge immediately",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1125
+   },
+   {
+    "id": "doc-1129",
+    "question": "returns\n-1 = nothing was purged\n0  = nothing was purged yet because have not yet reached the expire time\n1  = some pages in the arena were purged",
+    "reference": "",
+    "split": "test",
+    "unit": 1129
+   },
+   {
+    "id": "doc-1150",
+    "question": "find the least significant bit that is set (i.e. count trailing zero's)\nreturn false if `x==0` (with `*idx` undefined) and true otherwise,\nwith the `idx` is set to the bit index (`0 <= *idx < MI_BFIELD_BITS`).",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1150
+   },
+   {
+    "id": "doc-1151",
+    "question": "find the most significant bit that is set.\nreturn false if `x==0` (with `*idx` undefined) and true otherwise,\nwith the `idx` is set to the bit index (`0 <= *idx < MI_BFIELD_BITS`).",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1151
+   },
+   {
+    "id": "doc-1152",
+    "question": "find each set bit in a bit field `x` and clear it, until it becomes zero.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1152
+   },
+   {
+    "id": "doc-1156",
+    "question": "mask of `bit_count` bits set shifted to the left by `shiftl`",
+    "reference": "",
+    "split": "test",
+    "unit": 1156
+   },
+   {
+    "id": "doc-1158",
+    "question": "Set a bit atomically. Returns `true` if the bit transitioned from 0 to 1",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1158
+   },
+   {
+    "id": "doc-1159",
+    "question": "Clear a bit atomically. Returns `true` if the bit transitioned from 1 to 0.\n`all_clear` is set if the new bfield is zero.",
+    "reference": "",
+    "split": "test",
+    "unit": 1159
+   },
+   {
+    "id": "doc-1160",
+    "question": "Clear a bit but only when/once it is set. This is used by concurrent free's while\nthe page is abandoned and mapped. This can incur a busy wait :-( but it should\nbe quite rare (and is accounted for in the stats)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1160
+   },
+   {
+    "id": "doc-1161",
+    "question": "Set a mask set of bits atomically, and return true of the mask bits transitioned from all 0's to 1's.\n`already_set` contains the count of bits that were already set (used when committing ranges to account\nstatistics correctly).",
+    "reference": "",
+    "split": "test",
+    "unit": 1161
+   },
+   {
+    "id": "doc-1162",
+    "question": "Clear a mask set of bits atomically, and return true of the mask bits transitioned from all 1's to 0's\n`all_clear` is set to `true` if the new bfield became zero.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1162
+   },
+   {
+    "id": "doc-1165",
+    "question": "Tries to clear a mask atomically, and returns true if the mask bits atomically transitioned from mask to 0\nand false otherwise (leaving the bit field as is). Returns the acquired value back in `expect` (regardless of success).\n`all_clear` is set to `true` if the new bfield became zero.\n`did_temp_clear_bits` is set to `true` some bits were temporarily cleared.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1165
+   },
+   {
+    "id": "doc-1166",
+    "question": "Tries to clear a bit atomically. For performance, it assumes there is a good chance of success.\nReturns `true` if the bit transitioned from 1 to 0\nand `false` otherwise (leaving the bfield `b` as-is).\n`all_clear` is set to true if the new bfield became zero (and false otherwise)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1166
+   },
+   {
+    "id": "doc-1167",
+    "question": "Tries to clear a byte atomically. For performance, it assumes there is a good chance of success.\nReturns true if the byte atomically transitioned from 0xFF to 0\n`all_clear` is set to true if the new bfield became zero (and false otherwise)",
+    "reference": "",
+    "split": "test",
+    "unit": 1167
+   },
+   {
+    "id": "doc-1168",
+    "question": "Try to clear a mask of bits atomically. For performance, it assumes these is a good chance of success.\nReturns true all bits transitioned from all 1's to 0's.\nand false otherwise leaving the bit field as-is. `all_clear` is set to true if the new bfield became zero.",
+    "reference": "",
+    "split": "test",
+    "unit": 1168
+   },
+   {
+    "id": "doc-1169",
+    "question": "Try to clear a full field of bits atomically, and return true all bits transitioned from all 1's to 0's.\nand false otherwise leaving the bit field as-is.\n`all_clear` is set to true if the new bfield became zero (which is always the case if successful).",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1169
+   },
+   {
+    "id": "doc-1171",
+    "question": "Check if a bit is set",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1171
+   },
+   {
+    "id": "doc-1172",
+    "question": "Check if a bit is clear",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1172
+   },
+   {
+    "id": "doc-1173",
+    "question": "Check if a bit is xset",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1173
+   },
+   {
+    "id": "doc-1174",
+    "question": "Check if all bits corresponding to a mask are set.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1174
+   },
+   {
+    "id": "doc-1175",
+    "question": "Check if all bits corresponding to a mask are clear.",
+    "reference": "",
+    "split": "test",
+    "unit": 1175
+   },
+   {
+    "id": "doc-1176",
+    "question": "Check if all bits corresponding to a mask are set/cleared.",
+    "reference": "",
+    "split": "test",
+    "unit": 1176
+   },
+   {
+    "id": "doc-1180",
+    "question": "Set `0 < n <= MI_BFIELD_BITS`, and return true of the mask bits transitioned from all 0's to 1's.\n`already_set` contains the count of bits that were already set (used when committing ranges to account\nstatistics correctly).\nCan cross over two bfields.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1180
+   },
+   {
+    "id": "doc-1181",
+    "question": "Set a sequence of `n` bits within a chunk.\nReturns true if all bits transitioned from 0 to 1 (or 1 to 0).",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1181
+   },
+   {
+    "id": "doc-1186",
+    "question": "Check if a sequence of `n` bits within a chunk are all set/cleared.\nThis can cross bfield's",
+    "reference": "",
+    "split": "test",
+    "unit": 1186
+   },
+   {
+    "id": "doc-1187",
+    "question": "Count set bits a sequence of `n` bits.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1187
+   },
+   {
+    "id": "doc-1189",
+    "question": "Check if a sequence of `n` bits within a chunk are all set/cleared.\nThis can cross bfield's",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1189
+   },
+   {
+    "id": "doc-1190",
+    "question": "Check if a sequence of `n` bits within a chunk are all set/cleared.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1190
+   },
+   {
+    "id": "doc-1192",
+    "question": "Clear `0 < n <= MI_BITFIELD_BITS`. Can cross over a bfield boundary.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1192
+   },
+   {
+    "id": "doc-1194",
+    "question": "Try to atomically clear a sequence of `n` bits within a chunk.\nReturns true if all bits transitioned from 1 to 0,\nand false otherwise leaving all bit fields as is.\nNote: this is the complex one as we need to unwind partial atomic operations if we fail halfway..\n`maybe_all_clear` is set to `true` if all the bfields involved become zero.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1194
+   },
+   {
+    "id": "doc-1202",
+    "question": "Find least 1-bit in a chunk and try to clear it atomically\nset `*pidx` to the bit index (0 <= *pidx < MI_BCHUNK_BITS) on success.\nThis is used to find free slices and abandoned pages and should be efficient.\ntodo: try neon version",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1202
+   },
+   {
+    "id": "doc-1205",
+    "question": "find least aligned byte in a chunk with all bits set, and try unset it atomically\nset `*pidx` to its bit index (0 <= *pidx < MI_BCHUNK_BITS) on success.\nUsed to find medium size pages in the free blocks.\ntodo: try neon version",
+    "reference": "",
+    "split": "test",
+    "unit": 1205
+   },
+   {
+    "id": "doc-1207",
+    "question": "find a sequence of `n` bits in a chunk with `0 < n <= MI_BFIELD_BITS` with all bits set,\nand try to clear them atomically.\nset `*pidx` to its bit index (0 <= *pidx <= MI_BCHUNK_BITS - n) on success.\nwill cross bfield boundaries.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1207
+   },
+   {
+    "id": "doc-1208",
+    "question": "find a sequence of `n` bits in a chunk with `n <= MI_BCHUNK_BITS` with all bits set,\nand try to clear them atomically.\nset `*pidx` to its bit index (0 <= *pidx <= MI_BCHUNK_BITS - n) on success.\nThis can cross bfield boundaries.",
+    "reference": "",
+    "split": "test",
+    "unit": 1208
+   },
+   {
+    "id": "doc-1212",
+    "question": "are all bits in a bitmap chunk clear?",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1212
+   },
+   {
+    "id": "doc-1213",
+    "question": "are all bits in a bitmap chunk set?",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1213
+   },
+   {
+    "id": "doc-1222",
+    "question": "initialize a bitmap to all unset; avoid a mem_zero if `already_zero` is true\nreturns the size of the bitmap",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1222
+   },
+   {
+    "id": "doc-1223",
+    "question": "Set a sequence of `n` bits in the bitmap (and can cross chunks). Not atomic so only use if local to a thread.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1223
+   },
+   {
+    "id": "doc-1224",
+    "question": "Set a sequence of `n` bits in the bitmap (and can cross chunks). Not atomic so only use if local to a thread.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1224
+   },
+   {
+    "id": "doc-1226",
+    "question": "Set a sequence of `n` bits in the bitmap; returns `true` if atomically transitioned from 0's to 1's (or 1's to 0's).",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1226
+   },
+   {
+    "id": "doc-1227",
+    "question": "Clear a sequence of `n` bits in the bitmap; returns `true` if atomically transitioned from 1's to 0's.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1227
+   },
+   {
+    "id": "doc-1228",
+    "question": "Count bits set in a range of `n` bits.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1228
+   },
+   {
+    "id": "doc-1229",
+    "question": "Set/clear a bit in the bitmap; returns `true` if atomically transitioned from 0 to 1 (or 1 to 0)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1229
+   },
+   {
+    "id": "doc-1232",
+    "question": "Is a sequence of n bits already all set/cleared?",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1232
+   },
+   {
+    "id": "doc-1240",
+    "question": "Go through the bitmap and for every sequence of `n` set bits, call the visitor function.\nIf it returns `true` stop the search.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1240
+   },
+   {
+    "id": "doc-1244",
+    "question": "Find a set bit in the bitmap and try to atomically clear it and claim it.\n(Used to find pages in the pages_abandoned bitmaps.)",
+    "reference": "",
+    "split": "test",
+    "unit": 1244
+   },
+   {
+    "id": "doc-1246",
+    "question": "Return count of all set bits in a bitmap.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1246
+   },
+   {
+    "id": "doc-1247",
+    "question": "Clear a bit once it is set.",
+    "reference": "",
+    "split": "test",
+    "unit": 1247
+   },
+   {
+    "id": "doc-1248",
+    "question": "Visit all set bits in a bitmap.\ntodo: optimize further? maybe use avx512 to directly get all indices using a mask_compressstore?",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1248
+   },
+   {
+    "id": "doc-1249",
+    "question": "Visit all set bits in a bitmap but try to return ranges (within bfields) if possible.\nAlso clear those ranges atomically.\nUsed by purging to purge larger ranges when possible\ntodo: optimize further? maybe use avx512 to directly get all indices using a mask_compressstore?",
+    "reference": "",
+    "split": "test",
+    "unit": 1249
+   },
+   {
+    "id": "doc-1250",
+    "question": "Visit all set bits in a bitmap but try to return ranges (within bfields) if possible,\nbut only in chunks of at least `rngslices` slices (that are also aligned at `rngslices`)\nand clear those ranges atomically.\nHowever, the `rngslices` are capped at `MI_BFIELD_BITS` at most.\nUsed by purging to purge larger ranges when possible. With transparent huge pages we only\nwant to purge whole huge pages (2 MiB) at a time which is what the `rngslices` parameter achieves.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1250
+   },
+   {
+    "id": "doc-1253",
+    "question": "initialize a bitmap to all unset; avoid a mem_zero if `already_zero` is true\nreturns the size of the bitmap",
+    "reference": "",
+    "split": "test",
+    "unit": 1253
+   },
+   {
+    "id": "doc-1257",
+    "question": "Assign a specific size bin to a chunk",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1257
+   },
+   {
+    "id": "doc-1259",
+    "question": "Track the index of the highest chunk that is accessed.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1259
+   },
+   {
+    "id": "doc-1260",
+    "question": "Set a bit in the chunkmap",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1260
+   },
+   {
+    "id": "doc-1263",
+    "question": "Set a sequence of `n` bits in the bitmap; returns `true` if atomically transitioned from 0's to 1's (or 1's to 0's).",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1263
+   },
+   {
+    "id": "doc-1265",
+    "question": "Try to clear `n` bits at `idx` where `n <= MI_BCHUNK_BITS`.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1265
+   },
+   {
+    "id": "doc-1267",
+    "question": "Is a sequence of n bits already all set/cleared?",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1267
+   },
+   {
+    "id": "doc-1269",
+    "question": "Go through the bbitmap and for every sequence of `n` set bits, call the visitor function.\nIf it returns `true` stop the search.\n\nThis is used for finding free blocks and it is important to be efficient (with 2-level bitscan)\nbut also reduce fragmentation (through size bins).",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1269
+   },
+   {
+    "id": "doc-1277",
+    "question": "Try to atomically clear `n` bits starting at `chunk_idx` where `n` can span over multiple chunks",
+    "reference": "",
+    "split": "test",
+    "unit": 1277
+   },
+   {
+    "id": "doc-1278",
+    "question": "Go through the bbitmap to find a sequence of `n` bits and clear them atomically where `n > MI_ARENA_MAX_CHUNK_OBJ_SIZE`\nSince these are very large object allocations we always search from the start and only consider starting at the start\nof a chunk (for fragmentation and efficiency).\nTodo: for now we try to find full empty chunks to cover `n` but we can allow a partial chunk at the end\nTodo: This scans directly through the chunks -- we might want to consult the cmap as well?",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1278
+   },
+   {
+    "id": "doc-1287",
+    "question": "Is a sequence of n bits already set?\n(Used to check if a memory range is already committed)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1287
+   },
+   {
+    "id": "doc-1288",
+    "question": "Is a sequence of n bits already clear?",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1288
+   },
+   {
+    "id": "doc-1299",
+    "question": "Is a sequence of n bits already set?\n(Used to check if a memory range is already committed)",
+    "reference": "",
+    "split": "test",
+    "unit": 1299
+   },
+   {
+    "id": "doc-1300",
+    "question": "Is a sequence of n bits already clear?",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1300
+   },
+   {
+    "id": "doc-1302",
+    "question": "Find a sequence of `n` bits in the bbitmap with all bits set, and try to atomically clear all.\nReturns true on success, and in that case sets the index: `0 <= *pidx <= MI_BITMAP_MAX_BITS-n`.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1302
+   },
+   {
+    "id": "doc-1304",
+    "question": "regular free of a (thread local) block pointer\nfast path written carefully to prevent spilling on the stack",
+    "reference": "",
+    "split": "test",
+    "unit": 1304
+   },
+   {
+    "id": "doc-1307",
+    "question": "Adjust a block that was allocated aligned, to the actual start of the block in the page.\nnote: this can be called from `mi_free_generic_mt` where a non-owning thread accesses the\n`page_woffset` and `block_size` fields; however these are constant and the page won't be\ndeallocated (as the block we are freeing keeps it alive) and thus safe to read concurrently.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1307
+   },
+   {
+    "id": "doc-1311",
+    "question": "free a local pointer  (page parameter comes first for better codegen)",
+    "reference": "",
+    "split": "test",
+    "unit": 1311
+   },
+   {
+    "id": "doc-1312",
+    "question": "free a pointer owned by another thread (page parameter comes first for better codegen)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1312
+   },
+   {
+    "id": "doc-1314",
+    "question": "Get the page belonging to a pointer\nDoes further checks in debug mode to see if this was a valid pointer.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1314
+   },
+   {
+    "id": "doc-1317",
+    "question": "Free a block\nFast path written carefully to prevent register spilling on the stack",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1317
+   },
+   {
+    "id": "doc-1322",
+    "question": "Free a pointer that is potentially allocated in a different sub-process",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1322
+   },
+   {
+    "id": "doc-1329",
+    "question": "Helper for mi_free_try_collect_mt: free if the page has no more used blocks (this is updated by `_mi_page_free_collect(_partly)`)",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1329
+   },
+   {
+    "id": "doc-1330",
+    "question": "Helper for mi_free_try_collect_mt: try if we can reabandon a previously abandoned mostly full page to be mapped",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1330
+   },
+   {
+    "id": "doc-1331",
+    "question": "Release ownership of a page. This may free or reabandoned the page if other blocks are concurrently\nfreed in the meantime. Returns `true` if the page was freed.\nBy passing the captured `expected_thread_free`, we can often avoid calling `mi_page_free_collect`.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1331
+   },
+   {
+    "id": "doc-1333",
+    "question": "Helper for mi_free_try_collect_mt:  try to reclaim the page for ourselves",
+    "reference": "",
+    "split": "test",
+    "unit": 1333
+   },
+   {
+    "id": "doc-1334",
+    "question": "We freed a block in an abandoned page (that was not owned). Try to collect",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1334
+   },
+   {
+    "id": "doc-1340",
+    "question": "linear check if the free list contains a specific element",
+    "reference": "",
+    "split": "test",
+    "unit": 1340
+   },
+   {
+    "id": "doc-1342",
+    "question": "Used for double free checking to avoid checking free lists too frequently",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1342
+   },
+   {
+    "id": "doc-1343",
+    "question": "check if `block` was free'd before",
+    "reference": "",
+    "split": "test",
+    "unit": 1343
+   },
+   {
+    "id": "doc-1347",
+    "question": "Return the exact usable size of a block.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1347
+   },
+   {
+    "id": "doc-1348",
+    "question": "When a non-thread-local block is freed, it becomes part of the thread delayed free\nlist that is freed later by the owning theap. If the exact usable size is too small to\ncontain the pointer for the delayed list, then shrink the padding (by decreasing delta)\nso it will later not trigger an overflow error in `mi_free_block`.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1348
+   },
+   {
+    "id": "doc-1364",
+    "question": "get (and possibly create) the theap belonging to a heap",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1364
+   },
+   {
+    "id": "doc-1369",
+    "question": "free all theaps belonging to this heap (without deleting their pages as we do this arena wise for efficiency)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1369
+   },
+   {
+    "id": "doc-1370",
+    "question": "free the heap resources (assuming the pages are already moved/destroyed, and all theaps have been freed)",
+    "reference": "",
+    "split": "test",
+    "unit": 1370
+   },
+   {
+    "id": "doc-1378",
+    "question": "unsafe heap utilization function for DragonFly (see issue #1258)\nIf the page of pointer `p` belongs to `heap` (or `heap==NULL`) and has less than `perc_threshold` used blocks in its used area return `true`.\nThis function is unsafe in general as it assumes we are the only thread accessing the page of `p`.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1378
+   },
+   {
+    "id": "doc-1411",
+    "question": "Set up hooks so `mi_thread_done` is called automatically",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1411
+   },
+   {
+    "id": "doc-1416",
+    "question": "Returns true if this module has not been initialized; Don't use C runtime routines until it returns false.",
+    "reference": "",
+    "split": "test",
+    "unit": 1416
+   },
+   {
+    "id": "doc-1417",
+    "question": "Returns true if mimalloc was redirected",
+    "reference": "",
+    "split": "test",
+    "unit": 1417
+   },
+   {
+    "id": "doc-1418",
+    "question": "Called once by the process loader from `src/prim/prim.c` before `main` is called.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1418
+   },
+   {
+    "id": "doc-1419",
+    "question": "Initialize the process; called by thread_init, the process loader, or an initial allocation (perhaps by the loader or a system library)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1419
+   },
+   {
+    "id": "doc-1420",
+    "question": "Initialize the process; called by thread_init or the process loader",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1420
+   },
+   {
+    "id": "doc-1421",
+    "question": "Called when the process is done",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1421
+   },
+   {
+    "id": "doc-1422",
+    "question": "Call when the process is done (cdecl as it is used with `at_exit` on some platforms)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1422
+   },
+   {
+    "id": "doc-1423",
+    "question": "Called automatically when the process is done (cdecl as it is used with `at_exit` on some platforms)",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1423
+   },
+   {
+    "id": "doc-1436",
+    "question": "Returns `true` only on the first invocation, signifying we can execute an action once.\nIf it returns `true`, the caller should call `_mi_atomic_once_release` after performing the action.\nOther threads (than the initial thread that entered) will block until `_mi_atomic_once_release` has been called.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1436
+   },
+   {
+    "id": "doc-1460",
+    "question": "sum of all the bytes in `x` if it is guaranteed that the sum < 256!",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1460
+   },
+   {
+    "id": "doc-1464",
+    "question": "sum of all the bytes in `x` if it is guaranteed that the sum < 256!",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1464
+   },
+   {
+    "id": "doc-1478",
+    "question": "called at actual process load, it should be safe to print now",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1478
+   },
+   {
+    "id": "doc-1498",
+    "question": "Once this module is loaded, switch to this routine\nwhich outputs to stderr and the delayed output buffer.",
+    "reference": "",
+    "split": "test",
+    "unit": 1498
+   },
+   {
+    "id": "doc-1502",
+    "question": "add stderr to the delayed output after the module is loaded",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1502
+   },
+   {
+    "id": "doc-1509",
+    "question": "Define our own limited `fprintf` that avoids memory allocation.\nWe do this using `_mi_vsnprintf` with a limited buffer.",
+    "reference": "",
+    "split": "test",
+    "unit": 1509
+   },
+   {
+    "id": "doc-1530",
+    "question": "if large OS pages are supported (2 or 4MiB), then return the size, otherwise return the small page size (4KiB)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1530
+   },
+   {
+    "id": "doc-1531",
+    "question": "minimal purge size. Can be larger than the page size if transparent huge pages are enabled.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1531
+   },
+   {
+    "id": "doc-1535",
+    "question": "round to a good OS allocation size (bounded by max 12.5% waste)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1535
+   },
+   {
+    "id": "doc-1541",
+    "question": "In secure mode, return the size of a guard page, otherwise 0",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1541
+   },
+   {
+    "id": "doc-1542",
+    "question": "In secure mode, try to decommit an area and output a warning if this fails.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1542
+   },
+   {
+    "id": "doc-1543",
+    "question": "In secure mode, try to decommit an area and output a warning if this fails.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1543
+   },
+   {
+    "id": "doc-1544",
+    "question": "In secure mode, try to recommit an area",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1544
+   },
+   {
+    "id": "doc-1545",
+    "question": "In secure mode, try to recommit an area",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1545
+   },
+   {
+    "id": "doc-1551",
+    "question": "Note: the `try_alignment` is just a hint and the returned pointer is not guaranteed to be aligned.\nAlso `hint_addr` is a hint and may be ignored.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1551
+   },
+   {
+    "id": "doc-1553",
+    "question": "Primitive aligned allocation from the OS.\nThis function guarantees the allocated memory is aligned.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1553
+   },
+   {
+    "id": "doc-1562",
+    "question": "OS page align within a given area, either conservative (pages inside the area only),\nor not (straddling pages outside the area is possible)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1562
+   },
+   {
+    "id": "doc-1568",
+    "question": "Signal to the OS that the address range is no longer in use\nbut may be used later again. This will release physical memory\npages and reduce swapping while keeping the memory committed.\nWe page align to a conservative area inside the range to reset.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1568
+   },
+   {
+    "id": "doc-1570",
+    "question": "either resets or decommits memory, returns true if the memory needs\nto be recommitted if it is to be re-used later on.",
+    "reference": "",
+    "split": "test",
+    "unit": 1570
+   },
+   {
+    "id": "doc-1571",
+    "question": "either resets or decommits memory, returns true if the memory needs\nto be recommitted if it is to be re-used later on.",
+    "reference": "",
+    "split": "test",
+    "unit": 1571
+   },
+   {
+    "id": "doc-1572",
+    "question": "Protect a region in memory to be not accessible.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1572
+   },
+   {
+    "id": "doc-1576",
+    "question": "Claim an aligned address range for huge pages",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1576
+   },
+   {
+    "id": "doc-1579",
+    "question": "free every huge page in a range individually (as we allocated per page)\nnote: needed with VirtualAlloc but could potentially be done in one go on mmap'd systems.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1579
+   },
+   {
+    "id": "doc-1627",
+    "question": "Return the bin for a given field size.\nReturns MI_BIN_HUGE if the size is too large.\nWe use `wsize` for the size in \"machine word sizes\",\ni.e. byte size == `wsize*sizeof(void*)`.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1627
+   },
+   {
+    "id": "doc-1636",
+    "question": "returns the page bin without using MI_BIN_FULL for statistics",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1636
+   },
+   {
+    "id": "doc-1639",
+    "question": "The current small page array is for efficiency and for each\nsmall size (up to 256) it points directly to the page for that\nsize without having to compute the bin. This means when the\ncurrent free page queue is updated for a small bin, we need to update a\nrange of entries in `_mi_page_small_free`.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1639
+   },
+   {
+    "id": "doc-1650",
+    "question": "Index a block in a page",
+    "reference": "",
+    "split": "test",
+    "unit": 1650
+   },
+   {
+    "id": "doc-1658",
+    "question": "Gets the theap belonging to a page.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1658
+   },
+   {
+    "id": "doc-1660",
+    "question": "Merge stats from the page into the corresponding theap or heap.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1660
+   },
+   {
+    "id": "doc-1667",
+    "question": "Collect the local `thread_free` list using an atomic exchange.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1667
+   },
+   {
+    "id": "doc-1668",
+    "question": "returns `true` if after collection `mi_page_immediate_available` is true.",
+    "reference": "",
+    "split": "test",
+    "unit": 1668
+   },
+   {
+    "id": "doc-1670",
+    "question": "Collect elements in the thread-free list starting at `head`. This is an optimized\nversion of `_mi_page_free_collect` to be used from `free.c:_mi_free_collect_mt` that avoids atomic access to `xthread_free`.\nreturns a possibly updated expected value for the thread_free pointer.\n\n`head` must be in the `xthread_free` list. It will not collect `head` itself\nso the `used` count is not fully updated in general. However, if the `head` is\nthe last remaining element, it will be collected and the used count will become `0` (so `mi_page_all_free` becomes true).",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1670
+   },
+   {
+    "id": "doc-1672",
+    "question": "called from `mi_free` on a reclaim, and fresh_alloc if we get an abandoned page",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1672
+   },
+   {
+    "id": "doc-1674",
+    "question": "allocate a fresh page from an arena",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1674
+   },
+   {
+    "id": "doc-1675",
+    "question": "Get a fresh page to use",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1675
+   },
+   {
+    "id": "doc-1677",
+    "question": "Move a page from the full list back to a regular list (called from thread-local mi_free)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1677
+   },
+   {
+    "id": "doc-1679",
+    "question": "Free a page with no more free blocks",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1679
+   },
+   {
+    "id": "doc-1681",
+    "question": "Retire a page with no more used blocks\nImportant to not retire too quickly though as new\nallocations might coming.\n\nNote: called from `mi_free` and benchmarks often\ntrigger this due to freeing everything and then\nallocating again so careful when changing this.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1681
+   },
+   {
+    "id": "doc-1684",
+    "question": "free retired pages: we don't need to look at the entire queues\nsince we only retire pages that are at the head position in a queue.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1684
+   },
+   {
+    "id": "doc-1689",
+    "question": "Extend the capacity (up to reserved) by initializing a free list\nWe do at most `MI_MAX_EXTEND` to avoid touching too much memory\nNote: we also experimented with \"bump\" allocation on the first\nallocations but this did not speed up any benchmark (due to an\nextra test in malloc? or cache effects?)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1689
+   },
+   {
+    "id": "doc-1690",
+    "question": "Initialize a fresh page (that is already partially initialized)",
+    "reference": "",
+    "split": "test",
+    "unit": 1690
+   },
+   {
+    "id": "doc-1692",
+    "question": "Find a page with free blocks of `page->block_size`.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1692
+   },
+   {
+    "id": "doc-1693",
+    "question": "Look for a page with free blocks of `size` but don't try to search or allocate",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1693
+   },
+   {
+    "id": "doc-1694",
+    "question": "Find a page with free blocks of `size`.",
+    "reference": "",
+    "split": "test",
+    "unit": 1694
+   },
+   {
+    "id": "doc-1695",
+    "question": "Huge pages contain just one block, and the segment contains just that page.\nHuge pages are also use if the requested alignment is very large (> MI_BLOCK_ALIGNMENT_MAX)\nso their size is not always `> MI_LARGE_OBJ_SIZE_MAX`.",
+    "reference": "",
+    "split": "test",
+    "unit": 1695
+   },
+   {
+    "id": "doc-1696",
+    "question": "Allocate a page\nNote: in debug mode the size includes MI_PADDING_SIZE and might have overflowed.",
+    "reference": "",
+    "split": "test",
+    "unit": 1696
+   },
+   {
+    "id": "doc-1704",
+    "question": "Generic allocation routine if the fast path (`alloc.c:mi_page_malloc`) does not succeed.\nNote: in debug mode the size includes MI_PADDING_SIZE and might have overflowed.\nThe `huge_alignment` is normally 0 but is set to a multiple of MI_SLICE_SIZE for\nvery large requested alignments in which case we use a huge singleton page.\nNote: we put `bool zero, size_t huge_alignment` into one parameter (with zero in the low bit)\nto use 4 parameters which compiles better on msvc for the malloc fast path.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1704
+   },
+   {
+    "id": "doc-1711",
+    "question": "Note: the `try_alignment` is just a hint and the returned pointer is not guaranteed to be aligned.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1711
+   },
+   {
+    "id": "doc-1766",
+    "question": "Required whenever the zone advertises version >= 9: macOS calls this from the\natfork_child handler (_malloc_fork_child) without a NULL check. mimalloc keeps\nno zone-level locks that need reinitializing after fork, so a no-op is safe.\nLeaving it NULL makes the forked child jump to address 0 and crash in fork().",
+    "reference": "",
+    "split": "test",
+    "unit": 1766
+   },
+   {
+    "id": "doc-1839",
+    "question": "try to detect the physical memory dynamically (if possible)",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1839
+   },
+   {
+    "id": "doc-1840",
+    "question": "Detect the virtual address bits (currently Linux/RISC-V only)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1840
+   },
+   {
+    "id": "doc-1851",
+    "question": "Note: the `try_alignment` is just a hint and the returned pointer is not guaranteed to be aligned.",
+    "reference": "",
+    "split": "test",
+    "unit": 1851
+   },
+   {
+    "id": "doc-1888",
+    "question": "fallback: use standard C `getenv` but this cannot be used while initializing the C runtime",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1888
+   },
+   {
+    "id": "doc-1914",
+    "question": "Note: the `try_alignment` is just a hint and the returned pointer is not guaranteed to be aligned.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1914
+   },
+   {
+    "id": "doc-1952",
+    "question": "Determines whether an event with a given Level and Keyword would be\nconsidered as enabled based on the state of the specified context.\nNote that you may want to use MCGEN_ENABLE_CHECK instead of calling this\nfunction directly.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1952
+   },
+   {
+    "id": "doc-1954",
+    "question": "Determines whether the specified event would be considered as enabled based\non the state of the specified context. Note that you may want to use\nMCGEN_ENABLE_CHECK instead of calling this function directly.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1954
+   },
+   {
+    "id": "doc-1956",
+    "question": "This function is for use by MC-generated code and should not be used directly.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1956
+   },
+   {
+    "id": "doc-1971",
+    "question": "This function is for use by MC-generated code and should not be used directly.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1971
+   },
+   {
+    "id": "doc-1973",
+    "question": "This function is for use by MC-generated code and should not be used directly.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 1973
+   },
+   {
+    "id": "doc-1975",
+    "question": "This function is for use by MC-generated code and should not be used directly.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1975
+   },
+   {
+    "id": "doc-1988",
+    "question": "This function is for use by MC-generated code and should not be used directly.\nInitialize and register the caller-allocated context.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1988
+   },
+   {
+    "id": "doc-1989",
+    "question": "This function is for use by MC-generated code and should not be used directly.\nTrigger a compile error if called with the wrong parameter type.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 1989
+   },
+   {
+    "id": "doc-2011",
+    "question": "Get a library handle (and possibly load it)",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2011
+   },
+   {
+    "id": "doc-2048",
+    "question": "On Windows use GetEnvironmentVariable instead of getenv to work\nreliably even when this is invoked before the C runtime is initialized.\ni.e. when `_mi_preloading() == true`.\nNote: on windows, environment names are not case sensitive.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2048
+   },
+   {
+    "id": "doc-2059",
+    "question": "nothing to do since `_mi_thread_done` is handled through the DLL_THREAD_DETACH event.",
+    "reference": "",
+    "split": "test",
+    "unit": 2059
+   },
+   {
+    "id": "doc-2064",
+    "question": "Hook into CRT initialization and finalization.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2064
+   },
+   {
+    "id": "doc-2066",
+    "question": "We also hook into the Windows loader TLS initialization and finalization.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2066
+   },
+   {
+    "id": "doc-2069",
+    "question": "nothing to do since `_mi_thread_done` is handled through the DLL_THREAD_DETACH event.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2069
+   },
+   {
+    "id": "doc-2072",
+    "question": "If linked into a DLL module, this raw entry is called before the CRT attach and\nafter the CRT detach through the CRT _pRawDllMain pointer.",
+    "reference": "",
+    "split": "test",
+    "unit": 2072
+   },
+   {
+    "id": "doc-2074",
+    "question": "We also hook into the Windows loader TLS initialization and finalization.\nIf we are linked into an EXE module we rely on these as `mi_dll_main_raw`\nis not called (and otherwise we ignore the TLS callbacks by checking if we are in a DLL).",
+    "reference": "",
+    "split": "test",
+    "unit": 2074
+   },
+   {
+    "id": "doc-2078",
+    "question": "Windows DLL: easy to hook into process_init and thread_done",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2078
+   },
+   {
+    "id": "doc-2079",
+    "question": "nothing to do since `_mi_thread_done` is handled through the DLL_THREAD_DETACH event.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2079
+   },
+   {
+    "id": "doc-2086",
+    "question": "nothing to do since `_mi_thread_done` is handled through the DLL_THREAD_DETACH event.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2086
+   },
+   {
+    "id": "doc-2124",
+    "question": "We always allocate a guarded allocation at an offset (`mi_page_has_interior_pointers` will be true).\nWe then set the first word of the block to `0` for regular offset aligned allocations (in `alloc-aligned.c`)\nand the first word to `~0` for guarded allocations to have a correct `mi_usable_size`",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2124
+   },
+   {
+    "id": "doc-2125",
+    "question": "Allocate a block with a guard page behind it.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2125
+   },
+   {
+    "id": "doc-2127",
+    "question": "unguard a whole page (called from `mi_heap_destroy`)",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2127
+   },
+   {
+    "id": "doc-2132",
+    "question": "Called when the theap sample countdown <= req_size; should call guarded or profiled allocation.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2132
+   },
+   {
+    "id": "doc-2156",
+    "question": "Adjust stats to compensate; for example before committing a range,\nfirst adjust downwards with parts that were already committed so\nwe avoid double counting.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2156
+   },
+   {
+    "id": "doc-2162",
+    "question": "must be thread safe as it is called from stats_merge",
+    "reference": "",
+    "split": "test",
+    "unit": 2162
+   },
+   {
+    "id": "doc-2166",
+    "question": "must be thread safe as it is called from stats_merge",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2166
+   },
+   {
+    "id": "doc-2168",
+    "question": "unit > 0 : size in binary bytes\nunit == 0: count as decimal\nunit < 0 : count in binary",
+    "reference": "",
+    "split": "test",
+    "unit": 2168
+   },
+   {
+    "id": "doc-2196",
+    "question": "show each heap and then the subproc",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2196
+   },
+   {
+    "id": "doc-2197",
+    "question": "aggregate all stats from the heaps and subproc and print those",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2197
+   },
+   {
+    "id": "doc-2253",
+    "question": "destroy all subproc resources including arena's, heap's etc.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2253
+   },
+   {
+    "id": "doc-2262",
+    "question": "Visit all pages in a theap; returns `false` if break was called.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2262
+   },
+   {
+    "id": "doc-2278",
+    "question": "todo: make order of parameters consistent (but would that break compat with CPython?)",
+    "reference": "",
+    "split": "test",
+    "unit": 2278
+   },
+   {
+    "id": "doc-2283",
+    "question": "we need to reference count theaps due to the _mi_theap_cached thread locals",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2283
+   },
+   {
+    "id": "doc-2286",
+    "question": "Remove the theaps in this heap from any thread local tld lists.",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2286
+   },
+   {
+    "id": "doc-2287",
+    "question": "Remove the theaps in this thread from the heaps that own them.",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2287
+   },
+   {
+    "id": "doc-2297",
+    "question": "Visit all theap pages as areas",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2297
+   },
+   {
+    "id": "doc-2300",
+    "question": "Visit all blocks in a theap",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2300
+   },
+   {
+    "id": "doc-2311",
+    "question": "dynamically reallocate the thread local slots when needed",
+    "reference": "",
+    "split": "calibration",
+    "unit": 2311
+   },
+   {
+    "id": "doc-2313",
+    "question": "set a tls slot; returns `true` if successful.\nCan return `false` if we could not reallocate the slots array.",
+    "reference": "",
+    "split": "test",
+    "unit": 2313
+   },
+   {
+    "id": "doc-2321",
+    "question": "strange signature but allows us to reuse the arena code for claiming free pages",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2321
+   },
+   {
+    "id": "doc-2322",
+    "question": "When we claim a free slot, we increase the global version counter\n(so if we reuse a slot it will be returning NULL initially when a thread tries to get it)",
+    "reference": "",
+    "split": "heldout",
+    "unit": 2322
+   }
+  ]
+ },
+ "q_gen": {
+  "by_split": {
+   "calibration": 36,
+   "heldout": 9,
+   "test": 6
+  },
+  "count": 51,
+  "queries": [
+   {
+    "id": "gen-1228",
+    "question": "What is the maximum number of bits in a bitmap?",
+    "reference": "Count bits set in a range of `n` bits.",
+    "split": "calibration",
+    "unit": 1228
+   },
+   {
+    "id": "gen-576",
+    "question": "What is the size of a slice in the memory arena?",
+    "reference": "Byte size of a number of blocks",
+    "split": "test",
+    "unit": 576
+   },
+   {
+    "id": "gen-1544",
+    "question": "What is the purpose of the `mi_os_secure_guard_page_reset_at` function in the context of secure memory management?",
+    "reference": "In secure mode, try to recommit an area",
+    "split": "calibration",
+    "unit": 1544
+   },
+   {
+    "id": "gen-458",
+    "question": "What is the purpose of the `_mi_is_power_of_two` function in the given code?",
+    "reference": "valid alignment values are as posix memalign: <https://en.cppreference.com/c/memory/aligned_alloc#Notes>",
+    "split": "calibration",
+    "unit": 458
+   },
+   {
+    "id": "gen-575",
+    "question": "What is the size of a slice in a memory arena?",
+    "reference": "Blocks needed for a given byte size",
+    "split": "heldout",
+    "unit": 575
+   },
+   {
+    "id": "gen-1636",
+    "question": "What is the size of the bin for a given page?",
+    "reference": "returns the page bin without using MI_BIN_FULL for statistics",
+    "split": "calibration",
+    "unit": 1636
+   },
+   {
+    "id": "gen-1542",
+    "question": "What is the purpose of the `mi_os_secure_guard_page_set_at` function in the context of secure memory management?",
+    "reference": "In secure mode, try to decommit an area and output a warning if this fails.",
+    "split": "calibration",
+    "unit": 1542
+   },
+   {
+    "id": "gen-1690",
+    "question": "What is the purpose of the `mi_page_init` function in the given code?",
+    "reference": "Initialize a fresh page (that is already partially initialized)",
+    "split": "test",
+    "unit": 1690
+   },
+   {
+    "id": "gen-496",
+    "question": "What is the default block size for a mi_page_t object?",
+    "reference": "Get the block size of a page",
+    "split": "calibration",
+    "unit": 496
+   },
+   {
+    "id": "gen-2074",
+    "question": "What is the purpose of the `IMAGE_FILE_DLL` flag in the `IMAGE_NT_HEADERS` structure?",
+    "reference": "We also hook into the Windows loader TLS initialization and finalization.\nIf we are linked into an EXE module we rely on these as `mi_dll_main_raw`\nis not called (and otherwise we ignore the TLS callbacks by checking if we are in a DLL).",
+    "split": "test",
+    "unit": 2074
+   },
+   {
+    "id": "gen-923",
+    "question": "What is the purpose of `mi_theap_xmalloc_small_zero` in the given code?",
+    "reference": "Regular small allocation functions that use the default theap.",
+    "split": "calibration",
+    "unit": 923
+   },
+   {
+    "id": "gen-1107",
+    "question": "What is the size of the first slice in the arena?",
+    "reference": "Return idx of the slice past the last used slice",
+    "split": "test",
+    "unit": 1107
+   },
+   {
+    "id": "gen-879",
+    "question": "What is the purpose of the `mi_decl_weak` keyword in the given code snippet?",
+    "reference": "some systems define reallocarr so mark it as a weak symbol (#751)",
+    "split": "calibration",
+    "unit": 879
+   },
+   {
+    "id": "gen-1333",
+    "question": "What is the maximum number of pages that can be reclaimed from an abandoned page in a multi-threaded scenario?",
+    "reference": "Helper for mi_free_try_collect_mt:  try to reclaim the page for ourselves",
+    "split": "test",
+    "unit": 1333
+   },
+   {
+    "id": "gen-1541",
+    "question": "What is the default page size for secure operations in MIOS?",
+    "reference": "In secure mode, return the size of a guard page, otherwise 0",
+    "split": "heldout",
+    "unit": 1541
+   },
+   {
+    "id": "gen-470",
+    "question": "What is the maximum size that can be allocated using a C++ allocator with a count of one?",
+    "reference": "Safe multiply `count*size` into `total`; return `true` on overflow.",
+    "split": "calibration",
+    "unit": 470
+   },
+   {
+    "id": "gen-1535",
+    "question": "What is the minimum alignment size for a given size in bytes?",
+    "reference": "round to a good OS allocation size (bounded by max 12.5% waste)",
+    "split": "calibration",
+    "unit": 1535
+   },
+   {
+    "id": "gen-1232",
+    "question": "Does the function correctly handle cases where `n` is greater than the maximum number of bits in the bitmap?",
+    "reference": "Is a sequence of n bits already all set/cleared?",
+    "split": "calibration",
+    "unit": 1232
+   },
+   {
+    "id": "gen-1172",
+    "question": "What is the purpose of the `mi_bfield_mask` function in the given code?",
+    "reference": "Check if a bit is clear",
+    "split": "calibration",
+    "unit": 1172
+   },
+   {
+    "id": "gen-1840",
+    "question": "What is the default virtual address bits for RISC-V systems?",
+    "reference": "Detect the virtual address bits (currently Linux/RISC-V only)",
+    "split": "calibration",
+    "unit": 1840
+   },
+   {
+    "id": "gen-1369",
+    "question": "What is the purpose of the `_mi_heap_detach_theaps` function in the `mi_heap.c` file?",
+    "reference": "free all theaps belonging to this heap (without deleting their pages as we do this arena wise for efficiency)",
+    "split": "calibration",
+    "unit": 1369
+   },
+   {
+    "id": "gen-1684",
+    "question": "What is the minimum and maximum page numbers that need to be collected from the given `mi_theap_t` structure?",
+    "reference": "free retired pages: we don't need to look at the entire queues\nsince we only retire pages that are at the head position in a queue.",
+    "split": "heldout",
+    "unit": 1684
+   },
+   {
+    "id": "gen-1250",
+    "question": "Is it possible to modify the function to handle cases where the number of ranges is not a multiple of `MI_BFIELD_BITS`?",
+    "reference": "Visit all set bits in a bitmap but try to return ranges (within bfields) if possible,\nbut only in chunks of at least `rngslices` slices (that are also aligned at `rngslices`)\nand clear those ranges atomically.\nHowever, the `rngslices` are capped at `MI_BFIELD_BITS` at most.\nUsed by purging to purge larger ranges when possible. With transparent huge pages we only\nwant to purge whole huge pages (2 MiB) at a time which is what the `rngslices` parameter achieves.",
+    "split": "heldout",
+    "unit": 1250
+   },
+   {
+    "id": "gen-1249",
+    "question": "What is the purpose of the `mi_bitmap_forall_setc_ranges` function in the given code?",
+    "reference": "Visit all set bits in a bitmap but try to return ranges (within bfields) if possible.\nAlso clear those ranges atomically.\nUsed by purging to purge larger ranges when possible\ntodo: optimize further? maybe use avx512 to directly get all indices using a mask_compressstore?",
+    "split": "test",
+    "unit": 1249
+   },
+   {
+    "id": "gen-1029",
+    "question": "What is the maximum fixed object size for a page in the MiSTer kernel?",
+    "reference": "fixed limit for the maximum object size in an arena",
+    "split": "calibration",
+    "unit": 1029
+   },
+   {
+    "id": "gen-1347",
+    "question": "What is the size of the usable space in a page, considering the block size and whether the page is guarded?",
+    "reference": "Return the exact usable size of a block.",
+    "split": "heldout",
+    "unit": 1347
+   },
+   {
+    "id": "gen-509",
+    "question": "What is the size of the slice committed to a page in MiSTer?",
+    "reference": "Currently committed part of a page",
+    "split": "calibration",
+    "unit": 509
+   },
+   {
+    "id": "gen-1030",
+    "question": "What is the maximum object size for the arena in the given code?",
+    "reference": "Maximum object size allowed to be allocated in an arena",
+    "split": "calibration",
+    "unit": 1030
+   },
+   {
+    "id": "gen-1059",
+    "question": "What is the purpose of the `mi_page_free_collect` function in the given code?",
+    "reference": "release ownership of a page. This may free the page if all blocks were concurrently\nfreed in the meantime. Returns true if the page was freed.",
+    "split": "heldout",
+    "unit": 1059
+   },
+   {
+    "id": "gen-374",
+    "question": "What is the purpose of the `mi_clz` function in the given code?",
+    "reference": "Bit scan reverse: find the most significant bit that is set\nreturn false if `x==0` (with `*idx` undefined) and true otherwise,\nwith the `idx` is set to the bit index (`0 <= *idx < MI_BFIELD_BITS`).",
+    "split": "calibration",
+    "unit": 374
+   },
+   {
+    "id": "gen-1089",
+    "question": "What is the purpose of the `mi_arenas_unsafe_destroy_all` function in the context of managing memory in a multi-threaded environment?",
+    "reference": "destroy owned arenas; this is unsafe and should only be done using `mi_option_destroy_on_exit`\nfor dynamic libraries that are unloaded and need to release all their allocated memory.",
+    "split": "calibration",
+    "unit": 1089
+   },
+   {
+    "id": "gen-1086",
+    "question": "What is the purpose of the `mi_arena_strictly_contains` function in the given code?",
+    "reference": "Is a pointer contained in the given arena area?",
+    "split": "calibration",
+    "unit": 1086
+   },
+   {
+    "id": "gen-1120",
+    "question": "What is the maximum number of pages that can be reserved in a single node for interleave operations?",
+    "reference": "reserve huge pages evenly among the given number of numa nodes (or use the available ones as detected)",
+    "split": "calibration",
+    "unit": 1120
+   },
+   {
+    "id": "gen-1627",
+    "question": "What is the maximum size of an object that can be allocated in a 4-word aligned bin?",
+    "reference": "Return the bin for a given field size.\nReturns MI_BIN_HUGE if the size is too large.\nWe use `wsize` for the size in \"machine word sizes\",\ni.e. byte size == `wsize*sizeof(void*)`.",
+    "split": "calibration",
+    "unit": 1627
+   },
+   {
+    "id": "gen-1330",
+    "question": "What is the purpose of the `_mi_arenas_page_try_reabandon_to_mapped` function in the context of managing memory in a multi-arenas system?",
+    "reference": "Helper for mi_free_try_collect_mt: try if we can reabandon a previously abandoned mostly full page to be mapped",
+    "split": "calibration",
+    "unit": 1330
+   },
+   {
+    "id": "gen-508",
+    "question": "What is the size of the page slice committed in bytes?",
+    "reference": "How much of the page is committed relative to the slice start? (or 0 if fully committed already)",
+    "split": "calibration",
+    "unit": 508
+   },
+   {
+    "id": "gen-2300",
+    "question": "What is the purpose of the `mi_theap_visit_areas` function in the given code?",
+    "reference": "Visit all blocks in a theap",
+    "split": "calibration",
+    "unit": 2300
+   },
+   {
+    "id": "gen-1952",
+    "question": "Is the channel enabled at level 0?",
+    "reference": "Determines whether an event with a given Level and Keyword would be\nconsidered as enabled based on the state of the specified context.\nNote that you may want to use MCGEN_ENABLE_CHECK instead of calling this\nfunction directly.",
+    "split": "calibration",
+    "unit": 1952
+   },
+   {
+    "id": "gen-1047",
+    "question": "What is the common starting index for a single heap program in a multi-threaded environment?",
+    "reference": "determine the start of search; important to keep heaps and threads\ninto their own memory regions to reduce contention.",
+    "split": "calibration",
+    "unit": 1047
+   },
+   {
+    "id": "gen-2078",
+    "question": "What is the purpose of the `mi_win_main` function in the given C code?",
+    "reference": "Windows DLL: easy to hook into process_init and thread_done",
+    "split": "calibration",
+    "unit": 2078
+   },
+   {
+    "id": "gen-507",
+    "question": "What is the offset of a page slice within a page?",
+    "reference": "This gives the offset relative to the start slice of a page.",
+    "split": "calibration",
+    "unit": 507
+   },
+   {
+    "id": "gen-464",
+    "question": "What is the purpose of the `mi_divide_up` function in the given code?",
+    "reference": "Divide upwards: `s <= _mi_divide_up(s,d)*d < s+d`.",
+    "split": "calibration",
+    "unit": 464
+   },
+   {
+    "id": "gen-1989",
+    "question": "What is the purpose of the `McGenContext_microsoft_windows_mimalloc*` function in the Mimalloc library?",
+    "reference": "This function is for use by MC-generated code and should not be used directly.\nTrigger a compile error if called with the wrong parameter type.",
+    "split": "calibration",
+    "unit": 1989
+   },
+   {
+    "id": "gen-1078",
+    "question": "What is the purpose of the `_mi_arenas_page_abandon` function in the context of managing memory in a multi-threaded environment?",
+    "reference": "this is called from `free.c:mi_free_try_collect_mt` only.",
+    "split": "heldout",
+    "unit": 1078
+   },
+   {
+    "id": "gen-504",
+    "question": "What is the size of the usable block size for a given `mi_page_t` structure?",
+    "reference": "Get the usable block size of a page without fixed padding.\nThis may still include internal padding due to alignment and rounding up size classes.",
+    "split": "heldout",
+    "unit": 504
+   },
+   {
+    "id": "gen-1531",
+    "question": "What is the default size for minimal purge in the MiOS operating system?",
+    "reference": "minimal purge size. Can be larger than the page size if transparent huge pages are enabled.",
+    "split": "calibration",
+    "unit": 1531
+   },
+   {
+    "id": "gen-282",
+    "question": "What is the purpose of the `_InterlockedExchangeAdd64` function in the given code?",
+    "reference": "These are used by the statistics",
+    "split": "calibration",
+    "unit": 282
+   },
+   {
+    "id": "gen-1988",
+    "question": "What is the purpose of the `McGenEventRegister` function in the context of Mimalloc?",
+    "reference": "This function is for use by MC-generated code and should not be used directly.\nInitialize and register the caller-allocated context.",
+    "split": "calibration",
+    "unit": 1988
+   },
+   {
+    "id": "gen-1460",
+    "question": "What is the sum of all bytes in a 32-bit integer?",
+    "reference": "sum of all the bytes in `x` if it is guaranteed that the sum < 256!",
+    "split": "calibration",
+    "unit": 1460
+   },
+   {
+    "id": "gen-1171",
+    "question": "What is the purpose of the `mi_bfield_mask` function in the given code?",
+    "reference": "Check if a bit is set",
+    "split": "calibration",
+    "unit": 1171
+   },
+   {
+    "id": "gen-1044",
+    "question": "What is the maximum size of an arena that can be reserved for large allocations on a system with overcommit?",
+    "reference": "try to reserve a fresh arena space",
+    "split": "heldout",
+    "unit": 1044
+   }
+  ]
+ },
+ "utility": {
+  "min_gain": 0.02,
+  "queries": [
+   {
+    "base_nll": 0.604552344155192,
+    "candidates": [
+     {
+      "gain": 0.1246692012455044,
+      "kind": "caller",
+      "unit": 583,
+      "useful": true
+     },
+     {
+      "gain": 0.03238889094359931,
+      "kind": "caller",
+      "unit": 1033,
+      "useful": true
+     },
+     {
+      "gain": 0.2465292673696058,
+      "kind": "caller",
+      "unit": 1035,
+      "useful": true
+     },
+     {
+      "gain": 0.13190225254553162,
+      "kind": "group",
+      "unit": 575,
+      "useful": true
+     },
+     {
+      "gain": 0.1499218093020132,
+      "kind": "group",
+      "unit": 1094,
+      "useful": true
+     },
+     {
+      "gain": 0.14554566864034113,
+      "kind": "group",
+      "unit": 1024,
+      "useful": true
+     },
+     {
+      "gain": 0.0561225267529899,
+      "kind": "random",
+      "unit": 2043,
+      "useful": true
+     },
+     {
+      "gain": 0.18458514903611045,
+      "kind": "random",
+      "unit": 1581,
+      "useful": true
+     },
+     {
+      "gain": -0.18160569917956693,
+      "kind": "random",
+      "unit": 895,
+      "useful": false
+     },
+     {
+      "gain": 0.1772607100466373,
+      "kind": "random",
+      "unit": 1182,
+      "useful": true
+     },
+     {
+      "gain": 0.046966186585266856,
+      "kind": "random",
+      "unit": 157,
+      "useful": true
+     },
+     {
+      "gain": 0.1385367370848663,
+      "kind": "random",
+      "unit": 1329,
+      "useful": true
+     }
+    ],
+    "query": "gen-576",
+    "unit": 576,
+    "useful": 11
+   },
+   {
+    "base_nll": 0.8281791308240372,
+    "candidates": [
+     {
+      "gain": -0.2501776409001657,
+      "kind": "callee",
+      "unit": 404,
+      "useful": false
+     },
+     {
+      "gain": -0.3341922252186189,
+      "kind": "callee",
+      "unit": 405,
+      "useful": false
+     },
+     {
+      "gain": -0.22976505716117623,
+      "kind": "callee",
+      "unit": 407,
+      "useful": false
+     },
+     {
+      "gain": -0.13211260023600047,
+      "kind": "caller",
+      "unit": 1071,
+      "useful": false
+     },
+     {
+      "gain": -0.16071816677041895,
+      "kind": "caller",
+      "unit": 1072,
+      "useful": false
+     },
+     {
+      "gain": -0.13621656802251791,
+      "kind": "group",
+      "unit": 1655,
+      "useful": false
+     },
+     {
+      "gain": 0.00973723471155774,
+      "kind": "group",
+      "unit": 1657,
+      "useful": false
+     },
+     {
+      "gain": -0.33810695027380855,
+      "kind": "group",
+      "unit": 538,
+      "useful": false
+     },
+     {
+      "gain": -0.23172490688647684,
+      "kind": "random",
+      "unit": 1375,
+      "useful": false
+     },
+     {
+      "gain": -0.217562035746377,
+      "kind": "random",
+      "unit": 1843,
+      "useful": false
+     },
+     {
+      "gain": -0.12617826897365025,
+      "kind": "random",
+      "unit": 1717,
+      "useful": false
+     },
+     {
+      "gain": -0.2925873701652293,
+      "kind": "random",
+      "unit": 1900,
+      "useful": false
+     },
+     {
+      "gain": -0.2573498536896337,
+      "kind": "random",
+      "unit": 488,
+      "useful": false
+     },
+     {
+      "gain": -0.2099613623808816,
+      "kind": "random",
+      "unit": 215,
+      "useful": false
+     },
+     {
+      "gain": -0.135202452927219,
+      "kind": "random",
+      "unit": 2035,
+      "useful": false
+     },
+     {
+      "gain": -0.21778816769854004,
+      "kind": "random",
+      "unit": 116,
+      "useful": false
+     }
+    ],
+    "query": "gen-1690",
+    "unit": 1690,
+    "useful": 0
+   },
+   {
+    "base_nll": 0.2156024172747112,
+    "candidates": [
+     {
+      "gain": -0.04357924184785167,
+      "kind": "caller",
+      "unit": 2063,
+      "useful": false
+     },
+     {
+      "gain": -0.048212701420307535,
+      "kind": "caller",
+      "unit": 2067,
+      "useful": false
+     },
+     {
+      "gain": -0.03379871247709079,
+      "kind": "caller",
+      "unit": 2075,
+      "useful": false
+     },
+     {
+      "gain": -0.030688451794252197,
+      "kind": "group",
+      "unit": 2062,
+      "useful": false
+     },
+     {
+      "gain": -0.048802652953055525,
+      "kind": "group",
+      "unit": 2066,
+      "useful": false
+     },
+     {
+      "gain": -0.09066284973381367,
+      "kind": "group",
+      "unit": 2068,
+      "useful": false
+     },
+     {
+      "gain": -0.020851024139831448,
+      "kind": "random",
+      "unit": 211,
+      "useful": false
+     },
+     {
+      "gain": -0.06613857766496634,
+      "kind": "random",
+      "unit": 1643,
+      "useful": false
+     },
+     {
+      "gain": -0.011442354003487892,
+      "kind": "random",
+      "unit": 1403,
+      "useful": false
+     },
+     {
+      "gain": -0.019515040687915736,
+      "kind": "random",
+      "unit": 1406,
+      "useful": false
+     },
+     {
+      "gain": -0.04201729566433465,
+      "kind": "random",
+      "unit": 159,
+      "useful": false
+     },
+     {
+      "gain": -0.11119176205309506,
+      "kind": "random",
+      "unit": 720,
+      "useful": false
+     }
+    ],
+    "query": "gen-2074",
+    "unit": 2074,
+    "useful": 0
+   },
+   {
+    "base_nll": 0.8490888195267825,
+    "candidates": [
+     {
+      "gain": 0.05336377452566554,
+      "kind": "callee",
+      "unit": 1024,
+      "useful": true
+     },
+     {
+      "gain": 0.054852646686913475,
+      "kind": "callee",
+      "unit": 1255,
+      "useful": true
+     },
+     {
+      "gain": -0.2463711176124579,
+      "kind": "caller",
+      "unit": 1113,
+      "useful": false
+     },
+     {
+      "gain": 0.05718719668208894,
+      "kind": "group",
+      "unit": 1035,
+      "useful": true
+     },
+     {
+      "gain": 0.15522730284501807,
+      "kind": "group",
+      "unit": 1033,
+      "useful": true
+     },
+     {
+      "gain": 0.07857040964147832,
+      "kind": "group",
+      "unit": 1094,
+      "useful": true
+     },
+     {
+      "gain": -0.02096670791908506,
+      "kind": "random",
+      "unit": 361,
+      "useful": false
+     },
+     {
+      "gain": 0.11927807497530729,
+      "kind": "random",
+      "unit": 2167,
+      "useful": true
+     },
+     {
+      "gain": 0.04239863300250524,
+      "kind": "random",
+      "unit": 2096,
+      "useful": true
+     },
+     {
+      "gain": 0.15684293707953645,
+      "kind": "random",
+      "unit": 2249,
+      "useful": true
+     },
+     {
+      "gain": 0.06250073847082793,
+      "kind": "random",
+      "unit": 539,
+      "useful": true
+     },
+     {
+      "gain": -0.015119824380511182,
+      "kind": "random",
+      "unit": 1570,
+      "useful": false
+     }
+    ],
+    "query": "gen-1107",
+    "unit": 1107,
+    "useful": 9
+   },
+   {
+    "base_nll": 0.8159083341640843,
+    "candidates": [
+     {
+      "gain": -0.0634682831610125,
+      "kind": "callee",
+      "unit": 393,
+      "useful": false
+     },
+     {
+      "gain": -0.05223855988234338,
+      "kind": "callee",
+      "unit": 395,
+      "useful": false
+     },
+     {
+      "gain": -0.05294656399366926,
+      "kind": "callee",
+      "unit": 397,
+      "useful": false
+     },
+     {
+      "gain": -0.015701762124313845,
+      "kind": "caller",
+      "unit": 1334,
+      "useful": false
+     },
+     {
+      "gain": -0.023664789318842194,
+      "kind": "group",
+      "unit": 1672,
+      "useful": false
+     },
+     {
+      "gain": -0.031856189198044005,
+      "kind": "group",
+      "unit": 1060,
+      "useful": false
+     },
+     {
+      "gain": -0.01712063635555494,
+      "kind": "group",
+      "unit": 1331,
+      "useful": false
+     },
+     {
+      "gain": -0.047791398283866915,
+      "kind": "random",
+      "unit": 547,
+      "useful": false
+     },
+     {
+      "gain": -0.06608700742220641,
+      "kind": "random",
+      "unit": 2137,
+      "useful": false
+     },
+     {
+      "gain": -0.031216801464293953,
+      "kind": "random",
+      "unit": 1960,
+      "useful": false
+     },
+     {
+      "gain": -0.06443049893586306,
+      "kind": "random",
+      "unit": 1249,
+      "useful": false
+     },
+     {
+      "gain": 0.01609871752677794,
+      "kind": "random",
+      "unit": 1428,
+      "useful": false
+     },
+     {
+      "gain": -0.006470077486320447,
+      "kind": "random",
+      "unit": 1755,
+      "useful": false
+     },
+     {
+      "gain": -0.016035027519254674,
+      "kind": "random",
+      "unit": 1640,
+      "useful": false
+     }
+    ],
+    "query": "gen-1333",
+    "unit": 1333,
+    "useful": 0
+   },
+   {
+    "base_nll": 0.27144015763788176,
+    "candidates": [
+     {
+      "gain": -0.00905094047968652,
+      "kind": "callee",
+      "unit": 210,
+      "useful": false
+     },
+     {
+      "gain": -0.020455388080245218,
+      "kind": "callee",
+      "unit": 213,
+      "useful": false
+     },
+     {
+      "gain": -0.017286819891552563,
+      "kind": "callee",
+      "unit": 228,
+      "useful": false
+     },
+     {
+      "gain": -0.020136277817033144,
+      "kind": "caller",
+      "unit": 1250,
+      "useful": false
+     },
+     {
+      "gain": 0.024421045538419672,
+      "kind": "group",
+      "unit": 1248,
+      "useful": true
+     },
+     {
+      "gain": -0.04240114304827086,
+      "kind": "group",
+      "unit": 1291,
+      "useful": false
+     },
+     {
+      "gain": -0.011369350576917903,
+      "kind": "group",
+      "unit": 1179,
+      "useful": false
+     },
+     {
+      "gain": -0.006045305015845603,
+      "kind": "random",
+      "unit": 2256,
+      "useful": false
+     },
+     {
+      "gain": 0.0005465590291647282,
+      "kind": "random",
+      "unit": 1108,
+      "useful": false
+     },
+     {
+      "gain": -0.01603175648366545,
+      "kind": "random",
+      "unit": 2005,
+      "useful": false
+     },
+     {
+      "gain": -0.0072473323752846874,
+      "kind": "random",
+      "unit": 2144,
+      "useful": false
+     },
+     {
+      "gain": -0.006503976496934738,
+      "kind": "random",
+      "unit": 1885,
+      "useful": false
+     },
+     {
+      "gain": -0.02620639481648801,
+      "kind": "random",
+      "unit": 1757,
+      "useful": false
+     },
+     {
+      "gain": -0.01249923052912455,
+      "kind": "random",
+      "unit": 600,
+      "useful": false
+     }
+    ],
+    "query": "gen-1249",
+    "unit": 1249,
+    "useful": 1
+   }
+  ]
+ }
+}

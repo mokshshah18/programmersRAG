@@ -1,0 +1,479 @@
+[
+  {
+    "key": "hong2025contextrot",
+    "title": "Context Rot: How Increasing Input Tokens Impacts LLM Performance",
+    "authors": "Kelly Hong, Anton Troynikov, Jeff Huber",
+    "year": "2025",
+    "venue": "Chroma Technical Report (14 July 2025)",
+    "url": "https://www.trychroma.com/research/context-rot",
+    "bibtex": "@techreport{hong2025contextrot,\n  title = {{Context Rot: How Increasing Input Tokens Impacts LLM Performance}},\n  author = {Kelly Hong and Anton Troynikov and Jeff Huber},\n  year = {2025},\n  institution = {Chroma},\n  month = {jul},\n  url = {https://www.trychroma.com/research/context-rot}\n}"
+  },
+  {
+    "key": "liu2023lost",
+    "title": "Lost in the Middle: How Language Models Use Long Contexts",
+    "authors": "Nelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua, Fabio Petroni, Percy Liang",
+    "year": "2024",
+    "venue": "Transactions of the Association for Computational Linguistics 12:157-173 (2024); arXiv:2307.03172",
+    "url": "https://aclanthology.org/2024.tacl-1.9/",
+    "bibtex": "@article{liu2023lost,\n  title = {{Lost in the Middle: How Language Models Use Long Contexts}},\n  author = {Nelson F. Liu and Kevin Lin and John Hewitt and Ashwin Paranjape and Michele Bevilacqua and Fabio Petroni and Percy Liang},\n  year = {2024},\n  eprint = {2307.03172},\n  archivePrefix = {arXiv},\n  journal = {Transactions of the Association for Computational Linguistics},\n  volume = {12},\n  pages = {157--173},\n  doi = {10.1162/tacl_a_00638},\n  url = {https://aclanthology.org/2024.tacl-1.9/}\n}"
+  },
+  {
+    "key": "shi2023distracted",
+    "title": "Large Language Models Can Be Easily Distracted by Irrelevant Context",
+    "authors": "Freda Shi, Xinyun Chen, Kanishka Misra, Nathan Scales, David Dohan, Ed Chi, Nathanael Schärli, Denny Zhou",
+    "year": "2023",
+    "venue": "ICML 2023; arXiv:2302.00093",
+    "url": "https://arxiv.org/abs/2302.00093",
+    "bibtex": "@inproceedings{shi2023distracted,\n  title = {{Large Language Models Can Be Easily Distracted by Irrelevant Context}},\n  author = {Freda Shi and Xinyun Chen and Kanishka Misra and Nathan Scales and David Dohan and Ed Chi and Nathanael Sch{\\\"a}rli and Denny Zhou},\n  year = {2023},\n  eprint = {2302.00093},\n  archivePrefix = {arXiv},\n  booktitle = {Proceedings of the 40th International Conference on Machine Learning (ICML)},\n  url = {https://arxiv.org/abs/2302.00093}\n}"
+  },
+  {
+    "key": "cuconasu2024noise",
+    "title": "The Power of Noise: Redefining Retrieval for RAG Systems",
+    "authors": "Florin Cuconasu, Giovanni Trappolini, Federico Siciliano, Simone Filice, Cesare Campagnano, Yoelle Maarek, Nicola Tonellotto, Fabrizio Silvestri",
+    "year": "2024",
+    "venue": "SIGIR 2024; arXiv:2401.14887",
+    "url": "https://arxiv.org/abs/2401.14887",
+    "bibtex": "@inproceedings{cuconasu2024noise,\n  title = {{The Power of Noise: Redefining Retrieval for RAG Systems}},\n  author = {Florin Cuconasu and Giovanni Trappolini and Federico Siciliano and Simone Filice and Cesare Campagnano and Yoelle Maarek and Nicola Tonellotto and Fabrizio Silvestri},\n  year = {2024},\n  eprint = {2401.14887},\n  archivePrefix = {arXiv},\n  booktitle = {Proceedings of the 47th International ACM SIGIR Conference on Research and Development in Information Retrieval},\n  doi = {10.1145/3626772.3657834},\n  url = {https://arxiv.org/abs/2401.14887}\n}"
+  },
+  {
+    "key": "yoran2023robust",
+    "title": "Making Retrieval-Augmented Language Models Robust to Irrelevant Context",
+    "authors": "Ori Yoran, Tomer Wolfson, Ori Ram, Jonathan Berant",
+    "year": "2024",
+    "venue": "ICLR 2024 (poster); arXiv:2310.01558",
+    "url": "https://openreview.net/forum?id=ZS4m74kZpH",
+    "bibtex": "@inproceedings{yoran2023robust,\n  title = {{Making Retrieval-Augmented Language Models Robust to Irrelevant Context}},\n  author = {Ori Yoran and Tomer Wolfson and Ori Ram and Jonathan Berant},\n  year = {2024},\n  eprint = {2310.01558},\n  archivePrefix = {arXiv},\n  booktitle = {The Twelfth International Conference on Learning Representations (ICLR)},\n  url = {https://openreview.net/forum?id=ZS4m74kZpH}\n}"
+  },
+  {
+    "key": "jin2025longrag",
+    "title": "Long-Context LLMs Meet RAG: Overcoming Challenges for Long Inputs in RAG",
+    "authors": "Bowen Jin, Jinsung Yoon, Jiawei Han, Sercan O. Arik",
+    "year": "2025",
+    "venue": "ICLR 2025; arXiv:2410.05983",
+    "url": "https://arxiv.org/abs/2410.05983",
+    "bibtex": "@inproceedings{jin2025longrag,\n  title = {{Long-Context LLMs Meet RAG: Overcoming Challenges for Long Inputs in RAG}},\n  author = {Bowen Jin and Jinsung Yoon and Jiawei Han and Sercan O. Arik},\n  year = {2025},\n  eprint = {2410.05983},\n  archivePrefix = {arXiv},\n  booktitle = {The Thirteenth International Conference on Learning Representations (ICLR)},\n  url = {https://arxiv.org/abs/2410.05983}\n}"
+  },
+  {
+    "key": "du2025length",
+    "title": "Context Length Alone Hurts LLM Performance Despite Perfect Retrieval",
+    "authors": "Yufeng Du, Minyang Tian, Srikanth Ronanki, Subendhu Rongali, Sravan Bodapati, Aram Galstyan, Azton Wells, Roy Schwartz, Eliu A. Huerta, Hao Peng",
+    "year": "2025",
+    "venue": "Findings of EMNLP 2025, pp. 23281-23298; arXiv:2510.05381",
+    "url": "https://aclanthology.org/2025.findings-emnlp.1264/",
+    "bibtex": "@inproceedings{du2025length,\n  title = {{Context Length Alone Hurts LLM Performance Despite Perfect Retrieval}},\n  author = {Yufeng Du and Minyang Tian and Srikanth Ronanki and Subendhu Rongali and Sravan Bodapati and Aram Galstyan and Azton Wells and Roy Schwartz and Eliu A. Huerta and Hao Peng},\n  year = {2025},\n  eprint = {2510.05381},\n  archivePrefix = {arXiv},\n  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2025},\n  pages = {23281--23298},\n  doi = {10.18653/v1/2025.findings-emnlp.1264},\n  url = {https://aclanthology.org/2025.findings-emnlp.1264/}\n}"
+  },
+  {
+    "key": "modarressi2025nolima",
+    "title": "NoLiMa: Long-Context Evaluation Beyond Literal Matching",
+    "authors": "Ali Modarressi, Hanieh Deilamsalehy, Franck Dernoncourt, Trung Bui, Ryan A. Rossi, Seunghyun Yoon, Hinrich Schütze",
+    "year": "2025",
+    "venue": "ICML 2025; arXiv:2502.05167",
+    "url": "https://arxiv.org/abs/2502.05167",
+    "bibtex": "@inproceedings{modarressi2025nolima,\n  title = {{NoLiMa: Long-Context Evaluation Beyond Literal Matching}},\n  author = {Ali Modarressi and Hanieh Deilamsalehy and Franck Dernoncourt and Trung Bui and Ryan A. Rossi and Seunghyun Yoon and Hinrich Sch{\\\"u}tze},\n  year = {2025},\n  eprint = {2502.05167},\n  archivePrefix = {arXiv},\n  booktitle = {Proceedings of the 42nd International Conference on Machine Learning (ICML)},\n  url = {https://arxiv.org/abs/2502.05167}\n}"
+  },
+  {
+    "key": "hsieh2024ruler",
+    "title": "RULER: What's the Real Context Size of Your Long-Context Language Models?",
+    "authors": "Cheng-Ping Hsieh, Simeng Sun, Samuel Kriman, Shantanu Acharya, Dima Rekesh, Fei Jia, Yang Zhang, Boris Ginsburg",
+    "year": "2024",
+    "venue": "COLM 2024; arXiv:2404.06654",
+    "url": "https://arxiv.org/abs/2404.06654",
+    "bibtex": "@inproceedings{hsieh2024ruler,\n  title = {{RULER: What's the Real Context Size of Your Long-Context Language Models?}},\n  author = {Cheng-Ping Hsieh and Simeng Sun and Samuel Kriman and Shantanu Acharya and Dima Rekesh and Fei Jia and Yang Zhang and Boris Ginsburg},\n  year = {2024},\n  eprint = {2404.06654},\n  archivePrefix = {arXiv},\n  booktitle = {First Conference on Language Modeling (COLM)},\n  url = {https://arxiv.org/abs/2404.06654}\n}"
+  },
+  {
+    "key": "dai2026denoising",
+    "title": "LLM-Oriented Information Retrieval: A Denoising-First Perspective",
+    "authors": "Lu Dai, Liang Sun, Fanpu Cao, Ziyang Rao, Cehao Yang, Hao Liu, Hui Xiong",
+    "year": "2026",
+    "venue": "arXiv:2605.00505 (arXiv comment: SIGIR 2026)",
+    "url": "https://arxiv.org/abs/2605.00505",
+    "bibtex": "@misc{dai2026denoising,\n  title = {{LLM-Oriented Information Retrieval: A Denoising-First Perspective}},\n  author = {Lu Dai and Liang Sun and Fanpu Cao and Ziyang Rao and Cehao Yang and Hao Liu and Hui Xiong},\n  year = {2026},\n  eprint = {2605.00505},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2605.00505},\n  note = {arXiv comment: SIGIR 2026}\n}"
+  },
+  {
+    "key": "xia2026rot",
+    "title": "Diagnosing and Mitigating Context Rot in Long-horizon Search",
+    "authors": "Shijie Xia, Yikun Wang, Zhen Huang, Pengfei Liu",
+    "year": "2026",
+    "venue": "arXiv:2606.29718 (preprint)",
+    "url": "https://arxiv.org/abs/2606.29718",
+    "bibtex": "@misc{xia2026rot,\n  title = {{Diagnosing and Mitigating Context Rot in Long-horizon Search}},\n  author = {Shijie Xia and Yikun Wang and Zhen Huang and Pengfei Liu},\n  year = {2026},\n  eprint = {2606.29718},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2606.29718}\n}"
+  },
+  {
+    "key": "martin2026monitor",
+    "title": "Classifier Context Rot: Monitor Performance Degrades with Context Length",
+    "authors": "Sam Martin, Fabien Roger",
+    "year": "2026",
+    "venue": "arXiv:2605.12366 (preprint)",
+    "url": "https://arxiv.org/abs/2605.12366",
+    "bibtex": "@misc{martin2026monitor,\n  title = {{Classifier Context Rot: Monitor Performance Degrades with Context Length}},\n  author = {Sam Martin and Fabien Roger},\n  year = {2026},\n  eprint = {2605.12366},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2605.12366}\n}"
+  },
+  {
+    "key": "wang2026degradation",
+    "title": "Intelligence Degradation in Long-Context LLMs: Critical Threshold Determination via Natural Length Distribution Analysis",
+    "authors": "Weiwei Wang, Jiyong Min, Weijie Zou",
+    "year": "2026",
+    "venue": "arXiv:2601.15300 (unreviewed preprint)",
+    "url": "https://arxiv.org/abs/2601.15300",
+    "bibtex": "@misc{wang2026degradation,\n  title = {{Intelligence Degradation in Long-Context LLMs: Critical Threshold Determination via Natural Length Distribution Analysis}},\n  author = {Weiwei Wang and Jiyong Min and Weijie Zou},\n  year = {2026},\n  eprint = {2601.15300},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2601.15300}\n}"
+  },
+  {
+    "key": "xue2026skills",
+    "title": "When and How Context Rot Appears in Coding Agents: A White-Box Study of Agent Skills in Code Auditing",
+    "authors": "Yue Xue",
+    "year": "2026",
+    "venue": "arXiv:2607.17937 (single-author preprint)",
+    "url": "https://arxiv.org/abs/2607.17937",
+    "bibtex": "@misc{xue2026skills,\n  title = {{When and How Context Rot Appears in Coding Agents: A White-Box Study of Agent Skills in Code Auditing}},\n  author = {Yue Xue},\n  year = {2026},\n  eprint = {2607.17937},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2607.17937}\n}"
+  },
+  {
+    "key": "tirmazi2026compaction",
+    "title": "Context Compaction Theory",
+    "authors": "Hayder Tirmazi, Sam Markelon, Allison Bishop, Michael Mitzenmacher",
+    "year": "2026",
+    "venue": "arXiv:2608.01326 (preliminary version)",
+    "url": "https://arxiv.org/abs/2608.01326",
+    "bibtex": "@misc{tirmazi2026compaction,\n  title = {{Context Compaction Theory}},\n  author = {Hayder Tirmazi and Sam Markelon and Allison Bishop and Michael Mitzenmacher},\n  year = {2026},\n  eprint = {2608.01326},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2608.01326}\n}"
+  },
+  {
+    "key": "anthropic2025context",
+    "title": "Effective context engineering for AI agents",
+    "authors": "Prithvi Rajasekaran, Ethan Dixon, Carly Ryan, Jeremy Hadfield",
+    "year": "2025",
+    "venue": "Anthropic Engineering blog, published 29 Sep 2025",
+    "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+    "bibtex": "@misc{anthropic2025context,\n  title = {{Effective context engineering for AI agents}},\n  author = {Prithvi Rajasekaran and Ethan Dixon and Carly Ryan and Jeremy Hadfield},\n  year = {2025},\n  howpublished = {Anthropic Engineering Blog},\n  month = {sep},\n  url = {https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents},\n  note = {Written by Anthropic's Applied AI team; accessed 2026-09-30}\n}"
+  },
+  {
+    "key": "mei2025survey",
+    "title": "A Survey of Context Engineering for Large Language Models",
+    "authors": "Lingrui Mei, Jiayu Yao, Yuyao Ge, Yiwei Wang, Baolong Bi, Yujun Cai, Jiazhi Liu, Mingyu Li, Zhong-Zhi Li, Duzhen Zhang, Chenlin Zhou, Jiayi Mao, Tianze Xia, Jiafeng Guo, Shenghua Liu",
+    "year": "2025",
+    "venue": "arXiv:2507.13334",
+    "url": "https://arxiv.org/abs/2507.13334",
+    "bibtex": "@misc{mei2025survey,\n  title = {{A Survey of Context Engineering for Large Language Models}},\n  author = {Lingrui Mei and Jiayu Yao and Yuyao Ge and Yiwei Wang and Baolong Bi and Yujun Cai and Jiazhi Liu and Mingyu Li and Zhong-Zhi Li and Duzhen Zhang and Chenlin Zhou and Jiayi Mao and Tianze Xia and Jiafeng Guo and Shenghua Liu},\n  year = {2025},\n  eprint = {2507.13334},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2507.13334}\n}"
+  },
+  {
+    "key": "zhang2025rlm",
+    "title": "Recursive Language Models",
+    "authors": "Alex L. Zhang, Tim Kraska, Omar Khattab",
+    "year": "2025",
+    "venue": "arXiv:2512.24601 (v1 31 Dec 2025; v3 11 May 2026)",
+    "url": "https://arxiv.org/abs/2512.24601",
+    "bibtex": "@misc{zhang2025rlm,\n  title = {{Recursive Language Models}},\n  author = {Alex L. Zhang and Tim Kraska and Omar Khattab},\n  year = {2025},\n  eprint = {2512.24601},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2512.24601}\n}"
+  },
+  {
+    "key": "wang2026overthink",
+    "title": "Think, But Don't Overthink: Reproducing Recursive Language Models",
+    "authors": "Daren Wang",
+    "year": "2026",
+    "venue": "arXiv:2603.02615 (single-author preprint)",
+    "url": "https://arxiv.org/abs/2603.02615",
+    "bibtex": "@misc{wang2026overthink,\n  title = {{Think, But Don't Overthink: Reproducing Recursive Language Models}},\n  author = {Daren Wang},\n  year = {2026},\n  eprint = {2603.02615},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2603.02615}\n}"
+  },
+  {
+    "key": "alizadeh2026srlm",
+    "title": "Recursive Language Models Meet Uncertainty: The Surprising Effectiveness of Self-Reflective Program Search for Long Context",
+    "authors": "Keivan Alizadeh, Parshin Shojaee, Minsik Cho, Mehrdad Farajtabar",
+    "year": "2026",
+    "venue": "arXiv:2603.15653 (preprint)",
+    "url": "https://arxiv.org/abs/2603.15653",
+    "bibtex": "@misc{alizadeh2026srlm,\n  title = {{Recursive Language Models Meet Uncertainty: The Surprising Effectiveness of Self-Reflective Program Search for Long Context}},\n  author = {Keivan Alizadeh and Parshin Shojaee and Minsik Cho and Mehrdad Farajtabar},\n  year = {2026},\n  eprint = {2603.15653},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2603.15653}\n}"
+  },
+  {
+    "key": "sarthi2024raptor",
+    "title": "RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval",
+    "authors": "Parth Sarthi, Salman Abdullah, Aditi Tuli, Shubh Khanna, Anna Goldie, Christopher D. Manning",
+    "year": "2024",
+    "venue": "ICLR 2024; arXiv:2401.18059",
+    "url": "https://arxiv.org/abs/2401.18059",
+    "bibtex": "@inproceedings{sarthi2024raptor,\n  title = {{RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval}},\n  author = {Parth Sarthi and Salman Abdullah and Aditi Tuli and Shubh Khanna and Anna Goldie and Christopher D. Manning},\n  year = {2024},\n  eprint = {2401.18059},\n  archivePrefix = {arXiv},\n  booktitle = {The Twelfth International Conference on Learning Representations (ICLR)},\n  url = {https://arxiv.org/abs/2401.18059}\n}"
+  },
+  {
+    "key": "edge2024graphrag",
+    "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization",
+    "authors": "Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva Mody, Steven Truitt, Dasha Metropolitansky, Robert Osazuwa Ness, Jonathan Larson",
+    "year": "2024",
+    "venue": "arXiv:2404.16130",
+    "url": "https://arxiv.org/abs/2404.16130",
+    "bibtex": "@misc{edge2024graphrag,\n  title = {{From Local to Global: A Graph RAG Approach to Query-Focused Summarization}},\n  author = {Darren Edge and Ha Trinh and Newman Cheng and Joshua Bradley and Alex Chao and Apurva Mody and Steven Truitt and Dasha Metropolitansky and Robert Osazuwa Ness and Jonathan Larson},\n  year = {2024},\n  eprint = {2404.16130},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2404.16130}\n}"
+  },
+  {
+    "key": "wang2023recsum",
+    "title": "Recursively Summarizing Enables Long-Term Dialogue Memory in Large Language Models",
+    "authors": "Qingyue Wang, Yanhe Fu, Yanan Cao, Shuai Wang, Zhiliang Tian, Liang Ding",
+    "year": "2023",
+    "venue": "arXiv:2308.15022 (arXiv comment: accepted by Neurocomputing)",
+    "url": "https://arxiv.org/abs/2308.15022",
+    "bibtex": "@misc{wang2023recsum,\n  title = {{Recursively Summarizing Enables Long-Term Dialogue Memory in Large Language Models}},\n  author = {Qingyue Wang and Yanhe Fu and Yanan Cao and Shuai Wang and Zhiliang Tian and Liang Ding},\n  year = {2023},\n  eprint = {2308.15022},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2308.15022},\n  note = {arXiv comment: accepted by Neurocomputing}\n}"
+  },
+  {
+    "key": "sun2026svdrag",
+    "title": "SVD-RAG: Efficient Tree-Organized Retrieval-Augmented Generation via Singular Value Decomposition",
+    "authors": "Zhihui Sun",
+    "year": "2026",
+    "venue": "arXiv:2607.10316 (single-author preprint)",
+    "url": "https://arxiv.org/abs/2607.10316",
+    "bibtex": "@misc{sun2026svdrag,\n  title = {{SVD-RAG: Efficient Tree-Organized Retrieval-Augmented Generation via Singular Value Decomposition}},\n  author = {Zhihui Sun},\n  year = {2026},\n  eprint = {2607.10316},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2607.10316}\n}"
+  },
+  {
+    "key": "jiang2023llmlingua",
+    "title": "LLMLingua: Compressing Prompts for Accelerated Inference of Large Language Models",
+    "authors": "Huiqiang Jiang, Qianhui Wu, Chin-Yew Lin, Yuqing Yang, Lili Qiu",
+    "year": "2023",
+    "venue": "EMNLP 2023, pp. 13358-13376; arXiv:2310.05736",
+    "url": "https://aclanthology.org/2023.emnlp-main.825/",
+    "bibtex": "@inproceedings{jiang2023llmlingua,\n  title = {{LLMLingua: Compressing Prompts for Accelerated Inference of Large Language Models}},\n  author = {Huiqiang Jiang and Qianhui Wu and Chin-Yew Lin and Yuqing Yang and Lili Qiu},\n  year = {2023},\n  eprint = {2310.05736},\n  archivePrefix = {arXiv},\n  booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing},\n  pages = {13358--13376},\n  doi = {10.18653/v1/2023.emnlp-main.825},\n  url = {https://aclanthology.org/2023.emnlp-main.825/}\n}"
+  },
+  {
+    "key": "jiang2024longllmlingua",
+    "title": "LongLLMLingua: Accelerating and Enhancing LLMs in Long Context Scenarios via Prompt Compression",
+    "authors": "Huiqiang Jiang, Qianhui Wu, Xufang Luo, Dongsheng Li, Chin-Yew Lin, Yuqing Yang, Lili Qiu",
+    "year": "2024",
+    "venue": "ACL 2024 (per arXiv comment); arXiv:2310.06839",
+    "url": "https://arxiv.org/abs/2310.06839",
+    "bibtex": "@inproceedings{jiang2024longllmlingua,\n  title = {{LongLLMLingua: Accelerating and Enhancing LLMs in Long Context Scenarios via Prompt Compression}},\n  author = {Huiqiang Jiang and Qianhui Wu and Xufang Luo and Dongsheng Li and Chin-Yew Lin and Yuqing Yang and Lili Qiu},\n  year = {2024},\n  eprint = {2310.06839},\n  archivePrefix = {arXiv},\n  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (ACL)},\n  url = {https://arxiv.org/abs/2310.06839}\n}"
+  },
+  {
+    "key": "pan2024llmlingua2",
+    "title": "LLMLingua-2: Data Distillation for Efficient and Faithful Task-Agnostic Prompt Compression",
+    "authors": "Zhuoshi Pan, Qianhui Wu, Huiqiang Jiang, Menglin Xia, Xufang Luo, Jue Zhang, Qingwei Lin, Victor Rühle, Yuqing Yang, Chin-Yew Lin, H. Vicky Zhao, Lili Qiu, Dongmei Zhang",
+    "year": "2024",
+    "venue": "Findings of ACL 2024, pp. 963-981; arXiv:2403.12968",
+    "url": "https://aclanthology.org/2024.findings-acl.57/",
+    "bibtex": "@inproceedings{pan2024llmlingua2,\n  title = {{LLMLingua-2: Data Distillation for Efficient and Faithful Task-Agnostic Prompt Compression}},\n  author = {Zhuoshi Pan and Qianhui Wu and Huiqiang Jiang and Menglin Xia and Xufang Luo and Jue Zhang and Qingwei Lin and Victor R{\\\"u}hle and Yuqing Yang and Chin-Yew Lin and H. Vicky Zhao and Lili Qiu and Dongmei Zhang},\n  year = {2024},\n  eprint = {2403.12968},\n  archivePrefix = {arXiv},\n  booktitle = {Findings of the Association for Computational Linguistics: ACL 2024},\n  pages = {963--981},\n  doi = {10.18653/v1/2024.findings-acl.57},\n  url = {https://aclanthology.org/2024.findings-acl.57/}\n}"
+  },
+  {
+    "key": "li2023selective",
+    "title": "Compressing Context to Enhance Inference Efficiency of Large Language Models",
+    "authors": "Yucheng Li, Bo Dong, Frank Guerin, Chenghua Lin",
+    "year": "2023",
+    "venue": "EMNLP 2023, pp. 6342-6353; arXiv:2310.06201",
+    "url": "https://aclanthology.org/2023.emnlp-main.391/",
+    "bibtex": "@inproceedings{li2023selective,\n  title = {{Compressing Context to Enhance Inference Efficiency of Large Language Models}},\n  author = {Yucheng Li and Bo Dong and Frank Guerin and Chenghua Lin},\n  year = {2023},\n  eprint = {2310.06201},\n  archivePrefix = {arXiv},\n  booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing},\n  pages = {6342--6353},\n  doi = {10.18653/v1/2023.emnlp-main.391},\n  url = {https://aclanthology.org/2023.emnlp-main.391/},\n  note = {Author order follows the ACL Anthology; arXiv lists Li, Dong, Lin, Guerin}\n}"
+  },
+  {
+    "key": "xu2024recomp",
+    "title": "RECOMP: Improving Retrieval-Augmented LMs with Context Compression and Selective Augmentation",
+    "authors": "Fangyuan Xu, Weijia Shi, Eunsol Choi",
+    "year": "2024",
+    "venue": "ICLR 2024; arXiv:2310.04408 (arXiv title omits 'Context')",
+    "url": "https://arxiv.org/abs/2310.04408",
+    "bibtex": "@inproceedings{xu2024recomp,\n  title = {{RECOMP: Improving Retrieval-Augmented LMs with Context Compression and Selective Augmentation}},\n  author = {Fangyuan Xu and Weijia Shi and Eunsol Choi},\n  year = {2024},\n  eprint = {2310.04408},\n  archivePrefix = {arXiv},\n  booktitle = {The Twelfth International Conference on Learning Representations (ICLR)},\n  url = {https://arxiv.org/abs/2310.04408}\n}"
+  },
+  {
+    "key": "chirkova2025provence",
+    "title": "Provence: efficient and robust context pruning for retrieval-augmented generation",
+    "authors": "Nadezhda Chirkova, Thibault Formal, Vassilina Nikoulina, Stéphane Clinchant",
+    "year": "2025",
+    "venue": "ICLR 2025; arXiv:2501.16214",
+    "url": "https://arxiv.org/abs/2501.16214",
+    "bibtex": "@inproceedings{chirkova2025provence,\n  title = {{Provence: efficient and robust context pruning for retrieval-augmented generation}},\n  author = {Nadezhda Chirkova and Thibault Formal and Vassilina Nikoulina and St{\\'e}phane Clinchant},\n  year = {2025},\n  eprint = {2501.16214},\n  archivePrefix = {arXiv},\n  booktitle = {The Thirteenth International Conference on Learning Representations (ICLR)},\n  url = {https://arxiv.org/abs/2501.16214}\n}"
+  },
+  {
+    "key": "zhu2024ib",
+    "title": "An Information Bottleneck Perspective for Effective Noise Filtering on Retrieval-Augmented Generation",
+    "authors": "Kun Zhu, Xiaocheng Feng, Xiyuan Du, Yuxuan Gu, Weijiang Yu, Haotian Wang, Qianglong Chen, Zheng Chu, Jingchang Chen, Bing Qin",
+    "year": "2024",
+    "venue": "ACL 2024 (Long Papers), pp. 1044-1069; arXiv:2406.01549",
+    "url": "https://aclanthology.org/2024.acl-long.59/",
+    "bibtex": "@inproceedings{zhu2024ib,\n  title = {{An Information Bottleneck Perspective for Effective Noise Filtering on Retrieval-Augmented Generation}},\n  author = {Kun Zhu and Xiaocheng Feng and Xiyuan Du and Yuxuan Gu and Weijiang Yu and Haotian Wang and Qianglong Chen and Zheng Chu and Jingchang Chen and Bing Qin},\n  year = {2024},\n  eprint = {2406.01549},\n  archivePrefix = {arXiv},\n  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},\n  pages = {1044--1069},\n  doi = {10.18653/v1/2024.acl-long.59},\n  url = {https://aclanthology.org/2024.acl-long.59/}\n}"
+  },
+  {
+    "key": "chakraborty2026conformal",
+    "title": "Principled Context Engineering for RAG: Statistical Guarantees via Conformal Prediction",
+    "authors": "Debashish Chakraborty, Eugene Yang, Daniel Khashabi, Dawn Lawrie, Kevin Duh",
+    "year": "2026",
+    "venue": "ECIR 2026, Advances in Information Retrieval (LNCS), pp. 537-546; arXiv:2511.17908",
+    "url": "https://arxiv.org/abs/2511.17908",
+    "bibtex": "@inproceedings{chakraborty2026conformal,\n  title = {{Principled Context Engineering for RAG: Statistical Guarantees via Conformal Prediction}},\n  author = {Debashish Chakraborty and Eugene Yang and Daniel Khashabi and Dawn Lawrie and Kevin Duh},\n  year = {2026},\n  eprint = {2511.17908},\n  archivePrefix = {arXiv},\n  booktitle = {Advances in Information Retrieval (ECIR 2026)},\n  pages = {537--546},\n  publisher = {Springer},\n  doi = {10.1007/978-3-032-21300-6_45},\n  url = {https://arxiv.org/abs/2511.17908}\n}"
+  },
+  {
+    "key": "angelopoulos2021gentle",
+    "title": "A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification",
+    "authors": "Anastasios N. Angelopoulos, Stephen Bates",
+    "year": "2021",
+    "venue": "arXiv:2107.07511",
+    "url": "https://arxiv.org/abs/2107.07511",
+    "bibtex": "@misc{angelopoulos2021gentle,\n  title = {{A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification}},\n  author = {Anastasios N. Angelopoulos and Stephen Bates},\n  year = {2021},\n  eprint = {2107.07511},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2107.07511}\n}"
+  },
+  {
+    "key": "guo2017calibration",
+    "title": "On Calibration of Modern Neural Networks",
+    "authors": "Chuan Guo, Geoff Pleiss, Yu Sun, Kilian Q. Weinberger",
+    "year": "2017",
+    "venue": "ICML 2017; arXiv:1706.04599",
+    "url": "https://arxiv.org/abs/1706.04599",
+    "bibtex": "@inproceedings{guo2017calibration,\n  title = {{On Calibration of Modern Neural Networks}},\n  author = {Chuan Guo and Geoff Pleiss and Yu Sun and Kilian Q. Weinberger},\n  year = {2017},\n  eprint = {1706.04599},\n  archivePrefix = {arXiv},\n  booktitle = {Proceedings of the 34th International Conference on Machine Learning (ICML)},\n  url = {https://arxiv.org/abs/1706.04599}\n}"
+  },
+  {
+    "key": "elkan2001cost",
+    "title": "The Foundations of Cost-Sensitive Learning",
+    "authors": "Charles Elkan",
+    "year": "2001",
+    "venue": "IJCAI 2001 (Seventeenth International Joint Conference on Artificial Intelligence)",
+    "url": "https://cseweb.ucsd.edu/~elkan/rescale.pdf",
+    "bibtex": "@inproceedings{elkan2001cost,\n  title = {{The Foundations of Cost-Sensitive Learning}},\n  author = {Charles Elkan},\n  year = {2001},\n  booktitle = {Proceedings of the Seventeenth International Joint Conference on Artificial Intelligence (IJCAI)},\n  url = {https://cseweb.ucsd.edu/~elkan/rescale.pdf}\n}"
+  },
+  {
+    "key": "shi2025longcodezip",
+    "title": "LongCodeZip: Compress Long Context for Code Language Models",
+    "authors": "Yuling Shi, Yichun Qian, Hongyu Zhang, Beijun Shen, Xiaodong Gu",
+    "year": "2025",
+    "venue": "ASE 2025, pp. 141-153; arXiv:2510.00446",
+    "url": "https://arxiv.org/abs/2510.00446",
+    "bibtex": "@inproceedings{shi2025longcodezip,\n  title = {{LongCodeZip: Compress Long Context for Code Language Models}},\n  author = {Yuling Shi and Yichun Qian and Hongyu Zhang and Beijun Shen and Xiaodong Gu},\n  year = {2025},\n  eprint = {2510.00446},\n  archivePrefix = {arXiv},\n  booktitle = {Proceedings of the 40th IEEE/ACM International Conference on Automated Software Engineering (ASE)},\n  pages = {141--153},\n  doi = {10.1109/ASE63991.2025.00020},\n  url = {https://arxiv.org/abs/2510.00446}\n}"
+  },
+  {
+    "key": "zhang2025hcp",
+    "title": "Hierarchical Context Pruning: Optimizing Real-World Code Completion with Repository-Level Pretrained Code LLMs",
+    "authors": "Lei Zhang, Yunshui Li, Jiaming Li, Xiaobo Xia, Jiaxi Yang, Run Luo, Minzheng Wang, Longze Chen, Junhao Liu, Qiang Qu, Min Yang",
+    "year": "2025",
+    "venue": "AAAI 2025, Proc. AAAI 39(24):25886-25894; arXiv:2406.18294",
+    "url": "https://ojs.aaai.org/index.php/AAAI/article/view/34782",
+    "bibtex": "@inproceedings{zhang2025hcp,\n  title = {{Hierarchical Context Pruning: Optimizing Real-World Code Completion with Repository-Level Pretrained Code LLMs}},\n  author = {Lei Zhang and Yunshui Li and Jiaming Li and Xiaobo Xia and Jiaxi Yang and Run Luo and Minzheng Wang and Longze Chen and Junhao Liu and Qiang Qu and Min Yang},\n  year = {2025},\n  eprint = {2406.18294},\n  archivePrefix = {arXiv},\n  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},\n  volume = {39},\n  number = {24},\n  pages = {25886--25894},\n  doi = {10.1609/aaai.v39i24.34782},\n  url = {https://ojs.aaai.org/index.php/AAAI/article/view/34782},\n  note = {AAAI version adds author Qiang Qu, absent from the arXiv listing}\n}"
+  },
+  {
+    "key": "wang2026lamr",
+    "title": "Context Pruning for Coding Agents via Multi-Rubric Latent Reasoning",
+    "authors": "Jingjing Wang, Xiwen Chen, Wenhui Zhu, Huayu Li, Zhengxiao He, Feiyang Cai, Ana S. Carreon-Rascon, Xuanzhao Dong, Feng Luo",
+    "year": "2026",
+    "venue": "arXiv:2605.15315 (arXiv comment: COLM 2026 Workshop on Efficient Reasoning)",
+    "url": "https://arxiv.org/abs/2605.15315",
+    "bibtex": "@misc{wang2026lamr,\n  title = {{Context Pruning for Coding Agents via Multi-Rubric Latent Reasoning}},\n  author = {Jingjing Wang and Xiwen Chen and Wenhui Zhu and Huayu Li and Zhengxiao He and Feiyang Cai and Ana S. Carreon-Rascon and Xuanzhao Dong and Feng Luo},\n  year = {2026},\n  eprint = {2605.15315},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2605.15315},\n  note = {arXiv comment: COLM 2026 Workshop on Efficient Reasoning}\n}"
+  },
+  {
+    "key": "jia2026swezze",
+    "title": "Compressing Code Context for LLM-based Issue Resolution",
+    "authors": "Haoxiang Jia, Earl T. Barr, Sergey Mechtaev",
+    "year": "2026",
+    "venue": "arXiv:2603.28119 (preprint)",
+    "url": "https://arxiv.org/abs/2603.28119",
+    "bibtex": "@misc{jia2026swezze,\n  title = {{Compressing Code Context for LLM-based Issue Resolution}},\n  author = {Haoxiang Jia and Earl T. Barr and Sergey Mechtaev},\n  year = {2026},\n  eprint = {2603.28119},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2603.28119}\n}"
+  },
+  {
+    "key": "wang2026swepruner",
+    "title": "SWE-Pruner: Self-Adaptive Context Pruning for Coding Agents",
+    "authors": "Yuhang Wang, Yuling Shi, Mo Yang, Rongrui Zhang, Shilin He, Heng Lian, Yuting Chen, Siyu Ye, Kai Cai, Xiaodong Gu",
+    "year": "2026",
+    "venue": "arXiv:2601.16746 (preprint)",
+    "url": "https://arxiv.org/abs/2601.16746",
+    "bibtex": "@misc{wang2026swepruner,\n  title = {{SWE-Pruner: Self-Adaptive Context Pruning for Coding Agents}},\n  author = {Yuhang Wang and Yuling Shi and Mo Yang and Rongrui Zhang and Shilin He and Heng Lian and Yuting Chen and Siyu Ye and Kai Cai and Xiaodong Gu},\n  year = {2026},\n  eprint = {2601.16746},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2601.16746}\n}"
+  },
+  {
+    "key": "zhang2025cast",
+    "title": "cAST: Enhancing Code Retrieval-Augmented Generation with Structural Chunking via Abstract Syntax Tree",
+    "authors": "Yilin Zhang, Xinran Zhao, Zora Zhiruo Wang, Chenyang Yang, Jiayi Wei, Tongshuang Wu",
+    "year": "2025",
+    "venue": "Findings of EMNLP 2025, pp. 8106-8116; arXiv:2506.15655",
+    "url": "https://aclanthology.org/2025.findings-emnlp.430/",
+    "bibtex": "@inproceedings{zhang2025cast,\n  title = {{cAST: Enhancing Code Retrieval-Augmented Generation with Structural Chunking via Abstract Syntax Tree}},\n  author = {Yilin Zhang and Xinran Zhao and Zora Zhiruo Wang and Chenyang Yang and Jiayi Wei and Tongshuang Wu},\n  year = {2025},\n  eprint = {2506.15655},\n  archivePrefix = {arXiv},\n  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2025},\n  pages = {8106--8116},\n  url = {https://aclanthology.org/2025.findings-emnlp.430/}\n}"
+  },
+  {
+    "key": "es2023ragas",
+    "title": "RAGAs: Automated Evaluation of Retrieval Augmented Generation",
+    "authors": "Shahul Es, Jithin James, Luis Espinosa Anke, Steven Schockaert",
+    "year": "2024",
+    "venue": "EACL 2024 System Demonstrations, pp. 150-158; arXiv:2309.15217",
+    "url": "https://aclanthology.org/2024.eacl-demo.16/",
+    "bibtex": "@inproceedings{es2023ragas,\n  title = {{RAGAs: Automated Evaluation of Retrieval Augmented Generation}},\n  author = {Shahul Es and Jithin James and Luis Espinosa Anke and Steven Schockaert},\n  year = {2024},\n  eprint = {2309.15217},\n  archivePrefix = {arXiv},\n  booktitle = {Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics: System Demonstrations},\n  pages = {150--158},\n  doi = {10.18653/v1/2024.eacl-demo.16},\n  url = {https://aclanthology.org/2024.eacl-demo.16/}\n}"
+  },
+  {
+    "key": "ragas2026docs",
+    "title": "Ragas documentation: Context Precision and Context Recall",
+    "authors": "Ragas project",
+    "year": "2026",
+    "venue": "docs.ragas.io stable documentation (accessed 2026-09-30)",
+    "url": "https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_precision/",
+    "bibtex": "@misc{ragas2026docs,\n  title = {{Ragas documentation: Context Precision and Context Recall}},\n  author = {{Ragas project}},\n  year = {2026},\n  howpublished = {Online documentation},\n  url = {https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_precision/},\n  note = {Context recall page: https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/context_recall/ ; accessed 2026-09-30}\n}"
+  },
+  {
+    "key": "ru2024ragchecker",
+    "title": "RAGChecker: A Fine-grained Framework for Diagnosing Retrieval-Augmented Generation",
+    "authors": "Dongyu Ru, Lin Qiu, Xiangkun Hu, Tianhang Zhang, Peng Shi, Shuaichen Chang, Cheng Jiayang, Cunxiang Wang, Shichao Sun, Huanyu Li, Zizhao Zhang, Binjie Wang, Jiarong Jiang, Tong He, Zhiguo Wang, Pengfei Liu, Yue Zhang, Zheng Zhang",
+    "year": "2024",
+    "venue": "NeurIPS 2024 Datasets and Benchmarks Track; arXiv:2408.08067",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/27245589131d17368cccdfa990cbf16e-Abstract-Datasets_and_Benchmarks_Track.html",
+    "bibtex": "@inproceedings{ru2024ragchecker,\n  title = {{RAGChecker: A Fine-grained Framework for Diagnosing Retrieval-Augmented Generation}},\n  author = {Dongyu Ru and Lin Qiu and Xiangkun Hu and Tianhang Zhang and Peng Shi and Shuaichen Chang and Cheng Jiayang and Cunxiang Wang and Shichao Sun and Huanyu Li and Zizhao Zhang and Binjie Wang and Jiarong Jiang and Tong He and Zhiguo Wang and Pengfei Liu and Yue Zhang and Zheng Zhang},\n  year = {2024},\n  eprint = {2408.08067},\n  archivePrefix = {arXiv},\n  booktitle = {Advances in Neural Information Processing Systems 37 (Datasets and Benchmarks Track)},\n  url = {https://proceedings.neurips.cc/paper_files/paper/2024/hash/27245589131d17368cccdfa990cbf16e-Abstract-Datasets_and_Benchmarks_Track.html}\n}"
+  },
+  {
+    "key": "joren2024sufficient",
+    "title": "Sufficient Context: A New Lens on Retrieval Augmented Generation Systems",
+    "authors": "Hailey Joren, Jianyi Zhang, Chun-Sung Ferng, Da-Cheng Juan, Ankur Taly, Cyrus Rashtchian",
+    "year": "2025",
+    "venue": "ICLR 2025; arXiv:2411.06037",
+    "url": "https://arxiv.org/abs/2411.06037",
+    "bibtex": "@inproceedings{joren2024sufficient,\n  title = {{Sufficient Context: A New Lens on Retrieval Augmented Generation Systems}},\n  author = {Hailey Joren and Jianyi Zhang and Chun-Sung Ferng and Da-Cheng Juan and Ankur Taly and Cyrus Rashtchian},\n  year = {2025},\n  eprint = {2411.06037},\n  archivePrefix = {arXiv},\n  booktitle = {The Thirteenth International Conference on Learning Representations (ICLR)},\n  url = {https://arxiv.org/abs/2411.06037}\n}"
+  },
+  {
+    "key": "carbonell1998mmr",
+    "title": "The Use of MMR, Diversity-Based Reranking for Reordering Documents and Producing Summaries",
+    "authors": "Jaime Carbonell, Jade Goldstein",
+    "year": "1998",
+    "venue": "SIGIR 1998, pp. 335-336",
+    "url": "https://www.cs.cmu.edu/~jgc/publication/The_Use_MMR_Diversity_Based_LTMIR_1998.pdf",
+    "bibtex": "@inproceedings{carbonell1998mmr,\n  title = {{The Use of MMR, Diversity-Based Reranking for Reordering Documents and Producing Summaries}},\n  author = {Jaime Carbonell and Jade Goldstein},\n  year = {1998},\n  booktitle = {Proceedings of the 21st Annual International ACM SIGIR Conference on Research and Development in Information Retrieval},\n  pages = {335--336},\n  doi = {10.1145/290941.291025},\n  url = {https://www.cs.cmu.edu/~jgc/publication/The_Use_MMR_Diversity_Based_LTMIR_1998.pdf}\n}"
+  },
+  {
+    "key": "goldstein1998mmr",
+    "title": "Summarization: (1) Using MMR for Diversity-Based Reranking and (2) Evaluating Summaries",
+    "authors": "Jade Goldstein, Jaime Carbonell",
+    "year": "1998",
+    "venue": "TIPSTER Text Program Phase III: Proceedings of a Workshop (Baltimore, Oct 1998), pp. 181-195",
+    "url": "https://aclanthology.org/X98-1025/",
+    "bibtex": "@inproceedings{goldstein1998mmr,\n  title = {{Summarization: (1) Using MMR for Diversity-Based Reranking and (2) Evaluating Summaries}},\n  author = {Jade Goldstein and Jaime Carbonell},\n  year = {1998},\n  booktitle = {TIPSTER TEXT PROGRAM PHASE III: Proceedings of a Workshop held at Baltimore, Maryland},\n  pages = {181--195},\n  doi = {10.3115/1119089.1119120},\n  url = {https://aclanthology.org/X98-1025/}\n}"
+  },
+  {
+    "key": "lin2011submodular",
+    "title": "A Class of Submodular Functions for Document Summarization",
+    "authors": "Hui Lin, Jeff Bilmes",
+    "year": "2011",
+    "venue": "ACL-HLT 2011, pp. 510-520",
+    "url": "https://aclanthology.org/P11-1052/",
+    "bibtex": "@inproceedings{lin2011submodular,\n  title = {{A Class of Submodular Functions for Document Summarization}},\n  author = {Hui Lin and Jeff Bilmes},\n  year = {2011},\n  booktitle = {Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies},\n  pages = {510--520},\n  url = {https://aclanthology.org/P11-1052/}\n}"
+  },
+  {
+    "key": "kulesza2012dpp",
+    "title": "Determinantal Point Processes for Machine Learning",
+    "authors": "Alex Kulesza, Ben Taskar",
+    "year": "2012",
+    "venue": "Foundations and Trends in Machine Learning 5(2-3):123-286; arXiv:1207.6083",
+    "url": "https://arxiv.org/abs/1207.6083",
+    "bibtex": "@article{kulesza2012dpp,\n  title = {{Determinantal Point Processes for Machine Learning}},\n  author = {Alex Kulesza and Ben Taskar},\n  year = {2012},\n  eprint = {1207.6083},\n  archivePrefix = {arXiv},\n  journal = {Foundations and Trends in Machine Learning},\n  volume = {5},\n  number = {2--3},\n  pages = {123--286},\n  doi = {10.1561/2200000044},\n  url = {https://arxiv.org/abs/1207.6083}\n}"
+  },
+  {
+    "key": "erkan2004lexrank",
+    "title": "LexRank: Graph-based Lexical Centrality as Salience in Text Summarization",
+    "authors": "Güneş Erkan, Dragomir R. Radev",
+    "year": "2004",
+    "venue": "Journal of Artificial Intelligence Research 22:457-479; arXiv:1109.2128",
+    "url": "https://arxiv.org/abs/1109.2128",
+    "bibtex": "@article{erkan2004lexrank,\n  title = {{LexRank: Graph-based Lexical Centrality as Salience in Text Summarization}},\n  author = {G{\\\"u}ne{\\c{s}} Erkan and Dragomir R. Radev},\n  year = {2004},\n  eprint = {1109.2128},\n  archivePrefix = {arXiv},\n  journal = {Journal of Artificial Intelligence Research},\n  volume = {22},\n  pages = {457--479},\n  doi = {10.1613/jair.1523},\n  url = {https://arxiv.org/abs/1109.2128}\n}"
+  },
+  {
+    "key": "gutierrez2024hipporag",
+    "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+    "authors": "Bernal Jiménez Gutiérrez, Yiheng Shu, Yu Gu, Michihiro Yasunaga, Yu Su",
+    "year": "2024",
+    "venue": "NeurIPS 2024 (Advances in Neural Information Processing Systems 37); arXiv:2405.14831",
+    "url": "https://arxiv.org/abs/2405.14831",
+    "bibtex": "@inproceedings{gutierrez2024hipporag,\n  title = {{HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models}},\n  author = {Bernal Jim{\\'e}nez Guti{\\'e}rrez and Yiheng Shu and Yu Gu and Michihiro Yasunaga and Yu Su},\n  year = {2024},\n  eprint = {2405.14831},\n  archivePrefix = {arXiv},\n  booktitle = {Advances in Neural Information Processing Systems 37},\n  doi = {10.52202/079017-1902},\n  url = {https://arxiv.org/abs/2405.14831}\n}"
+  },
+  {
+    "key": "sobolev2011contracting",
+    "title": "Contracting-mapping principle",
+    "authors": "V. I. Sobolev",
+    "year": "2011",
+    "venue": "Encyclopedia of Mathematics (EMS Press / Springer), online entry",
+    "url": "https://encyclopediaofmath.org/wiki/Contracting-mapping_principle",
+    "bibtex": "@misc{sobolev2011contracting,\n  title = {{Contracting-mapping principle}},\n  author = {V. I. Sobolev},\n  year = {2011},\n  howpublished = {Encyclopedia of Mathematics},\n  url = {https://encyclopediaofmath.org/wiki/Contracting-mapping_principle},\n  note = {Principle proved by S. Banach, Fund. Math. 3 (1922) 7-33; accessed 2026-09-30}\n}"
+  },
+  {
+    "key": "ross2026redundancy",
+    "title": "How retriever redundancy and diversity impact RAG effectiveness",
+    "authors": "Jonathan J. Ross, Bevan Koopman, Anton van der Vegt, Guido Zuccon",
+    "year": "2026",
+    "venue": "arXiv:2608.13956 (preprint)",
+    "url": "https://arxiv.org/abs/2608.13956",
+    "bibtex": "@misc{ross2026redundancy,\n  title = {{How retriever redundancy and diversity impact RAG effectiveness}},\n  author = {Jonathan J. Ross and Bevan Koopman and Anton van der Vegt and Guido Zuccon},\n  year = {2026},\n  eprint = {2608.13956},\n  archivePrefix = {arXiv},\n  url = {https://arxiv.org/abs/2608.13956}\n}"
+  }
+]

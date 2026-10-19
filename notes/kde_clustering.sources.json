@@ -1,0 +1,612 @@
+[
+  {
+    "key": "rosenblatt1956",
+    "title": "Remarks on Some Nonparametric Estimates of a Density Function",
+    "authors": "Murray Rosenblatt",
+    "year": "1956",
+    "venue": "The Annals of Mathematical Statistics 27(3), 832-837. DOI 10.1214/aoms/1177728190",
+    "url": "https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-27/issue-3/Remarks-on-Some-Nonparametric-Estimates-of-a-Density-Function/10.1214/aoms/1177728190.full",
+    "bibtex": "@article{rosenblatt1956,\n  author  = {Rosenblatt, Murray},\n  title   = {Remarks on Some Nonparametric Estimates of a Density Function},\n  journal = {The Annals of Mathematical Statistics},\n  volume  = {27},\n  number  = {3},\n  pages   = {832--837},\n  year    = {1956},\n  doi     = {10.1214/aoms/1177728190},\n  url     = {https://doi.org/10.1214/aoms/1177728190}\n}",
+    "verified_via": "Project Euclid landing page (abstract) and Crossref record; full text is a scan and was not read."
+  },
+  {
+    "key": "parzen1962",
+    "title": "On Estimation of a Probability Density Function and Mode",
+    "authors": "Emanuel Parzen",
+    "year": "1962",
+    "venue": "The Annals of Mathematical Statistics 33(3), 1065-1076. DOI 10.1214/aoms/1177704472",
+    "url": "https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-33/issue-3/On-Estimation-of-a-Probability-Density-Function-and-Mode/10.1214/aoms/1177704472.full",
+    "bibtex": "@article{parzen1962,\n  author  = {Parzen, Emanuel},\n  title   = {On Estimation of a Probability Density Function and Mode},\n  journal = {The Annals of Mathematical Statistics},\n  volume  = {33},\n  number  = {3},\n  pages   = {1065--1076},\n  year    = {1962},\n  doi     = {10.1214/aoms/1177704472},\n  url     = {https://doi.org/10.1214/aoms/1177704472}\n}",
+    "verified_via": "Project Euclid landing page and Crossref record; full text is a scan and was not read."
+  },
+  {
+    "key": "chen2017tutorial",
+    "title": "A tutorial on kernel density estimation and recent advances",
+    "authors": "Yen-Chi Chen",
+    "year": "2017",
+    "venue": "Biostatistics & Epidemiology 1(1), 161-187. DOI 10.1080/24709360.2017.1396742 (arXiv:1704.03924v2)",
+    "url": "https://arxiv.org/abs/1704.03924",
+    "bibtex": "@article{chen2017tutorial,\n  author        = {Chen, Yen-Chi},\n  title         = {A Tutorial on Kernel Density Estimation and Recent Advances},\n  journal       = {Biostatistics \\& Epidemiology},\n  volume        = {1},\n  number        = {1},\n  pages         = {161--187},\n  year          = {2017},\n  doi           = {10.1080/24709360.2017.1396742},\n  eprint        = {1704.03924},\n  archivePrefix = {arXiv},\n  primaryClass  = {stat.ME},\n  url           = {https://arxiv.org/abs/1704.03924}\n}",
+    "verified_via": "arXiv abstract page, arXiv TeX source (equations read directly), Crossref record for the journal version."
+  },
+  {
+    "key": "stone1980",
+    "title": "Optimal Rates of Convergence for Nonparametric Estimators",
+    "authors": "Charles J. Stone",
+    "year": "1980",
+    "venue": "The Annals of Statistics 8(6), 1348-1360. DOI 10.1214/aos/1176345206",
+    "url": "https://doi.org/10.1214/aos/1176345206",
+    "bibtex": "@article{stone1980,\n  author  = {Stone, Charles J.},\n  title   = {Optimal Rates of Convergence for Nonparametric Estimators},\n  journal = {The Annals of Statistics},\n  volume  = {8},\n  number  = {6},\n  pages   = {1348--1360},\n  year    = {1980},\n  doi     = {10.1214/aos/1176345206},\n  url     = {https://doi.org/10.1214/aos/1176345206}\n}",
+    "verified_via": "Full-text PDF (JSTOR copy hosted at sites.stat.washington.edu/courses/stat527/s14/readings/Stone_Annals_1980.pdf) and Crossref record."
+  },
+  {
+    "key": "scipy_gaussian_kde",
+    "title": "scipy.stats.gaussian_kde (SciPy v1.18.0 Manual, API reference)",
+    "authors": "The SciPy community",
+    "year": "2026",
+    "venue": "Official SciPy documentation, v1.18.0 (accessed 2026-09-29)",
+    "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gaussian_kde.html",
+    "bibtex": "@misc{scipy_gaussian_kde,\n  author       = {{The SciPy community}},\n  title        = {{scipy.stats.gaussian\\_kde} --- {SciPy} v1.18.0 Manual},\n  year         = {2026},\n  howpublished = {Online API reference},\n  url          = {https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gaussian_kde.html},\n  note         = {Accessed 2026-09-29}\n}",
+    "verified_via": "Documentation page fetched and its Notes section read."
+  },
+  {
+    "key": "hall1987",
+    "title": "Kernel density estimation with spherical data",
+    "authors": "Peter Hall, G. S. Watson, Javier Cabrera",
+    "year": "1987",
+    "venue": "Biometrika 74(4), 751-762. DOI 10.1093/biomet/74.4.751",
+    "url": "https://academic.oup.com/biomet/article/74/4/751/280530",
+    "bibtex": "@article{hall1987,\n  author  = {Hall, Peter and Watson, G. S. and Cabrera, Javier},\n  title   = {Kernel Density Estimation with Spherical Data},\n  journal = {Biometrika},\n  volume  = {74},\n  number  = {4},\n  pages   = {751--762},\n  year    = {1987},\n  doi     = {10.1093/biomet/74.4.751},\n  url     = {https://doi.org/10.1093/biomet/74.4.751}\n}",
+    "verified_via": "Publisher abstract page and Crossref record; formulas attributed to it are taken from Garcia-Portugues (2013)."
+  },
+  {
+    "key": "bai1988",
+    "title": "Kernel estimators of density function of directional data",
+    "authors": "Z. D. Bai, C. Radhakrishna Rao, L. C. Zhao",
+    "year": "1988",
+    "venue": "Journal of Multivariate Analysis 27(1), 24-39. DOI 10.1016/0047-259X(88)90113-3",
+    "url": "https://ideas.repec.org/a/eee/jmvana/v27y1988i1p24-39.html",
+    "bibtex": "@article{bai1988,\n  author  = {Bai, Z. D. and Rao, C. Radhakrishna and Zhao, L. C.},\n  title   = {Kernel Estimators of Density Function of Directional Data},\n  journal = {Journal of Multivariate Analysis},\n  volume  = {27},\n  number  = {1},\n  pages   = {24--39},\n  year    = {1988},\n  doi     = {10.1016/0047-259X(88)90113-3},\n  url     = {https://doi.org/10.1016/0047-259X(88)90113-3}\n}",
+    "verified_via": "RePEc record (abstract) and Crossref record."
+  },
+  {
+    "key": "garciaportugues2013",
+    "title": "Exact risk improvement of bandwidth selectors for kernel density estimation with directional data",
+    "authors": "Eduardo García-Portugués",
+    "year": "2013",
+    "venue": "Electronic Journal of Statistics 7, 1655-1685. DOI 10.1214/13-EJS821 (arXiv:1306.0517v5)",
+    "url": "https://arxiv.org/abs/1306.0517",
+    "bibtex": "@article{garciaportugues2013,\n  author        = {Garc{\\'i}a-Portugu{\\'e}s, Eduardo},\n  title         = {Exact Risk Improvement of Bandwidth Selectors for Kernel Density Estimation with Directional Data},\n  journal       = {Electronic Journal of Statistics},\n  volume        = {7},\n  pages         = {1655--1685},\n  year          = {2013},\n  doi           = {10.1214/13-EJS821},\n  eprint        = {1306.0517},\n  archivePrefix = {arXiv},\n  primaryClass  = {stat.ME},\n  url           = {https://arxiv.org/abs/1306.0517}\n}",
+    "verified_via": "arXiv abstract page, arXiv TeX source v5 (equations read directly), Crossref record."
+  },
+  {
+    "key": "garciaportugues2024polysphere",
+    "title": "Kernel density estimation with polyspherical data and its applications",
+    "authors": "Eduardo García-Portugués, Andrea Meilán-Vila",
+    "year": "2024",
+    "venue": "arXiv:2411.04166v1 [stat.ME] (preprint, 6 November 2024)",
+    "url": "https://arxiv.org/abs/2411.04166",
+    "bibtex": "@misc{garciaportugues2024polysphere,\n  author        = {Garc{\\'i}a-Portugu{\\'e}s, Eduardo and Meil{\\'a}n-Vila, Andrea},\n  title         = {Kernel Density Estimation with Polyspherical Data and Its Applications},\n  year          = {2024},\n  eprint        = {2411.04166},\n  archivePrefix = {arXiv},\n  primaryClass  = {stat.ME},\n  url           = {https://arxiv.org/abs/2411.04166}\n}",
+    "verified_via": "arXiv abstract page (metadata and abstract). Added during verification."
+  },
+  {
+    "key": "banerjee2005",
+    "title": "Clustering on the Unit Hypersphere using von Mises-Fisher Distributions",
+    "authors": "Arindam Banerjee, Inderjit S. Dhillon, Joydeep Ghosh, Suvrit Sra",
+    "year": "2005",
+    "venue": "Journal of Machine Learning Research 6, 1345-1382",
+    "url": "https://jmlr.org/papers/volume6/banerjee05a/banerjee05a.pdf",
+    "bibtex": "@article{banerjee2005,\n  author  = {Banerjee, Arindam and Dhillon, Inderjit S. and Ghosh, Joydeep and Sra, Suvrit},\n  title   = {Clustering on the Unit Hypersphere using von {Mises}-{Fisher} Distributions},\n  journal = {Journal of Machine Learning Research},\n  volume  = {6},\n  pages   = {1345--1382},\n  year    = {2005},\n  url     = {https://jmlr.org/papers/v6/banerjee05a.html}\n}",
+    "verified_via": "JMLR PDF read in full text; Table 1 recomputed with mpmath."
+  },
+  {
+    "key": "sra2012",
+    "title": "A short note on parameter approximation for von Mises-Fisher distributions: and a fast implementation of I_s(x)",
+    "authors": "Suvrit Sra",
+    "year": "2012",
+    "venue": "Computational Statistics 27(1), 177-190 (online 3 February 2011). DOI 10.1007/s00180-011-0232-x",
+    "url": "https://link.springer.com/article/10.1007/s00180-011-0232-x",
+    "bibtex": "@article{sra2012,\n  author  = {Sra, Suvrit},\n  title   = {A Short Note on Parameter Approximation for von {Mises}-{Fisher} Distributions: And a Fast Implementation of {$I_s(x)$}},\n  journal = {Computational Statistics},\n  volume  = {27},\n  number  = {1},\n  pages   = {177--190},\n  year    = {2012},\n  doi     = {10.1007/s00180-011-0232-x},\n  url     = {https://doi.org/10.1007/s00180-011-0232-x}\n}",
+    "verified_via": "Springer article page (metadata and abstract) and Crossref record; full text not read."
+  },
+  {
+    "key": "kim2021vmfpytorch",
+    "title": "On PyTorch Implementation of Density Estimators for von Mises-Fisher and Its Mixture",
+    "authors": "Minyoung Kim",
+    "year": "2021",
+    "venue": "arXiv:2102.05340v1 [cs.LG] (preprint)",
+    "url": "https://arxiv.org/abs/2102.05340",
+    "bibtex": "@misc{kim2021vmfpytorch,\n  author        = {Kim, Minyoung},\n  title         = {On {PyTorch} Implementation of Density Estimators for von {Mises}-{Fisher} and Its Mixture},\n  year          = {2021},\n  eprint        = {2102.05340},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.LG},\n  url           = {https://arxiv.org/abs/2102.05340}\n}",
+    "verified_via": "arXiv abstract page and TeX source."
+  },
+  {
+    "key": "fukunaga1975",
+    "title": "The estimation of the gradient of a density function, with applications in pattern recognition",
+    "authors": "K. Fukunaga, L. Hostetler",
+    "year": "1975",
+    "venue": "IEEE Transactions on Information Theory 21(1), 32-40. DOI 10.1109/TIT.1975.1055330",
+    "url": "https://doi.org/10.1109/TIT.1975.1055330",
+    "bibtex": "@article{fukunaga1975,\n  author  = {Fukunaga, Keinosuke and Hostetler, Larry D.},\n  title   = {The Estimation of the Gradient of a Density Function, with Applications in Pattern Recognition},\n  journal = {IEEE Transactions on Information Theory},\n  volume  = {21},\n  number  = {1},\n  pages   = {32--40},\n  year    = {1975},\n  doi     = {10.1109/TIT.1975.1055330},\n  url     = {https://doi.org/10.1109/TIT.1975.1055330}\n}",
+    "verified_via": "Crossref record only (publisher page not accessible); content claims rest on Cheng (1995), which was read."
+  },
+  {
+    "key": "cheng1995",
+    "title": "Mean Shift, Mode Seeking, and Clustering",
+    "authors": "Yizong Cheng",
+    "year": "1995",
+    "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence 17(8), 790-799. DOI 10.1109/34.400568",
+    "url": "https://doi.org/10.1109/34.400568",
+    "bibtex": "@article{cheng1995,\n  author  = {Cheng, Yizong},\n  title   = {Mean Shift, Mode Seeking, and Clustering},\n  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},\n  volume  = {17},\n  number  = {8},\n  pages   = {790--799},\n  year    = {1995},\n  doi     = {10.1109/34.400568},\n  url     = {https://doi.org/10.1109/34.400568}\n}",
+    "verified_via": "Scanned full-text PDF (copy at members.loria.fr/MOBerger/Enseignement/Master2/Exposes/meanShiftCluster.pdf) and Crossref record."
+  },
+  {
+    "key": "comaniciu2002",
+    "title": "Mean Shift: A Robust Approach Toward Feature Space Analysis",
+    "authors": "Dorin Comaniciu, Peter Meer",
+    "year": "2002",
+    "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence 24(5), 603-619. DOI 10.1109/34.1000236",
+    "url": "https://doi.org/10.1109/34.1000236",
+    "bibtex": "@article{comaniciu2002,\n  author  = {Comaniciu, Dorin and Meer, Peter},\n  title   = {Mean Shift: A Robust Approach Toward Feature Space Analysis},\n  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},\n  volume  = {24},\n  number  = {5},\n  pages   = {603--619},\n  year    = {2002},\n  doi     = {10.1109/34.1000236},\n  url     = {https://doi.org/10.1109/34.1000236}\n}",
+    "verified_via": "Full-text PDF (copy at courses.csail.mit.edu/6.869/handouts/PAMIMeanshift.pdf) and Crossref record."
+  },
+  {
+    "key": "comaniciu2001variable",
+    "title": "The Variable Bandwidth Mean Shift and Data-Driven Scale Selection",
+    "authors": "Dorin Comaniciu, Visvanathan Ramesh, Peter Meer",
+    "year": "2001",
+    "venue": "Proceedings of the Eighth IEEE International Conference on Computer Vision (ICCV 2001), vol. 1, 438-445. DOI 10.1109/ICCV.2001.937550",
+    "url": "https://doi.org/10.1109/ICCV.2001.937550",
+    "bibtex": "@inproceedings{comaniciu2001variable,\n  author    = {Comaniciu, Dorin and Ramesh, Visvanathan and Meer, Peter},\n  title     = {The Variable Bandwidth Mean Shift and Data-Driven Scale Selection},\n  booktitle = {Proceedings of the Eighth IEEE International Conference on Computer Vision (ICCV)},\n  volume    = {1},\n  pages     = {438--445},\n  year      = {2001},\n  doi       = {10.1109/ICCV.2001.937550},\n  url       = {https://doi.org/10.1109/ICCV.2001.937550}\n}",
+    "verified_via": "Full-text PDF (copy at www.dgp.toronto.edu/~jay/MS%20bandwidth.pdf) and Crossref record."
+  },
+  {
+    "key": "yamasaki2023convergence",
+    "title": "Convergence Analysis of Mean Shift",
+    "authors": "Ryoya Yamasaki, Toshiyuki Tanaka",
+    "year": "2024",
+    "venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence 46(10), 6688-6698. DOI 10.1109/TPAMI.2024.3385920 (arXiv:2305.08463v3)",
+    "url": "https://arxiv.org/abs/2305.08463",
+    "bibtex": "@article{yamasaki2023convergence,\n  author        = {Yamasaki, Ryoya and Tanaka, Toshiyuki},\n  title         = {Convergence Analysis of Mean Shift},\n  journal       = {IEEE Transactions on Pattern Analysis and Machine Intelligence},\n  volume        = {46},\n  number        = {10},\n  pages         = {6688--6698},\n  year          = {2024},\n  doi           = {10.1109/TPAMI.2024.3385920},\n  eprint        = {2305.08463},\n  archivePrefix = {arXiv},\n  primaryClass  = {stat.ML},\n  url           = {https://arxiv.org/abs/2305.08463}\n}",
+    "verified_via": "arXiv abstract page, TeX source v3, Crossref record for the journal version. Key kept from the first dossier; year corrected to 2024."
+  },
+  {
+    "key": "oba2005multiscale",
+    "title": "Multi-Scale Clustering for Gene Expression Profiling Data",
+    "authors": "Shigeyuki Oba, Kikuya Kato, Shin Ishii",
+    "year": "2005",
+    "venue": "Fifth IEEE Symposium on Bioinformatics and Bioengineering (BIBE'05), 210-217. DOI 10.1109/BIBE.2005.41",
+    "url": "https://doi.org/10.1109/BIBE.2005.41",
+    "bibtex": "@inproceedings{oba2005multiscale,\n  author    = {Oba, Shigeyuki and Kato, Kikuya and Ishii, Shin},\n  title     = {Multi-Scale Clustering for Gene Expression Profiling Data},\n  booktitle = {Fifth IEEE Symposium on Bioinformatics and Bioengineering (BIBE'05)},\n  pages     = {210--217},\n  year      = {2005},\n  doi       = {10.1109/BIBE.2005.41},\n  url       = {https://doi.org/10.1109/BIBE.2005.41}\n}",
+    "verified_via": "Crossref record and OpenAlex abstract; cited by Zhang and Chen (2021) as the first generalisation of mean shift to directional data. Added during verification."
+  },
+  {
+    "key": "kobayashi2010vmf",
+    "title": "Von Mises-Fisher Mean Shift for Clustering on a Hypersphere",
+    "authors": "Takumi Kobayashi, Nobuyuki Otsu",
+    "year": "2010",
+    "venue": "2010 20th International Conference on Pattern Recognition (ICPR), 2130-2133. DOI 10.1109/ICPR.2010.522",
+    "url": "https://doi.org/10.1109/ICPR.2010.522",
+    "bibtex": "@inproceedings{kobayashi2010vmf,\n  author    = {Kobayashi, Takumi and Otsu, Nobuyuki},\n  title     = {Von {Mises}-{Fisher} Mean Shift for Clustering on a Hypersphere},\n  booktitle = {2010 20th International Conference on Pattern Recognition (ICPR)},\n  pages     = {2130--2133},\n  year      = {2010},\n  doi       = {10.1109/ICPR.2010.522},\n  url       = {https://doi.org/10.1109/ICPR.2010.522}\n}",
+    "verified_via": "Crossref record and OpenAlex abstract. Added during verification."
+  },
+  {
+    "key": "zhang2021directional",
+    "title": "Kernel Smoothing, Mean Shift, and Their Learning Theory with Directional Data",
+    "authors": "Yikun Zhang, Yen-Chi Chen",
+    "year": "2021",
+    "venue": "Journal of Machine Learning Research 22(154), 1-92 (arXiv:2010.13523v2)",
+    "url": "https://arxiv.org/abs/2010.13523",
+    "bibtex": "@article{zhang2021directional,\n  author        = {Zhang, Yikun and Chen, Yen-Chi},\n  title         = {Kernel Smoothing, Mean Shift, and Their Learning Theory with Directional Data},\n  journal       = {Journal of Machine Learning Research},\n  volume        = {22},\n  number        = {154},\n  pages         = {1--92},\n  year          = {2021},\n  eprint        = {2010.13523},\n  archivePrefix = {arXiv},\n  primaryClass  = {stat.ML},\n  url           = {https://jmlr.org/papers/v22/20-1194.html}\n}",
+    "verified_via": "arXiv abstract page, TeX source v2 (all equations and theorems read directly), JMLR PDF (theorem numbering)."
+  },
+  {
+    "key": "zhang2021em",
+    "title": "The EM Perspective of Directional Mean Shift Algorithm",
+    "authors": "Yikun Zhang, Yen-Chi Chen",
+    "year": "2021",
+    "venue": "arXiv:2101.10058v1 [math.ST] (preprint)",
+    "url": "https://arxiv.org/abs/2101.10058",
+    "bibtex": "@misc{zhang2021em,\n  author        = {Zhang, Yikun and Chen, Yen-Chi},\n  title         = {The {EM} Perspective of Directional Mean Shift Algorithm},\n  year          = {2021},\n  eprint        = {2101.10058},\n  archivePrefix = {arXiv},\n  primaryClass  = {math.ST},\n  url           = {https://arxiv.org/abs/2101.10058}\n}",
+    "verified_via": "arXiv abstract page, TeX source and PDF (theorem numbering)."
+  },
+  {
+    "key": "zhang2025product",
+    "title": "Mode and Ridge Estimation in Euclidean and Directional Product Spaces: A Mean Shift Approach",
+    "authors": "Yikun Zhang, Yen-Chi Chen",
+    "year": "2025",
+    "venue": "Journal of Computational and Graphical Statistics 35(1), 101-110 (published online 2025; issue dated 2026). DOI 10.1080/10618600.2025.2505734 (arXiv:2110.08505v2)",
+    "url": "https://arxiv.org/abs/2110.08505",
+    "bibtex": "@article{zhang2025product,\n  author        = {Zhang, Yikun and Chen, Yen-Chi},\n  title         = {Mode and Ridge Estimation in {Euclidean} and Directional Product Spaces: A Mean Shift Approach},\n  journal       = {Journal of Computational and Graphical Statistics},\n  volume        = {35},\n  number        = {1},\n  pages         = {101--110},\n  year          = {2025},\n  doi           = {10.1080/10618600.2025.2505734},\n  eprint        = {2110.08505},\n  archivePrefix = {arXiv},\n  url           = {https://arxiv.org/abs/2110.08505},\n  note          = {Published online 2025; issue dated 2026}\n}",
+    "verified_via": "arXiv abstract page and Crossref record. Added during verification."
+  },
+  {
+    "key": "saavedra2024directional",
+    "title": "Directional density-based clustering",
+    "authors": "Paula Saavedra-Nieves, Martín Fernández-Pérez",
+    "year": "2024",
+    "venue": "Advances in Data Analysis and Classification 20(1), 289-314 (published online 11 December 2024; issue dated March 2026). DOI 10.1007/s11634-024-00616-3 (arXiv:2302.09897v2)",
+    "url": "https://link.springer.com/article/10.1007/s11634-024-00616-3",
+    "bibtex": "@article{saavedra2024directional,\n  author        = {Saavedra-Nieves, Paula and Fern{\\'a}ndez-P{\\'e}rez, Mart{\\'i}n},\n  title         = {Directional Density-Based Clustering},\n  journal       = {Advances in Data Analysis and Classification},\n  volume        = {20},\n  number        = {1},\n  pages         = {289--314},\n  year          = {2024},\n  doi           = {10.1007/s11634-024-00616-3},\n  eprint        = {2302.09897},\n  archivePrefix = {arXiv},\n  primaryClass  = {stat.ME},\n  url           = {https://doi.org/10.1007/s11634-024-00616-3},\n  note          = {Published online 11 December 2024; issue dated March 2026}\n}",
+    "verified_via": "Springer article page (metadata and abstract), Crossref record, arXiv abstract page and TeX source v2."
+  },
+  {
+    "key": "campello2013hdbscan",
+    "title": "Density-Based Clustering Based on Hierarchical Density Estimates",
+    "authors": "Ricardo J. G. B. Campello, Davoud Moulavi, Joerg Sander",
+    "year": "2013",
+    "venue": "Advances in Knowledge Discovery and Data Mining (PAKDD 2013), Lecture Notes in Computer Science vol. 7819, Springer, 160-172. DOI 10.1007/978-3-642-37456-2_14",
+    "url": "https://link.springer.com/chapter/10.1007/978-3-642-37456-2_14",
+    "bibtex": "@inproceedings{campello2013hdbscan,\n  author    = {Campello, Ricardo J. G. B. and Moulavi, Davoud and Sander, Joerg},\n  title     = {Density-Based Clustering Based on Hierarchical Density Estimates},\n  booktitle = {Advances in Knowledge Discovery and Data Mining (PAKDD 2013)},\n  series    = {Lecture Notes in Computer Science},\n  volume    = {7819},\n  pages     = {160--172},\n  publisher = {Springer},\n  year      = {2013},\n  doi       = {10.1007/978-3-642-37456-2_14},\n  url       = {https://doi.org/10.1007/978-3-642-37456-2_14}\n}",
+    "verified_via": "Springer chapter page (metadata and abstract) and Crossref record; algorithmic formulas taken from McInnes and Healy (2017)."
+  },
+  {
+    "key": "mcinnes2017accelerated",
+    "title": "Accelerated Hierarchical Density Based Clustering",
+    "authors": "Leland McInnes, John Healy",
+    "year": "2017",
+    "venue": "2017 IEEE International Conference on Data Mining Workshops (ICDMW), 33-42. DOI 10.1109/ICDMW.2017.12 (arXiv:1705.07321v2, titled 'Accelerated Hierarchical Density Clustering')",
+    "url": "https://arxiv.org/abs/1705.07321",
+    "bibtex": "@inproceedings{mcinnes2017accelerated,\n  author        = {McInnes, Leland and Healy, John},\n  title         = {Accelerated Hierarchical Density Based Clustering},\n  booktitle     = {2017 IEEE International Conference on Data Mining Workshops (ICDMW)},\n  pages         = {33--42},\n  year          = {2017},\n  doi           = {10.1109/ICDMW.2017.12},\n  eprint        = {1705.07321},\n  archivePrefix = {arXiv},\n  primaryClass  = {stat.ML},\n  url           = {https://arxiv.org/abs/1705.07321}\n}",
+    "verified_via": "arXiv abstract page, TeX source v2, Crossref record for the workshop version."
+  },
+  {
+    "key": "mcinnes2017hdbscan",
+    "title": "hdbscan: Hierarchical density based clustering",
+    "authors": "Leland McInnes, John Healy, Steve Astels",
+    "year": "2017",
+    "venue": "Journal of Open Source Software 2(11), 205. DOI 10.21105/joss.00205",
+    "url": "https://doi.org/10.21105/joss.00205",
+    "bibtex": "@article{mcinnes2017hdbscan,\n  author  = {McInnes, Leland and Healy, John and Astels, Steve},\n  title   = {hdbscan: Hierarchical Density Based Clustering},\n  journal = {Journal of Open Source Software},\n  volume  = {2},\n  number  = {11},\n  pages   = {205},\n  year    = {2017},\n  doi     = {10.21105/joss.00205},\n  url     = {https://doi.org/10.21105/joss.00205}\n}",
+    "verified_via": "JOSS PDF (www.theoj.org/joss-papers/joss.00205/10.21105.joss.00205.pdf) and Crossref record."
+  },
+  {
+    "key": "rodriguez2014density",
+    "title": "Clustering by fast search and find of density peaks",
+    "authors": "Alex Rodriguez, Alessandro Laio",
+    "year": "2014",
+    "venue": "Science 344(6191), 1492-1496. DOI 10.1126/science.1242072",
+    "url": "https://doi.org/10.1126/science.1242072",
+    "bibtex": "@article{rodriguez2014density,\n  author  = {Rodriguez, Alex and Laio, Alessandro},\n  title   = {Clustering by Fast Search and Find of Density Peaks},\n  journal = {Science},\n  volume  = {344},\n  number  = {6191},\n  pages   = {1492--1496},\n  year    = {2014},\n  doi     = {10.1126/science.1242072},\n  url     = {https://doi.org/10.1126/science.1242072}\n}",
+    "verified_via": "Full-text PDF (copy at sites.psu.edu/mcnl/files/2017/03/9-2dhti48.pdf) and Crossref record."
+  },
+  {
+    "key": "beyer1999nearest",
+    "title": "When Is \"Nearest Neighbor\" Meaningful?",
+    "authors": "Kevin Beyer, Jonathan Goldstein, Raghu Ramakrishnan, Uri Shaft",
+    "year": "1999",
+    "venue": "Database Theory - ICDT'99, Lecture Notes in Computer Science vol. 1540, Springer, 217-235. DOI 10.1007/3-540-49257-7_15",
+    "url": "https://link.springer.com/chapter/10.1007/3-540-49257-7_15",
+    "bibtex": "@inproceedings{beyer1999nearest,\n  author    = {Beyer, Kevin and Goldstein, Jonathan and Ramakrishnan, Raghu and Shaft, Uri},\n  title     = {When Is ``Nearest Neighbor'' Meaningful?},\n  booktitle = {Database Theory --- ICDT'99},\n  series    = {Lecture Notes in Computer Science},\n  volume    = {1540},\n  pages     = {217--235},\n  publisher = {Springer},\n  year      = {1999},\n  doi       = {10.1007/3-540-49257-7_15},\n  url       = {https://doi.org/10.1007/3-540-49257-7_15}\n}",
+    "verified_via": "Springer chapter page (metadata and full abstract) and Crossref record."
+  },
+  {
+    "key": "radovanovic2010hubs",
+    "title": "Hubs in Space: Popular Nearest Neighbors in High-Dimensional Data",
+    "authors": "Miloš Radovanović, Alexandros Nanopoulos, Mirjana Ivanović",
+    "year": "2010",
+    "venue": "Journal of Machine Learning Research 11, 2487-2531",
+    "url": "https://www.jmlr.org/papers/volume11/radovanovic10a/radovanovic10a.pdf",
+    "bibtex": "@article{radovanovic2010hubs,\n  author  = {Radovanovi{\\'c}, Milo{\\v{s}} and Nanopoulos, Alexandros and Ivanovi{\\'c}, Mirjana},\n  title   = {Hubs in Space: Popular Nearest Neighbors in High-Dimensional Data},\n  journal = {Journal of Machine Learning Research},\n  volume  = {11},\n  pages   = {2487--2531},\n  year    = {2010},\n  url     = {https://www.jmlr.org/papers/v11/radovanovic10a.html}\n}",
+    "verified_via": "JMLR PDF read in full text."
+  },
+  {
+    "key": "bruch2024foundations",
+    "title": "Foundations of Vector Retrieval",
+    "authors": "Sebastian Bruch",
+    "year": "2024",
+    "venue": "Springer, Cham (monograph). DOI 10.1007/978-3-031-55182-6 (arXiv:2401.09350v1)",
+    "url": "https://arxiv.org/abs/2401.09350",
+    "bibtex": "@book{bruch2024foundations,\n  author        = {Bruch, Sebastian},\n  title         = {Foundations of Vector Retrieval},\n  publisher     = {Springer},\n  address       = {Cham},\n  year          = {2024},\n  doi           = {10.1007/978-3-031-55182-6},\n  eprint        = {2401.09350},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.DS},\n  url           = {https://arxiv.org/abs/2401.09350}\n}",
+    "verified_via": "arXiv abstract page, TeX source (Chapter 2 read directly), Crossref record for the book."
+  },
+  {
+    "key": "dasgupta2003jl",
+    "title": "An Elementary Proof of a Theorem of Johnson and Lindenstrauss",
+    "authors": "Sanjoy Dasgupta, Anupam Gupta",
+    "year": "2003",
+    "venue": "Random Structures & Algorithms 22(1), 60-65. DOI 10.1002/rsa.10073",
+    "url": "https://cseweb.ucsd.edu/~dasgupta/papers/jl.pdf",
+    "bibtex": "@article{dasgupta2003jl,\n  author  = {Dasgupta, Sanjoy and Gupta, Anupam},\n  title   = {An Elementary Proof of a Theorem of {Johnson} and {Lindenstrauss}},\n  journal = {Random Structures \\& Algorithms},\n  volume  = {22},\n  number  = {1},\n  pages   = {60--65},\n  year    = {2003},\n  doi     = {10.1002/rsa.10073},\n  url     = {https://doi.org/10.1002/rsa.10073}\n}",
+    "verified_via": "Author-hosted full-text PDF and Crossref record."
+  },
+  {
+    "key": "larsen2017jl",
+    "title": "Optimality of the Johnson-Lindenstrauss Lemma",
+    "authors": "Kasper Green Larsen, Jelani Nelson",
+    "year": "2017",
+    "venue": "2017 IEEE 58th Annual Symposium on Foundations of Computer Science (FOCS), 633-638. DOI 10.1109/FOCS.2017.64 (arXiv:1609.02094v2)",
+    "url": "https://arxiv.org/abs/1609.02094",
+    "bibtex": "@inproceedings{larsen2017jl,\n  author        = {Larsen, Kasper Green and Nelson, Jelani},\n  title         = {Optimality of the {Johnson}-{Lindenstrauss} Lemma},\n  booktitle     = {2017 IEEE 58th Annual Symposium on Foundations of Computer Science (FOCS)},\n  pages         = {633--638},\n  year          = {2017},\n  doi           = {10.1109/FOCS.2017.64},\n  eprint        = {1609.02094},\n  archivePrefix = {arXiv},\n  url           = {https://arxiv.org/abs/1609.02094}\n}",
+    "verified_via": "arXiv abstract page and Crossref record. Added during verification."
+  },
+  {
+    "key": "kim2019uniform",
+    "title": "Uniform Convergence Rate of the Kernel Density Estimator Adaptive to Intrinsic Volume Dimension",
+    "authors": "Jisu Kim, Jaehyeok Shin, Alessandro Rinaldo, Larry Wasserman",
+    "year": "2019",
+    "venue": "Proceedings of the 36th International Conference on Machine Learning (ICML), PMLR 97, 3398-3407 (arXiv:1810.05935v3)",
+    "url": "https://proceedings.mlr.press/v97/kim19e.html",
+    "bibtex": "@inproceedings{kim2019uniform,\n  author        = {Kim, Jisu and Shin, Jaehyeok and Rinaldo, Alessandro and Wasserman, Larry},\n  title         = {Uniform Convergence Rate of the Kernel Density Estimator Adaptive to Intrinsic Volume Dimension},\n  booktitle     = {Proceedings of the 36th International Conference on Machine Learning},\n  series        = {Proceedings of Machine Learning Research},\n  volume        = {97},\n  pages         = {3398--3407},\n  publisher     = {PMLR},\n  year          = {2019},\n  eprint        = {1810.05935},\n  archivePrefix = {arXiv},\n  url           = {https://proceedings.mlr.press/v97/kim19e.html}\n}",
+    "verified_via": "PMLR page (metadata), arXiv abstract page and TeX source v3."
+  },
+  {
+    "key": "bae2026manifolds",
+    "title": "Kernel smoothing on manifolds",
+    "authors": "Eunseong Bae, Wolfgang Polonik",
+    "year": "2026",
+    "venue": "arXiv:2601.16777v1 [math.ST] (preprint, 23 January 2026)",
+    "url": "https://arxiv.org/abs/2601.16777",
+    "bibtex": "@misc{bae2026manifolds,\n  author        = {Bae, Eunseong and Polonik, Wolfgang},\n  title         = {Kernel Smoothing on Manifolds},\n  year          = {2026},\n  eprint        = {2601.16777},\n  archivePrefix = {arXiv},\n  primaryClass  = {math.ST},\n  url           = {https://arxiv.org/abs/2601.16777}\n}",
+    "verified_via": "arXiv abstract page, TeX source and PDF (theorem numbering)."
+  },
+  {
+    "key": "charikar2017hbe",
+    "title": "Hashing-Based-Estimators for Kernel Density in High Dimensions",
+    "authors": "Moses Charikar, Paris Siminelakis",
+    "year": "2017",
+    "venue": "2017 IEEE 58th Annual Symposium on Foundations of Computer Science (FOCS), 1032-1043. DOI 10.1109/FOCS.2017.99 (full version arXiv:1808.10530v1)",
+    "url": "https://arxiv.org/abs/1808.10530",
+    "bibtex": "@inproceedings{charikar2017hbe,\n  author        = {Charikar, Moses and Siminelakis, Paris},\n  title         = {Hashing-Based-Estimators for Kernel Density in High Dimensions},\n  booktitle     = {2017 IEEE 58th Annual Symposium on Foundations of Computer Science (FOCS)},\n  pages         = {1032--1043},\n  year          = {2017},\n  doi           = {10.1109/FOCS.2017.99},\n  eprint        = {1808.10530},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.DS},\n  url           = {https://arxiv.org/abs/1808.10530}\n}",
+    "verified_via": "arXiv abstract page, TeX source and PDF of the full version; Crossref record for the FOCS version."
+  },
+  {
+    "key": "backurs2019space",
+    "title": "Space and Time Efficient Kernel Density Estimation in High Dimensions",
+    "authors": "Arturs Backurs, Piotr Indyk, Tal Wagner",
+    "year": "2019",
+    "venue": "Advances in Neural Information Processing Systems 32 (NeurIPS 2019)",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2019/hash/a2ce8f1706e52936dfad516c23904e3e-Abstract.html",
+    "bibtex": "@inproceedings{backurs2019space,\n  author    = {Backurs, Arturs and Indyk, Piotr and Wagner, Tal},\n  title     = {Space and Time Efficient Kernel Density Estimation in High Dimensions},\n  booktitle = {Advances in Neural Information Processing Systems},\n  volume    = {32},\n  year      = {2019},\n  url       = {https://proceedings.neurips.cc/paper_files/paper/2019/hash/a2ce8f1706e52936dfad516c23904e3e-Abstract.html}\n}",
+    "verified_via": "NeurIPS proceedings page (metadata) and full-text PDF."
+  },
+  {
+    "key": "siminelakis2019rehashing",
+    "title": "Rehashing Kernel Evaluation in High Dimensions",
+    "authors": "Paris Siminelakis, Kexin Rong, Peter Bailis, Moses Charikar, Philip Levis",
+    "year": "2019",
+    "venue": "Proceedings of the 36th International Conference on Machine Learning (ICML), PMLR 97, 5789-5798",
+    "url": "https://proceedings.mlr.press/v97/siminelakis19a.html",
+    "bibtex": "@inproceedings{siminelakis2019rehashing,\n  author    = {Siminelakis, Paris and Rong, Kexin and Bailis, Peter and Charikar, Moses and Levis, Philip},\n  title     = {Rehashing Kernel Evaluation in High Dimensions},\n  booktitle = {Proceedings of the 36th International Conference on Machine Learning},\n  series    = {Proceedings of Machine Learning Research},\n  volume    = {97},\n  pages     = {5789--5798},\n  publisher = {PMLR},\n  year      = {2019},\n  url       = {https://proceedings.mlr.press/v97/siminelakis19a.html}\n}",
+    "verified_via": "PMLR page (metadata) and full-text PDF."
+  },
+  {
+    "key": "karppa2022deann",
+    "title": "DEANN: Speeding up Kernel-Density Estimation using Approximate Nearest Neighbor Search",
+    "authors": "Matti Karppa, Martin Aumüller, Rasmus Pagh",
+    "year": "2022",
+    "venue": "Proceedings of the 25th International Conference on Artificial Intelligence and Statistics (AISTATS), PMLR 151, 3108-3137 (arXiv:2107.02736v2)",
+    "url": "https://proceedings.mlr.press/v151/karppa22a.html",
+    "bibtex": "@inproceedings{karppa2022deann,\n  author        = {Karppa, Matti and Aum{\\\"u}ller, Martin and Pagh, Rasmus},\n  title         = {{DEANN}: Speeding up Kernel-Density Estimation using Approximate Nearest Neighbor Search},\n  booktitle     = {Proceedings of the 25th International Conference on Artificial Intelligence and Statistics},\n  series        = {Proceedings of Machine Learning Research},\n  volume        = {151},\n  pages         = {3108--3137},\n  publisher     = {PMLR},\n  year          = {2022},\n  eprint        = {2107.02736},\n  archivePrefix = {arXiv},\n  url           = {https://proceedings.mlr.press/v151/karppa22a.html}\n}",
+    "verified_via": "PMLR page (metadata), PMLR PDF (lemma numbering), arXiv abstract page and TeX source v2."
+  },
+  {
+    "key": "wang2020uniformity",
+    "title": "Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere",
+    "authors": "Tongzhou Wang, Phillip Isola",
+    "year": "2020",
+    "venue": "Proceedings of the 37th International Conference on Machine Learning (ICML), PMLR 119, 9929-9939 (arXiv:2005.10242v10)",
+    "url": "https://arxiv.org/abs/2005.10242",
+    "bibtex": "@inproceedings{wang2020uniformity,\n  author        = {Wang, Tongzhou and Isola, Phillip},\n  title         = {Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere},\n  booktitle     = {Proceedings of the 37th International Conference on Machine Learning},\n  series        = {Proceedings of Machine Learning Research},\n  volume        = {119},\n  pages         = {9929--9939},\n  publisher     = {PMLR},\n  year          = {2020},\n  eprint        = {2005.10242},\n  archivePrefix = {arXiv},\n  url           = {https://proceedings.mlr.press/v119/wang20k.html}\n}",
+    "verified_via": "arXiv abstract page, TeX source v10, PMLR page (metadata)."
+  },
+  {
+    "key": "ethayarajh2019contextual",
+    "title": "How Contextual are Contextualized Word Representations? Comparing the Geometry of BERT, ELMo, and GPT-2 Embeddings",
+    "authors": "Kawin Ethayarajh",
+    "year": "2019",
+    "venue": "Proceedings of EMNLP-IJCNLP 2019, 55-65. DOI 10.18653/v1/D19-1006 (arXiv:1909.00512v1)",
+    "url": "https://arxiv.org/abs/1909.00512",
+    "bibtex": "@inproceedings{ethayarajh2019contextual,\n  author        = {Ethayarajh, Kawin},\n  title         = {How Contextual are Contextualized Word Representations? {C}omparing the Geometry of {BERT}, {ELMo}, and {GPT-2} Embeddings},\n  booktitle     = {Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)},\n  pages         = {55--65},\n  publisher     = {Association for Computational Linguistics},\n  year          = {2019},\n  doi           = {10.18653/v1/D19-1006},\n  eprint        = {1909.00512},\n  archivePrefix = {arXiv},\n  url           = {https://arxiv.org/abs/1909.00512}\n}",
+    "verified_via": "arXiv abstract page, TeX source, Crossref record for the proceedings version."
+  },
+  {
+    "key": "gao2021simcse",
+    "title": "SimCSE: Simple Contrastive Learning of Sentence Embeddings",
+    "authors": "Tianyu Gao, Xingcheng Yao, Danqi Chen",
+    "year": "2021",
+    "venue": "Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing (EMNLP), 6894-6910. DOI 10.18653/v1/2021.emnlp-main.552 (arXiv:2104.08821v4)",
+    "url": "https://arxiv.org/abs/2104.08821",
+    "bibtex": "@inproceedings{gao2021simcse,\n  author        = {Gao, Tianyu and Yao, Xingcheng and Chen, Danqi},\n  title         = {{SimCSE}: Simple Contrastive Learning of Sentence Embeddings},\n  booktitle     = {Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing},\n  pages         = {6894--6910},\n  publisher     = {Association for Computational Linguistics},\n  year          = {2021},\n  doi           = {10.18653/v1/2021.emnlp-main.552},\n  eprint        = {2104.08821},\n  archivePrefix = {arXiv},\n  url           = {https://arxiv.org/abs/2104.08821}\n}",
+    "verified_via": "arXiv abstract page (abstract) and Crossref record. Added during verification."
+  },
+  {
+    "key": "kusupati2022matryoshka",
+    "title": "Matryoshka Representation Learning",
+    "authors": "Aditya Kusupati, Gantavya Bhatt, Aniket Rege, Matthew Wallingford, Aditya Sinha, Vivek Ramanujan, William Howard-Snyder, Kaifeng Chen, Sham Kakade, Prateek Jain, Ali Farhadi",
+    "year": "2022",
+    "venue": "Advances in Neural Information Processing Systems 35 (NeurIPS 2022), 30233-30249 (arXiv:2205.13147v4)",
+    "url": "https://arxiv.org/abs/2205.13147",
+    "bibtex": "@inproceedings{kusupati2022matryoshka,\n  author        = {Kusupati, Aditya and Bhatt, Gantavya and Rege, Aniket and Wallingford, Matthew and Sinha, Aditya and Ramanujan, Vivek and Howard-Snyder, William and Chen, Kaifeng and Kakade, Sham and Jain, Prateek and Farhadi, Ali},\n  title         = {Matryoshka Representation Learning},\n  booktitle     = {Advances in Neural Information Processing Systems},\n  volume        = {35},\n  pages         = {30233--30249},\n  year          = {2022},\n  eprint        = {2205.13147},\n  archivePrefix = {arXiv},\n  url           = {https://proceedings.neurips.cc/paper_files/paper/2022/hash/c32319f4868da7613d78af9993100e42-Abstract-Conference.html}\n}",
+    "verified_via": "arXiv abstract page, TeX source v4 (abstract), NeurIPS proceedings page (metadata)."
+  },
+  {
+    "key": "mcinnes2018umap",
+    "title": "UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction",
+    "authors": "Leland McInnes, John Healy, James Melville",
+    "year": "2018",
+    "venue": "arXiv:1802.03426v3 [stat.ML] (preprint; v3 dated 18 September 2020)",
+    "url": "https://arxiv.org/abs/1802.03426",
+    "bibtex": "@misc{mcinnes2018umap,\n  author        = {McInnes, Leland and Healy, John and Melville, James},\n  title         = {{UMAP}: Uniform Manifold Approximation and Projection for Dimension Reduction},\n  year          = {2018},\n  eprint        = {1802.03426},\n  archivePrefix = {arXiv},\n  primaryClass  = {stat.ML},\n  url           = {https://arxiv.org/abs/1802.03426}\n}",
+    "verified_via": "arXiv abstract page and TeX source v3."
+  },
+  {
+    "key": "grootendorst2022bertopic",
+    "title": "BERTopic: Neural topic modeling with a class-based TF-IDF procedure",
+    "authors": "Maarten Grootendorst",
+    "year": "2022",
+    "venue": "arXiv:2203.05794v1 [cs.CL] (preprint)",
+    "url": "https://arxiv.org/abs/2203.05794",
+    "bibtex": "@misc{grootendorst2022bertopic,\n  author        = {Grootendorst, Maarten},\n  title         = {{BERTopic}: Neural Topic Modeling with a Class-Based {TF-IDF} Procedure},\n  year          = {2022},\n  eprint        = {2203.05794},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.CL},\n  url           = {https://arxiv.org/abs/2203.05794}\n}",
+    "verified_via": "arXiv abstract page and TeX source."
+  },
+  {
+    "key": "sarthi2024raptor",
+    "title": "RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval",
+    "authors": "Parth Sarthi, Salman Abdullah, Aditi Tuli, Shubh Khanna, Anna Goldie, Christopher D. Manning",
+    "year": "2024",
+    "venue": "International Conference on Learning Representations (ICLR 2024) (arXiv:2401.18059v1)",
+    "url": "https://arxiv.org/abs/2401.18059",
+    "bibtex": "@inproceedings{sarthi2024raptor,\n  author        = {Sarthi, Parth and Abdullah, Salman and Tuli, Aditi and Khanna, Shubh and Goldie, Anna and Manning, Christopher D.},\n  title         = {{RAPTOR}: Recursive Abstractive Processing for Tree-Organized Retrieval},\n  booktitle     = {International Conference on Learning Representations (ICLR)},\n  year          = {2024},\n  eprint        = {2401.18059},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.CL},\n  url           = {https://arxiv.org/abs/2401.18059}\n}",
+    "verified_via": "arXiv abstract page and TeX source (camera-ready header 'Published as a conference paper at ICLR 2024')."
+  },
+  {
+    "key": "kong2018recurrent",
+    "title": "Recurrent Pixel Embedding for Instance Grouping",
+    "authors": "Shu Kong, Charless Fowlkes",
+    "year": "2018",
+    "venue": "2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 9018-9028. DOI 10.1109/CVPR.2018.00940 (arXiv:1712.08273v1)",
+    "url": "https://arxiv.org/abs/1712.08273",
+    "bibtex": "@inproceedings{kong2018recurrent,\n  author        = {Kong, Shu and Fowlkes, Charless},\n  title         = {Recurrent Pixel Embedding for Instance Grouping},\n  booktitle     = {2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\n  pages         = {9018--9028},\n  year          = {2018},\n  doi           = {10.1109/CVPR.2018.00940},\n  eprint        = {1712.08273},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.CV},\n  url           = {https://arxiv.org/abs/1712.08273}\n}",
+    "verified_via": "arXiv abstract page, TeX source, Crossref record for the CVPR version."
+  },
+  {
+    "key": "choi2024cms",
+    "title": "Contrastive Mean-Shift Learning for Generalized Category Discovery",
+    "authors": "Sua Choi, Dahyun Kang, Minsu Cho",
+    "year": "2024",
+    "venue": "2024 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 23094-23104. DOI 10.1109/CVPR52733.2024.02179 (arXiv:2404.09451v1)",
+    "url": "https://arxiv.org/abs/2404.09451",
+    "bibtex": "@inproceedings{choi2024cms,\n  author        = {Choi, Sua and Kang, Dahyun and Cho, Minsu},\n  title         = {Contrastive Mean-Shift Learning for Generalized Category Discovery},\n  booktitle     = {2024 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},\n  pages         = {23094--23104},\n  year          = {2024},\n  doi           = {10.1109/CVPR52733.2024.02179},\n  eprint        = {2404.09451},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.CV},\n  url           = {https://arxiv.org/abs/2404.09451}\n}",
+    "verified_via": "arXiv abstract page, TeX source, CVF open-access page and Crossref record."
+  },
+  {
+    "key": "sun2022knnood",
+    "title": "Out-of-Distribution Detection with Deep Nearest Neighbors",
+    "authors": "Yiyou Sun, Yifei Ming, Xiaojin Zhu, Yixuan Li",
+    "year": "2022",
+    "venue": "Proceedings of the 39th International Conference on Machine Learning (ICML), PMLR 162, 20827-20840 (arXiv:2204.06507v3)",
+    "url": "https://proceedings.mlr.press/v162/sun22d.html",
+    "bibtex": "@inproceedings{sun2022knnood,\n  author        = {Sun, Yiyou and Ming, Yifei and Zhu, Xiaojin and Li, Yixuan},\n  title         = {Out-of-Distribution Detection with Deep Nearest Neighbors},\n  booktitle     = {Proceedings of the 39th International Conference on Machine Learning},\n  series        = {Proceedings of Machine Learning Research},\n  volume        = {162},\n  pages         = {20827--20840},\n  publisher     = {PMLR},\n  year          = {2022},\n  eprint        = {2204.06507},\n  archivePrefix = {arXiv},\n  url           = {https://proceedings.mlr.press/v162/sun22d.html}\n}",
+    "verified_via": "PMLR page (metadata) and arXiv abstract page (abstract). Added during verification."
+  },
+  {
+    "key": "wang2026glass",
+    "title": "GLASS: Graph-Language Alignment with Spherical Scoring for Transferable Graph-Level Anomaly Detection",
+    "authors": "Xudong Wang, Chris Ding, Tongxin Li, Jicong Fan",
+    "year": "2026",
+    "venue": "arXiv:2609.05253v1 (preprint, 4 September 2026)",
+    "url": "https://arxiv.org/abs/2609.05253",
+    "bibtex": "@misc{wang2026glass,\n  author        = {Wang, Xudong and Ding, Chris and Li, Tongxin and Fan, Jicong},\n  title         = {{GLASS}: Graph-Language Alignment with Spherical Scoring for Transferable Graph-Level Anomaly Detection},\n  year          = {2026},\n  eprint        = {2609.05253},\n  archivePrefix = {arXiv},\n  url           = {https://arxiv.org/abs/2609.05253}\n}",
+    "verified_via": "arXiv abstract page (metadata and abstract). Added during verification."
+  },
+  {
+    "key": "skabar2010vmf",
+    "title": "Density estimation-based document categorization using von Mises-Fisher kernels",
+    "authors": "Andrew Skabar, Shahmeer Memon",
+    "year": "2010",
+    "venue": "The 2010 International Joint Conference on Neural Networks (IJCNN), 1-8. DOI 10.1109/IJCNN.2010.5596595",
+    "url": "https://doi.org/10.1109/IJCNN.2010.5596595",
+    "bibtex": "@inproceedings{skabar2010vmf,\n  author    = {Skabar, Andrew and Memon, Shahmeer},\n  title     = {Density Estimation-Based Document Categorization using von {Mises}-{Fisher} Kernels},\n  booktitle = {The 2010 International Joint Conference on Neural Networks (IJCNN)},\n  pages     = {1--8},\n  year      = {2010},\n  doi       = {10.1109/IJCNN.2010.5596595},\n  url       = {https://doi.org/10.1109/IJCNN.2010.5596595}\n}",
+    "verified_via": "Crossref record and OpenAlex abstract; full text not read. Added during verification."
+  },
+  {
+    "key": "manmatha2001scores",
+    "title": "Modeling score distributions for combining the outputs of search engines",
+    "authors": "R. Manmatha, T. Rath, F. Feng",
+    "year": "2001",
+    "venue": "Proceedings of the 24th Annual International ACM SIGIR Conference on Research and Development in Information Retrieval, 267-275. DOI 10.1145/383952.384005",
+    "url": "https://doi.org/10.1145/383952.384005",
+    "bibtex": "@inproceedings{manmatha2001scores,\n  author    = {Manmatha, R. and Rath, T. and Feng, F.},\n  title     = {Modeling Score Distributions for Combining the Outputs of Search Engines},\n  booktitle = {Proceedings of the 24th Annual International ACM SIGIR Conference on Research and Development in Information Retrieval},\n  pages     = {267--275},\n  publisher = {ACM},\n  year      = {2001},\n  doi       = {10.1145/383952.384005},\n  url       = {https://doi.org/10.1145/383952.384005}\n}",
+    "verified_via": "Crossref record and OpenAlex abstract; full text not read. Added during verification."
+  },
+  {
+    "key": "arampatzis2009stop",
+    "title": "Where to stop reading a ranked list? Threshold optimization using truncated score distributions",
+    "authors": "Avi Arampatzis, Jaap Kamps, Stephen Robertson",
+    "year": "2009",
+    "venue": "Proceedings of the 32nd International ACM SIGIR Conference on Research and Development in Information Retrieval, 524-531. DOI 10.1145/1571941.1572031",
+    "url": "https://doi.org/10.1145/1571941.1572031",
+    "bibtex": "@inproceedings{arampatzis2009stop,\n  author    = {Arampatzis, Avi and Kamps, Jaap and Robertson, Stephen},\n  title     = {Where to Stop Reading a Ranked List? {T}hreshold Optimization using Truncated Score Distributions},\n  booktitle = {Proceedings of the 32nd International ACM SIGIR Conference on Research and Development in Information Retrieval},\n  pages     = {524--531},\n  publisher = {ACM},\n  year      = {2009},\n  doi       = {10.1145/1571941.1572031},\n  url       = {https://doi.org/10.1145/1571941.1572031}\n}",
+    "verified_via": "Crossref record and OpenAlex abstract; full text not read. Added during verification."
+  },
+  {
+    "key": "rossi2024relevance",
+    "title": "Relevance Filtering for Embedding-based Retrieval",
+    "authors": "Nicholas Rossi, Juexin Lin, Feng Liu, Zhen Yang, Tony Lee, Alessandro Magnani, Ciya Liao",
+    "year": "2024",
+    "venue": "Proceedings of the 33rd ACM International Conference on Information and Knowledge Management (CIKM 2024), 4828-4835. DOI 10.1145/3627673.3680095 (arXiv:2408.04887v1)",
+    "url": "https://arxiv.org/abs/2408.04887",
+    "bibtex": "@inproceedings{rossi2024relevance,\n  author        = {Rossi, Nicholas and Lin, Juexin and Liu, Feng and Yang, Zhen and Lee, Tony and Magnani, Alessandro and Liao, Ciya},\n  title         = {Relevance Filtering for Embedding-Based Retrieval},\n  booktitle     = {Proceedings of the 33rd ACM International Conference on Information and Knowledge Management},\n  pages         = {4828--4835},\n  publisher     = {ACM},\n  year          = {2024},\n  doi           = {10.1145/3627673.3680095},\n  eprint        = {2408.04887},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.IR},\n  url           = {https://arxiv.org/abs/2408.04887}\n}",
+    "verified_via": "arXiv abstract page, TeX source, Crossref record for the CIKM version."
+  },
+  {
+    "key": "xu2025car",
+    "title": "Cluster-based Adaptive Retrieval: Dynamic Context Selection for RAG Applications",
+    "authors": "Yifan Xu, Vipul Gupta, Rohit Aggarwal, Varsha Mahadevan, Bhaskar Krishnamachari",
+    "year": "2025",
+    "venue": "arXiv:2511.14769v1 [cs.IR] (preprint, dated 2 October 2025)",
+    "url": "https://arxiv.org/abs/2511.14769",
+    "bibtex": "@misc{xu2025car,\n  author        = {Xu, Yifan and Gupta, Vipul and Aggarwal, Rohit and Mahadevan, Varsha and Krishnamachari, Bhaskar},\n  title         = {Cluster-Based Adaptive Retrieval: Dynamic Context Selection for {RAG} Applications},\n  year          = {2025},\n  eprint        = {2511.14769},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.IR},\n  url           = {https://arxiv.org/abs/2511.14769}\n}",
+    "verified_via": "arXiv abstract page (raw HTML meta tags) and TeX source. Author list corrected."
+  },
+  {
+    "key": "taguchi2025adaptivek",
+    "title": "Efficient Context Selection for Long-Context QA: No Tuning, No Iteration, Just Adaptive-k",
+    "authors": "Chihiro Taguchi, Seiji Maekawa, Nikita Bhutani",
+    "year": "2025",
+    "venue": "arXiv:2506.08479v3 (accepted at EMNLP 2025, main conference, per the arXiv comments field)",
+    "url": "https://arxiv.org/abs/2506.08479",
+    "bibtex": "@misc{taguchi2025adaptivek,\n  author        = {Taguchi, Chihiro and Maekawa, Seiji and Bhutani, Nikita},\n  title         = {Efficient Context Selection for Long-Context {QA}: No Tuning, No Iteration, Just Adaptive-$k$},\n  year          = {2025},\n  eprint        = {2506.08479},\n  archivePrefix = {arXiv},\n  url           = {https://arxiv.org/abs/2506.08479},\n  note          = {Accepted at EMNLP 2025 (Main)}\n}",
+    "verified_via": "arXiv abstract page (metadata, abstract, comments). Added during verification."
+  },
+  {
+    "key": "song2026taak",
+    "title": "Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation",
+    "authors": "Ziyu Song, Jiaming Fang, Kuangyu Li, Tuo Xia, Chuanpeng Wang",
+    "year": "2026",
+    "venue": "arXiv:2606.11907v1 (accepted at ECML PKDD 2026, per the arXiv comments field)",
+    "url": "https://arxiv.org/abs/2606.11907",
+    "bibtex": "@misc{song2026taak,\n  author        = {Song, Ziyu and Fang, Jiaming and Li, Kuangyu and Xia, Tuo and Wang, Chuanpeng},\n  title         = {Tail-Aware Adaptive-k: Query-Adaptive Context Selection for Retrieval-Augmented Generation},\n  year          = {2026},\n  eprint        = {2606.11907},\n  archivePrefix = {arXiv},\n  url           = {https://arxiv.org/abs/2606.11907},\n  note          = {Accepted at ECML PKDD 2026}\n}",
+    "verified_via": "arXiv abstract page (metadata, abstract, comments). Added during verification."
+  },
+  {
+    "key": "xia2026qcar",
+    "title": "Pre-retrieval Query Clustering for Adaptive Top-k Document Retrieval in RAG Systems",
+    "authors": "Ye Xia, Emre Yamangil, Haixun Wang",
+    "year": "2026",
+    "venue": "arXiv:2609.13489v2 [cs.IR] (accepted to the Applied Research Track of CIKM 2026, per the arXiv comments field)",
+    "url": "https://arxiv.org/abs/2609.13489",
+    "bibtex": "@misc{xia2026qcar,\n  author        = {Xia, Ye and Yamangil, Emre and Wang, Haixun},\n  title         = {Pre-Retrieval Query Clustering for Adaptive Top-k Document Retrieval in {RAG} Systems},\n  year          = {2026},\n  eprint        = {2609.13489},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.IR},\n  url           = {https://arxiv.org/abs/2609.13489},\n  note          = {Accepted to the Applied Research Track of CIKM 2026}\n}",
+    "verified_via": "arXiv abstract page (raw HTML meta tags) and TeX source."
+  },
+  {
+    "key": "rouzrokh2024conflare",
+    "title": "CONFLARE: CONFormal LArge language model REtrieval",
+    "authors": "Pouria Rouzrokh, Shahriar Faghani, Cooper U. Gamble, Moein Shariatnia, Bradley J. Erickson",
+    "year": "2024",
+    "venue": "arXiv:2404.04287v1 (preprint)",
+    "url": "https://arxiv.org/abs/2404.04287",
+    "bibtex": "@misc{rouzrokh2024conflare,\n  author        = {Rouzrokh, Pouria and Faghani, Shahriar and Gamble, Cooper U. and Shariatnia, Moein and Erickson, Bradley J.},\n  title         = {{CONFLARE}: {CONFormal} {LArge} Language Model {REtrieval}},\n  year          = {2024},\n  eprint        = {2404.04287},\n  archivePrefix = {arXiv},\n  url           = {https://arxiv.org/abs/2404.04287}\n}",
+    "verified_via": "arXiv abstract page (metadata and abstract). Added during verification."
+  },
+  {
+    "key": "ricco2025hallucination",
+    "title": "Hallucination Detection: A Probabilistic Framework Using Embeddings Distance Analysis",
+    "authors": "Emanuele Ricco, Lorenzo Cima, Roberto Di Pietro",
+    "year": "2025",
+    "venue": "arXiv:2502.08663v1 [cs.CL] (preprint)",
+    "url": "https://arxiv.org/abs/2502.08663",
+    "bibtex": "@misc{ricco2025hallucination,\n  author        = {Ricco, Emanuele and Cima, Lorenzo and Di Pietro, Roberto},\n  title         = {Hallucination Detection: A Probabilistic Framework Using Embeddings Distance Analysis},\n  year          = {2025},\n  eprint        = {2502.08663},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.CL},\n  url           = {https://arxiv.org/abs/2502.08663}\n}",
+    "verified_via": "arXiv abstract page and TeX source."
+  },
+  {
+    "key": "pal2026meanshift",
+    "title": "Convergence and clustering analysis for mean shift with radially symmetric, positive definite kernels",
+    "authors": "Susovan Pal",
+    "year": "2026",
+    "venue": "International Journal of Data Science and Analytics 22(1), article 144 (published online 20 April 2026). DOI 10.1007/s41060-026-01105-w (arXiv:2506.19837)",
+    "url": "https://arxiv.org/abs/2506.19837",
+    "bibtex": "@article{pal2026meanshift,\n  author  = {Pal, Susovan},\n  title   = {Convergence and clustering analysis for mean shift with radially symmetric, positive definite kernels},\n  journal = {International Journal of Data Science and Analytics},\n  volume  = {22},\n  number  = {1},\n  pages   = {144},\n  year    = {2026},\n  doi     = {10.1007/s41060-026-01105-w},\n  eprint  = {2506.19837},\n  archivePrefix = {arXiv},\n  url     = {https://arxiv.org/abs/2506.19837}\n}",
+    "verified_via": "arXiv abstract page (metadata and abstract) and Crossref record for the journal version; full text not read. Added during verification."
+  },
+  {
+    "key": "jabbar2026intensity",
+    "title": "Unbiased estimation of squared concentration in the Fisher-von Mises-Langevin distribution and the impossibility of unbiased concentration",
+    "authors": "Zain Jabbar, Yuqin Jiang, Andrey A. Popov",
+    "year": "2026",
+    "venue": "arXiv:2606.04267v1 (preprint, 2 June 2026)",
+    "url": "https://arxiv.org/abs/2606.04267",
+    "bibtex": "@misc{jabbar2026intensity,\n  author        = {Jabbar, Zain and Jiang, Yuqin and Popov, Andrey A.},\n  title         = {Unbiased estimation of squared concentration in the Fisher-von Mises-Langevin distribution and the impossibility of unbiased concentration},\n  year          = {2026},\n  eprint        = {2606.04267},\n  archivePrefix = {arXiv},\n  url           = {https://arxiv.org/abs/2606.04267}\n}",
+    "verified_via": "arXiv abstract page (metadata and abstract); full text not read. Added during verification."
+  }
+]
